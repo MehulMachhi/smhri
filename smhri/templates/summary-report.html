@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .form-filter {
+        justify-content: center;
+        margin: 20px 0;
+      }
+      .form-filter__label {
+        align-self: center;
+      }
+      .basic-info {
+        display: flex;
+        justify-content: space-between;
+      }
+      .tableColor,
+      tr .tableColor:hover,
+      .btnColor {
+        background-color: #3163ad !important;
+        color: #fff !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <form class="row form-filter">
+              <label
+                for="emp_from_input"
+                class="col-lg-1 control-label form-filter__label"
+                style="text-align: right; padding-left: 20px"
+                id="emp_from_label"
+                >From</label
+              >
+              <div class="col-lg-2" style="padding-left: 20px">
+                <input
+                  type="date"
+                  class="form-control hasDatepicker"
+                  id="emp_from_input"
+                  style="padding-left: 20px"
+                  name="emp_from_input"
+                />
+              </div>
+              <label
+                for="emp_to_input"
+                class="col-lg-1 control-label form-filter__label"
+                style="text-align: right; padding-left: 20px"
+                id="emp_to_label"
+                >To</label
+              >
+              <div class="col-lg-2" style="padding-left: 20px">
+                <input
+                  type="date"
+                  class="form-control hasDatepicker"
+                  id="emp_to_input"
+                  style="padding-left: 20px"
+                  name="emp_to_input"
+                />
+              </div>
+              <div class="col-lg-3" style="padding-left: 20px">
+                <button
+                  type="submit"
+                  class="btn btn-primary btnColor"
+                  id="emp_search"
+                  nmae="emp_search"
+                >
+                  SEARCH
+                </button>
+              </div>
+            </form>
+          </div>
+          <h3 style="text-align: center">
+            PERIODICAL MEIDCAL EXAMINATON SUMMARY REPORT Here
+          </h3>
+          <div class="basic-info">
+            <h4>Company Name</h4>
+            <img
+              width="120"
+              src="https://quantum-techs.com/smhri/assets/uploads/images/3fdac-holtec-asia-01.png"
+            />
+          </div>
+          <table
+            class="table table-striped table-bordered"
+            style="
+              font-size: 12px;
+              table-layout: fixed;
+              display: block;
+              overflow: auto;
+            "
+          >
+            <thead>
+              <tr class="hDiv tableColor">
+                <th style="text-align: center">Sr NO</th>
+                <th style="text-align: center">Ticket No</th>
+                <th style="text-align: center">Test Date</th>
+                <th style="text-align: center">Emp Id</th>
+                <th style="text-align: center">Age</th>
+                <th style="text-align: center" width="20%">Emp Name</th>
+                <th style="text-align: center">Des</th>
+                <th style="text-align: center">Dept</th>
+                <!-- Blood Group -->
+                <th style="text-align: center">Blood Group</th>
+                <th style="text-align: center">HT</th>
+                <th style="text-align: center">WT</th>
+                <th style="text-align: center">BMI</th>
+                <th style="text-align: center">PERSONAL HISTORY</th>
+                <th style="text-align: center">EYE REPORT</th>
+                <th style="text-align: center">COLOUR VISION</th>
+                <th style="text-align: center">PULSE</th>
+                <th style="text-align: center">BP</th>
+                <th style="text-align: center">ECG</th>
+                <th style="text-align: center">HB</th>
+                <th style="text-align: center">WBC</th>
+                <th style="text-align: center">RBS</th>
+                <th style="text-align: center">Alkaline Phosphatase</th>
+                <th style="text-align: center">SERUM CREATININE</th>
+                <th style="text-align: center">BLOOD UREA</th>
+                <th style="text-align: center">TOTAL Bilirubin</th>
+                <th style="text-align: center">Direct Bilirubin</th>
+                <th style="text-align: center">Indirect Bilirubin</th>
+                <th style="text-align: center">SGOT</th>
+                <th style="text-align: center">SGPT</th>
+                <th style="text-align: center">GGT</th>
+                <th style="text-align: center">S.Cholest erol</th>
+                <th style="text-align: center">S.Triglyce rides</th>
+                <th style="text-align: center">URINE SUGAR</th>
+                <th style="text-align: center">Spirometry</th>
+                <th style="text-align: center">Audiorpt</th>
+                <th style="text-align: center">X-Ray</th>
+                <th style="text-align: center">FIT / UNFIT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align: center">1</td>
+                <td style="text-align: center">ML-1069</td>
+                <td style="text-align: center">03/11/2018</td>
+                <td style="text-align: center">1371</td>
+                <td style="text-align: center">52</td>
+                <td width="30%">Mr.AMARJITSINGH</td>
+                <td style="text-align: center">GM -OPE</td>
+                <td style="text-align: center"></td>
+                <!-- Blood Group -->
+                <td style="text-align: center">O POSITIVE</td>
+                <!-- Height -->
+                <td style="text-align: center">174.5</td>
+                <!-- Weight -->
+                <td style="text-align: center">93</td>
+                <td style="text-align: center">
+                  <font color="#FF0000">30.54</font>
+                </td>
+                <td style="text-align: center">NO</td>
+                <td style="text-align: center">NEAR VISION</td>
+                <td style="text-align: center"></td>
+                <td style="text-align: center">80</td>
+                <td style="text-align: center">120/70/</td>
+                <td style="text-align: center">NORMAL</td>
+                <td style="text-align: center">
+                  <font color="#000">13.4</font>
+                </td>
+                <td style="text-align: center">7600</td>
+                <td style="text-align: center"></td>
+                <td style="text-align: center"></td>
+                <td style="text-align: center">
+                  <font color="#000">0.71</font>
+                </td>
+                <td style="text-align: center"></td>
+                <td style="text-align: center">
+                  <font color="#000">0.64</font>
+                </td>
+                <td style="text-align: center">
+                  <font color="#000">0.17</font>
+                </td>
+                <td style="text-align: center"></td>
+                <td style="text-align: center"></td>
+                <td style="text-align: center"></td>
+                <td style="text-align: center"></td>
+                <td style="text-align: center">
+                  <font color="#000">171</font>
+                </td>
+                <td style="text-align: center"></td>
+                <td style="text-align: center">NIL</td>
+                <td style="text-align: center">NA</td>
+                <td style="text-align: center">NA</td>
+                <td style="text-align: center">NORMAL</td>
+                <td style="text-align: center">EMPLOYEE IS MEDICALLY FIT</td>
+              </tr>
+              <tr>
+                <td class="tableColor" style="text-align: center" colspan="37">
+                  <b>
+                    SHREE OCCUPATIONAL HEALTH SERVICES PVT LTD.<br />
+                    NABL ACCERIDITED MEDICAL LABORATORY<br />
+                    ADDRESS: 1st Floor Bridgeview complex, Above SBI BANK, Over
+                    bridge by pass Road, Bharuch M.No.: 9898027111
+                  </b>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

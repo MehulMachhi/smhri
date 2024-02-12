@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+    .mainc{
+            width: 210px;
+    display: inline-block;
+    }
+    .mainup{
+            width: 375px;
+    display: inline-block;
+    }
+      .report_header_form {
+        margin: 10px 0;
+        text-align: center;
+      } 
+      #srno {
+        text-align: center;
+      }
+      tr td {
+        /*padding: 0.7em;*/
+      }
+      tbody,
+      td,
+      tfoot,
+      th,
+      thead,
+      tr {
+        border-width: inherit;
+      }
+       @media print {
+        body * {
+            visibility: hidden;
+        }
+        .div_res, .div_res * {
+            visibility: visible;
+        }
+         .report_header_form{
+            display: none;
+        }
+        table{
+                font-size: 12px !important;
+                font-weight : 700;
+        }
+        .div_res{
+            margin-top : 25px;
+        }
+      
+}
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <div class="report_header_form">
+            <input
+              type="button"
+              value="Print Report"
+              class="btn btn-primary"
+              onclick="window.print()"
+              id="create_print"
+            />
+          </div>
+          <div class="div_res" style="border: solid 1px; padding: 10px;margin-left:50px;margin-right:50px">
+            <div align="center">
+              <h3>FORM NO.32</h3>
+              <h4>
+                (Prescribed under Rule 68-T and 102,Gujarat Factories
+                Rules-1963)
+              </h4>
+              Certificate of Medical Examination
+            </div>
+            <br />
+            <div class="report_content">
+              <ul type="none">
+                  
+                 {% if report.list_company %} 
+                <li>
+                  <b><span class="mainc">Employee Company Name&nbsp;&nbsp;</span>: {{report.list_company}}</b>
+                </li>
+                {% endif %}
+                
+                {% if report.ticket_no %} 
+                <li>
+                  <b><span class="mainc">Ticket No </span>: {{report.ticket_no}}</b>
+                </li>
+                 {% endif %}
+                
+              </ul>
+              <ol type="1">
+                <li><span class="mainup">Serial Number in the Register of Adult Worker :</li>
+                
+                {% if report.first_name %} 
+                <li><span class="mainup">Name of Worker</span> : {{report.first_name}}</li>
+                {% endif %}
+                
+                {% if report.sex %} 
+                <li><span class="mainup">sex </span> : {{report.sex}} / {{report.age}} Year</li>
+                {% endif %}
+                
+                 {% if report.birthdate %} 
+                <li><span class="mainup">Date of Birth</span> : {{report.birthdate}}</li>
+                 {% endif %}
+              </ol>
+              <br />
+              <center>
+                <table border="1" width="100%" style="font-size: 15px">
+                  <colgroup>
+                    <col width="1" />
+                    <col width="450" />
+                    <col width="450" />
+                  </colgroup>
+                  <tbody>
+                    
+                    <tr>
+                      <td id="srno">1</td>
+                      <td>Department Works</td>
+                      <td></td>
+                    </tr>
+                    
+                    
+                    <tr>
+                      <td id="srno">2</td>
+                      <td>Name of Hazardous Processes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td id="srno">3</td>
+                      <td>Dangerous process / operation</td>
+                      <td></td>
+                    </tr>
+                    
+                     
+                    <tr>
+                      <td id="srno">4</td>
+                      <td>Nature of job or Occupation</td>
+                      <td>{{report.designation}}</td>
+                    </tr>
+                    
+                    
+                    <tr>
+                      <td id="srno">5</td>
+                      <td>
+                        Raw materials,product or by products Likely to be
+                        exposed to
+                      </td>
+                      <td></td>
+                    </tr>
+                    
+                    
+                    <tr>
+                      <td id="srno">6</td>
+                      <td>Date of Posting or Joining</td>
+                      <td>{{report.date_joining}}</td>
+                    </tr>
+                    
+                    
+                    <tr>
+                      <td id="srno">7</td>
+                      <td>Date of Leaving / transfer to or trans for</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td id="srno">8</td>
+                      <td>Reason for discharge/leaving or trans for</td>
+                      <td></td>
+                    </tr>
+                    
+                   
+                    <tr>
+                      <td id="srno">9</td>
+                      <td>Date</td>
+                      <td>{{report.fitness_certificate_date}}</td>
+                    </tr>
+                    
+                    
+                    <tr>
+                      <td id="srno">10</td>
+                      <td>Signs and symptoms observed during examinations</td>
+                      <td></td>
+                    </tr>
+                    
+                   <tr>
+                      <td id="srno">11</td>
+                      <td>Nature of tests &amp; results there of</td>
+                      <td>
+                        {% for test in report.test %}
+                        
+                        {{ test }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                           
+                      </td>
+                    </tr>
+                    
+                    
+                      
+                    <tr>
+                      <td id="srno">12</td>
+                      <td>Result Fit / Unfit</td>
+                      <td>{{report.remarks_and_advice}}</td>
+                    </tr>
+                  
+                    
+                    <tr>
+                      <td id="srno">13</td>
+                      <td>Period of temporary withdrawal from that work</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td id="srno">14</td>
+                      <td>Reason for such withdrawal</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td id="srno">15</td>
+                      <td>Date of declaring him unfit for that work</td>
+                      <td></td>
+                    </tr>
+                    
+                   
+                    <tr>
+                      <td id="srno">16</td>
+                      <td>Date of issuing fitness certificate</td>
+                      <td>{{report.fitness_certificate_date}}</td>
+                    </tr>
+                  
+                    
+                    <tr>
+                      <td id="srno">17</td>
+                      <td>
+                        Signature with date of the Factory Medical Officer / the
+                        Certify Surgeon
+                      </td>
+                      <td style="text-align: center">
+                        <br /><br />
+                        <b>Dr. R.I.Parmar</b> <br />
+                        (M.D.C.I.H) <br />
+                        Bharuch (Gujarat) India. <br />
+                        Reg.No. G-8096
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

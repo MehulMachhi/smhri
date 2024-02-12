@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+         .pink {
+        color : #FF00FF;
+        }
+        .red{
+        color : red;
+        }
+      html {
+        font-size: 10px;
+      }
+      .report_header_form {
+        margin: 10px 0;
+        text-align: center;
+      }
+      .report_header_form {
+        margin: 10px 0;
+        text-align: center;
+      }
+      #srno {
+        text-align: center;
+      } 
+      @media print {
+           .div_res {
+        transform : scale(0.93);
+      }
+        body * {
+            visibility: hidden;
+        }
+        .div_res, .div_res * {
+            visibility: visible;
+        }
+         .report_header_form{
+            display: none;
+        }
+
+}
+    </style>
+  </head>
+  <body>
+    <div class="container" style="margin:50px;">
+      <div class="row">
+        <div class="col">
+         <div class="report_header_form">
+            <input
+              type="button"
+              value="Print Report"
+              class="btn btn-primary"
+              onclick="window.print()"
+              id="create_print"
+            />
+          </div>
+          <table class="div_res" style="margin:auto">
+            <tbody>
+              <tr>
+                <td>
+                  <div style="width: 9cm; height: 6.3cm; border: 1px solid #666">
+                    <table style="border-bottom: 0.2px solid" width="100%">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <span style="font-size: 13px"
+                              ><b>{{report.list_company}}</b></span
+                            >
+                            <br /><span style="font-size: 8px"
+                              ></span
+                            >
+                          </td>
+                          <td></td>
+                          <!-- {% if report.photo %}-->
+                          <!--<td align="center">-->
+                          <!--  <img width="{{report.photo.url}}" height="30" src="" />-->
+                          <!--</td>-->
+                          <!--{% endif %}-->
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table width="100%">
+                      <tbody>
+                        <tr>
+                          <td style="font-size: 10px; padding-left: 2px">
+                            Emp.Code&nbsp;:&nbsp;{{report.employee_no}}
+                          </td>
+                          <td style="font-size: 10px">{{report.collection_date}}</td> <td style="font-size: 10px">{{report.age}} Yrs.</td>
+<!--                          <td style="font-size: 10px">-->
+<!--                            Age&nbsp;:&nbsp;57 Yrs.-->
+<!--                          </td>-->
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table width="100%">
+                      <tbody>
+                        <tr>
+                          <td
+                            style="
+                              color: #ff0000;
+                              font-size: 12px;
+                              padding-left: 2px;
+                            "
+                            colspan="2"
+                          >
+                             
+                            <b>{{report.first_name}} </b>
+                           
+                          </td>
+                        </tr>
+                        <tr style="border-bottom: 0.2px solid">
+                          
+                          <td style="font-size: 10px; padding-left: 2px">
+                            Des&nbsp;:{{report.designation}}   &nbsp;
+                          </td>
+                         
+                          
+                        
+                          <td style="font-size: 10px">Dept&nbsp;:{{report.department}}  &nbsp;</td>
+                          
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table width="100%">
+                      <tbody>
+                        <tr>
+                          <td
+                            style="font-size: 10px; padding-left: 2px"
+                            colspan="2"
+                          >
+                            <b>VITAL DATA</b>
+                          </td>
+                          
+                          <td style="font-size: 10px" align="right" colspan="3">
+                            Blood Group&nbsp;:&nbsp;{{report.blood_group}}
+                          </td>
+                          
+                           
+                           {% if report.photo %}
+                          <td rowspan="7" align="center">
+                            <img src="{{report.photo.url}}" width="90" height="100" />
+                          </td>
+                           {% endif %}
+                        </tr>
+                        <tr>
+                          
+                          <td style="font-size: 10px; padding-left: 2px">
+                            HT&nbsp;:&nbsp;{{report.height}} Cm.
+                          </td>
+                          
+                           
+                           
+                          <td style="font-size: 10px">WT&nbsp;:{{report.weight}}&nbsp;Kg.</td>
+                           
+                          <td style="font-size: 10px" class=" {% if report.total_wbc_count < 19 %} pink {% elif report.total_wbc_count > 25 %} red  {% endif %}" align="right" colspan="2">
+                            BMI&nbsp;:&nbsp;{{report.bmi}}
+                          </td>
+                         
+                          <td style="font-size: 10px" align="right">
+                            B.P&nbsp;:&nbsp;{{report.blood_pressure}}
+                          </td>
+                          
+                        </tr>
+                        <tr style="border-top: 0.2px solid">
+                          <td style="font-size: 10px; padding-left: 2px">
+                            <b>VISION&nbsp;:&nbsp; {{report.vision_remark}}</b>
+                          </td>
+                          <td style="font-size: 10px" colspan="4"><b></b></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 10px" align="center"></td>
+                          <td style="font-size: 10px" align="center">
+                            <b>WTG-LE</b>
+                          </td>
+                          <td style="font-size: 10px" align="center">
+                            <b>WTG-RE</b>
+                          </td>
+                          <td style="font-size: 10px" align="center">
+                            <b>WG-LE</b>
+                          </td>
+                          <td style="font-size: 10px" align="center">
+                            <b>WG-RE</b>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 10px; padding-left: 2px">
+                            Near
+                          </td>
+                          <td style="font-size: 10px" align="center">{{report.nearvision_without_glass}}</td>
+                          <td style="font-size: 10px" align="center">{{report.nearvision_without_glass_right}}</td> 
+                          <td style="font-size: 10px" align="center">{{report.nearvision_with_glass}}</td>
+                          <td style="font-size: 10px" align="center">{{report.nearvision_with_glass_right}}</td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 10px; padding-left: 2px">
+                            Distance
+                          </td>
+                          <td style="font-size: 10px" align="center">{{report.distance_vision_without_glass}}</td>
+                          <td style="font-size: 10px" align="center">{{report.distance_vision_without_glass_right}}</td>
+                          <td style="font-size: 10px" align="center">{{report.distance_vision_with_glass}}</td>
+                          <td style="font-size: 10px" align="center">{{report.distance_vision_with_glass_right}}</td>
+                        </tr>
+                        <tr>
+                          <td
+                            colspan="5"
+                            style="font-size: 10px; padding-left: 2px"
+                          >
+                            COLOUR VISION&nbsp;:&nbsp;ACCEPTABLE 
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- <table width="100%" style="border-top:0.2px solid;"> <tr> <td style="font-size:9px; padding-left:2px;"><b>ALLERGIC TO&nbsp;:</b>&nbsp;</td> </tr> <tr> <td style="font-size:9px; padding-left:2px;">P/H&nbsp;:&nbsp;NAD</td> </tr> <tr> <td style="font-size:9px; padding-left:2px;">F/H&nbsp;:&nbsp;</td> </tr> </table> -->
+                  </div>
+                </td>
+                <td>
+                  <div style="width: 9cm; height: 6.3cm; border: 1px solid #666">
+                    <table style="border-bottom: 0.2px solid" width="100%">
+                      <tbody>
+                        <tr>
+                          <td style="color: #000080; padding-left: 2px">
+                            <b>SMHRI OCCUPATIONAL HEALTH SERVICE PVT LTD</b>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 12px; padding-left: 2px">
+                            NABL ACCREDITED MEDICAL LAB. (M)9898027111
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table style="border-bottom: 0.2px solid" width="100%">
+                      <tbody>
+                        <tr>
+                          <td style="font-size: 12px; padding-left: 2px">
+                            <b>PATHOLOGY REPORT&nbsp;:</b>
+                          </td>
+                          
+                          <td style="font-size: 10px">WBC&nbsp;:&nbsp;{{report.total_wbc_count}}</td>
+                             
+                          
+                         
+                          <td style="font-size: 10px">ESR&nbsp;:&nbsp;{{report.esr}}mm</td>
+                         
+                        </tr>
+                        <tr>
+                          
+                          <td style="font-size: 10px; padding-left: 2px">
+                            Random Glucose&nbsp;:{{report.random_blood_glucose}}&nbsp;mg/dl
+                          </td>
+                          
+                           
+                          
+                          <td style="font-size: 10px">HB&nbsp;:&nbsp;{{report.hemoglobin}}</td>
+                         
+                          
+                          
+                          <td style="font-size: 10px">
+                            Polymorphs&nbsp;:{{report.polymorphs}}&nbsp;%
+                          </td>
+                          
+                        </tr>
+                        <tr>
+                           
+                          <td style="font-size: 10px; padding-left: 2px">
+                            S.Cholestrol&nbsp;:&nbsp;{{report.blood_cholestrol}}mg/dl
+                          </td>
+                           
+                          
+                          
+                          <td style="font-size: 10px">
+                            Lymphocytes&nbsp;:{{report.lymphocytes}}&nbsp;%
+                          </td>
+                          
+                          
+                           
+                          <td style="font-size: 10px">
+                            Eosinophils&nbsp;:&nbsp;{{report.eosinophils}}%
+                          </td>
+                           
+                        </tr>
+                        <tr>
+                          <td style="font-size: 10px; padding-left: 2px"></td>
+                          <td style="font-size: 10px"></td>
+                          <td style="font-size: 10px"></td>
+                        </tr>
+                        <tr>
+                         
+                          <td style="font-size: 10px; padding-left: 2px">
+                            Monocytes&nbsp;:&nbsp;-{{report.monocytes}}
+                          </td>
+                              
+                              
+                       
+                          <td style="font-size: 10px">
+                            Basophils&nbsp;:&nbsp;-{{report.basophils}}
+                          </td>
+                          
+                          
+                       
+                          <td style="font-size: 10px">
+                            Platelet&nbsp;:&nbsp;- {{report.platelet_count}}
+                          </td>
+                         
+                          
+                        </tr>
+                        <tr>
+                            
+                       
+                          <td style="font-size: 10px">
+                            Creatinine&nbsp;:&nbsp;- {{report.creatinine}}
+                          </td>
+                         
+                          
+                          
+                          <td style="font-size: 10px">SGOT&nbsp;:&nbsp;- {{report.sgot}}</td>
+                          
+                          
+                         
+                          <td style="font-size: 10px">SGPT&nbsp;:&nbsp;- {{report.sgpt}}</td>
+                           
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table style="border-bottom: 0.2px solid" width="100%">
+                      <tbody>
+                        <tr>
+                          <td style="font-size: 12px; padding-left: 2px">
+                            <b>URINE TEST&nbsp;:&nbsp;</b>
+                          </td>
+                          
+                          <td style="font-size: 10px">
+                            Albumin&nbsp;:&nbsp;{{report.albumin}}
+                          </td>
+                        
+                          
+                         
+                          <td style="font-size: 10px">Sugar&nbsp;:&nbsp;{{report.sugar}}</td>
+                         
+                        </tr>
+                        <tr>
+                        
+                          <td style="font-size: 10px; padding-left: 2px">
+                            RBC&nbsp;:&nbsp;{{report.rbc}}
+                          </td>
+                           
+                             
+                       
+                          <td style="font-size: 10px">
+                            Crystal&nbsp;:&nbsp;{{report.crystals}}
+                          </td>
+                          
+                          
+                          <td style="font-size: 10px"></td>
+                        </tr>
+                        <tr>
+                            
+                       
+                          <td style="font-size: 10px; padding-left: 2px">
+                            Pus Cells&nbsp;:&nbsp;{{report.pus_cells}}
+                          </td>
+                       
+                         
+                          <td style="font-size: 10px"></td>
+                          <td style="font-size: 10px"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table width="100%">
+                      <tbody>
+                        <tr>
+                        
+                          <td style="font-size: 10px; padding-left: 2px">
+                            <b>AUDIOMETRY&nbsp;: {{report.audiometery}}</b>&nbsp;
+                          </td>
+                       
+                        </tr>
+                        <tr>
+                      
+                          <td style="font-size: 10px; padding-left: 2px">
+                            <b>X-RAY CHEST&nbsp;: {{report.xray_report}}</b>&nbsp;
+                          </td>
+                         
+                         
+                          
+                          <td style="font-size: 10px">
+                            <b>ECG&nbsp;: {{report.ecg_report}}</b>&nbsp;
+                          </td>
+                         
+                        </tr>
+                        <tr>
+                             
+                          <td style="font-size: 10px; padding-left: 2px">
+                            <b>SPIROMETERY&nbsp;: {{report.spirometry}}</b>&nbsp;
+                              
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

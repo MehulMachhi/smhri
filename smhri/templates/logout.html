@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Logout{% endblock title %}
+{% block content %}
+ <div class="form-content my-3 p-3">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
+                        <div class="card-body">
+                            <div style="margin-top: 20px;" class="text-center">
+                                <img  style="display: block;margin:auto" src="https://smhri.com/static/images/logo-big.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="card-header justify-content-center">
+                          <h3 class="font-weight-light my-1 text-center">You Have Been Logged Out</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+        <a href="{% url 'login' %}" class="btn btn-dark text-center">SignIn Again</a>
+        </div>
+        </div>
+     </div>
+{% endblock content %}

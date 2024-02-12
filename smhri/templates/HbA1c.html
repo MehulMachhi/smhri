@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .pink {
+color : #FF00FF;
+}
+.red{
+color : red;
+}
+      .report_header_form {
+        margin: 10px 0;
+        text-align: center;
+      }
+      .report_header_form {
+        margin: 10px 0;
+        text-align: center;
+      }
+      #srno {
+        text-align: center;
+      }
+      tr td, tr th {
+        padding: 0.2em;
+      }
+      tbody,
+      td,
+      tfoot,
+      th,
+      thead,
+      tr {
+        border-width: inherit;
+      }
+      @media print {
+        body * {
+            visibility: hidden;
+        }
+        .div_res, .div_res * {
+            visibility: visible;
+        }
+         .report_header_form{
+            display: none;
+        }
+        table, .div_res table{
+                font-size: 12px !important;
+        }
+        .div_res{
+            margin-top : 90px;
+        }
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+         <div class="report_header_form">
+            <input
+              type="button"
+              value="Print Report"
+              class="btn btn-primary"
+              onclick="window.print()"
+              id="create_print"
+            />
+          </div>
+          <div
+            class="div_res"
+          >
+             <table
+              cellspacing="0px"
+              cellpadding="0px"
+              width="100%"
+              style="font-size: 14px"
+            >
+              <tbody>
+                  {% if report.employee_no %}   
+                <tr>
+                  <th width="20%">Emp No</th>
+                  <th width="50%">:&nbsp;{{report.employee_no}}</th>
+                  {% endif %}
+                 
+                 {% if report.collection_date %}   
+                  <th width="1%">Date</th>
+                  <th width="30%">:&nbsp;{{report.collection_date}}</th>
+                </tr>
+                {% endif %}
+                
+                
+                <tr>
+                  {% if report.first_name %}   
+                  <th width="20%">Patient's Name</th>
+                  <th width="50%">:&nbsp;{{report.first_name}}</th>
+                  {% endif %}
+                  {% if report.birthdate %}   
+                  <th width="1%">BirthDate</th>
+                  <th width="30%">:&nbsp;{{report.birthdate}}</th>
+                  {% endif %}
+                </tr>
+                
+                
+                <tr>
+<!--                  <th width="20%">Age</th>-->
+<!--                  <th>-->
+<!--                    :&nbsp;&nbsp;62 &nbsp;Yrs &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sex-->
+<!--                    :&nbsp;&nbsp;Male-->
+<!--                  </th>-->
+                </tr>
+                
+                     
+                <tr>
+                    {% if report.list_company %}
+                  <th width="20%">Company Name</th>
+                  <th width="40%">:&nbsp;{{report.list_company}}</th>
+                   {% endif %}
+                  {% if report.age %}   
+                  <th width="20%">Age</th>
+                  <th width="40%">:&nbsp;{{report.age}} Year</th>
+                     {% endif %}
+                   
+                </tr>
+                
+                 <tr>
+                   
+                 {% if report.ticket_no %}   
+                  <th width="1%">Ticket Number</th>
+                  <th width="30%">:&nbsp;{{report.ticket_no}}</th>
+                  {% endif %}
+                 
+                  {% if report.sex %}   
+                  <th width="20%">Sex</th>
+                  <th width="40%">:&nbsp;{{report.sex}}</th>
+                    {% endif %}
+                </tr>
+                
+                
+              </tbody>
+            </table>
+            <hr />
+            <div align="center">
+                <h3><u>HBA1C REPORT</u></h3>
+              </div>
+              <table
+                cellspacing="0px"
+                cellpadding="0px"
+                width="100%"
+                style="margin-top: 30px"
+              >
+                <tbody>
+                    <tr>
+                    <th width="30%"><u>TEST</u></th>
+                      <th width="25%" style="text-align: left">
+                        <u>RESULT</u>
+                      </th>
+                      <th width="20%"><u>Reference RANGE</u></th>
+                    
+                    </tr>
+                    
+                                     {% if report.hba1c %}
+                      <tr style="font-size: 14px">
+                        <td width="30%">HbA1C</td>
+                        <td style="text-align: left" width="25%" class=" {% if report.hba1c < 4.3 %} pink {% elif report.hba1c > 9 %} red  {% endif %}">:&nbsp;{{report.hba1c}}&nbsp;%</td>
+                        <td style="text-align: left" width="20%">
+                          Non Diabetic: 4.3-6.3%
+                        </td>
+                      </tr>
+                       
+                      <tr style="font-size: 14px">
+                        <td width="30%"></td>
+                        <td style="text-align: left" width="30%"></td>
+                        <td style="text-align: left" width="20%">
+                          Good Control: 6.4-7.5%
+                        </td>
+                      </tr>
+                      <tr style="font-size: 14px">
+                        <td width="30%"></td>
+                        <td style="text-align: left" width="30%"></td>
+                        <td style="text-align: left" width="20%">
+                          Moderate Control: 7.5-9.0%
+                        </td>
+                      </tr>
+                      <tr style="font-size: 14px">
+                        <td width="30%"></td>
+                        <td style="text-align: left" width="30%"></td>
+                        <td style="text-align: left" width="20%">
+                          Poor Control: 9.0% &amp; Above
+                        </td>
+                      </tr>
+                 {% endif %} 
+                 
+                 {% if report.avg_blood_glucose_level %}
+                  <tr style="font-size: 14px">
+                    <td width="30%">Avg. Blood Glucose Level</td>
+                    <td style="text-align: left" width="30%">
+                      :&nbsp;&nbsp;{{report.avg_blood_glucose_level}} mg/dl
+                    </td>
+                    <td style="text-align: left" width="20%"></td>
+                  </tr>
+                  {% endif %} 
+                </tbody>
+              </table>
+            </center>
+            <br /><br />
+            <hr style="border-width: thin; border-color: #333" />
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td align="center">
+                    <font style="font-size: 13px"><b></b></font>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <div style="text-align: center">
+              <b
+                ><i><u>End of The Report</u></i></b
+              >
+            </div>
+            <br />
+            <div>
+              <i
+                >Note: This report is not for legal implication and purpose,
+                confidential report only for company use.</i
+              >
+            </div>
+            <table
+              cellspacing="0px"
+              cellpadding="0px"
+              width="100%"
+              style="margin-top: 30px; font-size: 20px"
+            >
+              <tbody>
+                <tr>
+                  <th width="70%" align="center">
+                    <img
+                      src="https://quantum-techs.com/smhri/assets/uploads/images/signatures/rpl5.jpeg"
+                      width="150px;"
+                    />
+                  </th>
+                  <th width="70%" align="center">
+                    <!-- <img src="https://quantum-techs.com/smhri/assets/uploads/images/signatures/mrk.png" width="150px;" /> -->
+                  </th>
+                </tr>
+                <tr>
+                  <th width="70%">
+                    DR.R.I.PARMAR<br />(M.D.C.I.H)<br />Reg. No:- G - 8096
+                  </th>
+                  <th>
+                    <!-- Dr. Mahesh R Kakadiya --><br /><!-- M.D (PATHOLOGY), --><br /><!-- Reg.No:- G - 23663 -->
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

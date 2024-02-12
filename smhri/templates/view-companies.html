@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="robots" content="index, follow" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+    <title>Companies | SMHRI  </title>
+    <!-- Favicon icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+	<link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+    <!-- Datatable -->
+    <link href="{% static 'vendor/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    	<link href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header">
+            <a href="{% url 'index' %}" class="brand-logo">
+				<img class="logo-abbr" src="/static/images/logo-small.jpg" alt="Small Logo" />
+				<img class="brand-title" src="/static/images/logo-big.jpg" alt="Big Logo" />
+			</a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+		
+		<!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="dashboard_bar">Companies</div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+        <!--**********************************************************************************************************************************************************************
+            																	Sidebar start
+        **********************************************************************************************************************************************************************-->
+        <div class="deznav">
+            <div class="deznav-scroll">
+				<ul class="metismenu" id="menu">
+                    <li><a class="ai-icon" href="{% url 'index' %}" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Dashboard</span>
+						</a>
+                    </li>
+                    <li><a class="ai-icon" href="{% url 'view_company_data' %}" aria-expanded="false">
+						<i class="flaticon-381-internet"></i></i><span class="nav-text">Company</span>
+						</a>
+                    </li>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-television"></i><span class="nav-text">Employees</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href="{% url 'add_employees_data' %}">Add New Employee</a></li>
+						<li><a href="{% url 'view_employees_data' %}">View All Employees</a></li>
+					</ul>
+				<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-notepad"></i>
+						<span class="nav-text">Reports</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href="{% url 'view_employee_reports' %}">Employee Reports</a></li>
+						<li><a href="{% url 'view_summary_reports' %}">Summary Reports</a></li>
+					</ul>
+				</li>
+					<li><a class="ai-icon" href="{% url 'get_test' %}" aria-expanded="false">
+							<i class="flaticon-381-layer-1"></i>
+							<span class="nav-text">Tests</span>
+						</a>
+					</li>
+						<li><a class="ai-icon" href="{% url 'logout' %}" aria-expanded="false">
+							<i class="flaticon-381-turn-off"></i>
+							<span class="nav-text">Logout</span>
+						</a>
+					</li>
+			</ul>
+			<div class="copyright" style="margin-top:120px">
+				<p><strong>SMHRI</strong> © {% now "Y" %} All Rights Reserved.</p>
+				<p class="fs-12">Made with <span class="heart"></span> by <a href="https://anantsoftcomputing.com/">ASC</a></p>
+			</div>
+			</div>
+        </div>
+        <!--*****************************************************************************************************************************************************************
+           																		 Sidebar end
+        *******************************************************************************************************************************************************************-->
+        <!--*****************************************************************************************************************************************************************
+            																	Content body start
+        *******************************************************************************************************************************************************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <!-- <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>Hi, welcome back!</h4>
+                            <span>Datatable</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Table</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Datatable</a></li>
+                        </ol>
+                    </div>
+                </div> -->
+                <!-- row -->
+                <div class="row">
+					<div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+								<!-- new Header -->
+								<div class="col-md-12 d-flex">
+                                    <div class="col-md-6">
+                                        <h4 class="card-title">List of Companies</h4>
+                                    </div>
+                                    <div class="col-md-6 justify-content-end text-end">
+                                        <!-- <button type="button" class="btn btn-primary mb-2" title="Import Employees">Import</button> -->
+                                        <!-- import start -->
+                                        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">Import</button>
+                                        <div class="modal fade bd-example-modal-lg" tabindex="-1" style="display: none;" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Import Employees</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        <span class="mini-text  my-5">Upload Menu (File type: .xls or .xlsx only &amp; Max File size: 6 MB.)</span>
+                                                        <hr>
+                                                        <input type="file" name="import_employess" class="form-control"><br>
+                                                        <span class="mini-text my-2">or you can download the sample</span><br>
+                                                        <a href="./pdf/smhri_sample_compny.xlsx" class="btn btn-primary  my-2">Download Sample</a>
+                                                        <!--    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Download Sample</button> -->
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- end import -->
+                                        <button type="button" class="btn btn-primary mb-2">Export</button>
+										<button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Add New</button>
+
+										<!-- <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Add New</button> -->
+                                    </div>
+
+                                    <!-- Modal -->
+									<!-- Button trigger modal -->
+									<!-- Modal -->
+
+					<!--############################################################# Add Company ################################################################ -->
+
+									<div class="modal fade" id="exampleModalCenter">
+										<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">Add New Company</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal">
+													</button>
+												</div>
+												<div class="modal-body">
+													<div class="form-validation">
+														<form class="needs-validation" action="{% url 'add_company_data' %}"  method="post" >
+															{% csrf_token %}
+															<div class="row">
+																<div class="col-xl-12">
+																	<div class="mb-3 row">
+																		<label class="col-lg-4 col-form-label" for="validationCustom01">Company Name
+																			<span class="text-danger">*</span>
+																		</label>
+																		<div class="col-lg-6">
+																			<input type="text" name="name" class="form-control" id="validationCustom01"  placeholder="Enter a Company Name.." required>
+																			<div class="invalid-feedback">
+																				Please enter a Company Name.
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="mb-3 row">
+																		<label class="col-lg-4 col-form-label" for="validationCustom02">Company Email <span
+																				class="text-danger">*</span>
+																		</label>
+																		<div class="col-lg-6">
+																			<input type="text" name="email" class="form-control" id="validationCustom02"  placeholder="Your valid email.." required>
+																			<div class="invalid-feedback">
+																				Please enter a Company Email.
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="mb-3 row">
+																		<label class="col-lg-4 col-form-label" for="validationCustom03">Company Phone
+																			<span class="text-danger"></span>
+																		</label>
+																		<div class="col-lg-6">
+																			<input type="tel" name="phone" class="form-control" id="validationCustom03" placeholder="Phone.." >
+																			<div class="invalid-feedback">
+																				Please enter a Company Phone.
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="mb-3 row">
+																		<label class="col-lg-4 col-form-label" for="validationCustom09">Company Registered Certificate : <span
+																				class="text-danger"></span>
+																		</label>
+																		<div class="col-lg-6">
+																			<input type="file" name="company_registration_certificate" class="form-control" id="validationCustom09" >
+																			<div class="invalid-feedback">Please Uplaod Company registration certificate :</div>
+																		</div>
+																	</div>
+
+																	<div class="mb-3 row">
+																		<label class="col-lg-4 col-form-label" for="validationCustom04">Company Address : <span
+																				class="text-danger"></span>
+																		</label>
+																		<div class="col-lg-6">
+																			<textarea class="form-control" name="address" id="validationCustom04"  rows="5" placeholder="Company Address :" ></textarea>
+																			<div class="invalid-feedback">
+																				Please enter a Address :
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="mb-3 row">
+																		<label class="col-lg-4 col-form-label" for="validationCustom03"> Pincode
+																			<span class="text-danger"></span>
+																		</label>
+																		<div class="col-lg-6">
+																			<input type="tel" name="pincode" class="form-control" id="validationCustom03" placeholder="Pincode.." >
+																			<div class="invalid-feedback">
+																				Please enter a Pincode.
+																			</div>
+																		</div>
+																	</div>
+
+<!--																	<div class="mb-3 row">-->
+<!--																		<label class="col-lg-4 col-form-label" for="validationCustom05">Country-->
+<!--																			<span class="text-danger">*</span>-->
+<!--																		</label>-->
+<!--																		<div class="col-lg-6">-->
+<!--																			<select class="default-select wide form-control" name="country" id="validationCustom05">-->
+<!--																				<option  data-display="Select">Please select</option>-->
+<!--																				<option value="India">India</option>-->
+<!--																				<option value="Australia">Australia</option>-->
+<!--																				<option value="UK">UK</option>-->
+<!--																			</select>-->
+<!--																			<div class="invalid-feedback">Please select a one.</div>-->
+<!--																		</div>-->
+<!--																	</div>-->
+
+
+
+																	<div class="mb-3 row">
+																		<label class="col-lg-4 col-form-label" for="validationCustom10">Company Test <span
+																				class="text-danger">*</span>
+																		</label>
+																		<div class="col-lg-6">
+																			<select multiple class="default-select form-control wide mt-3 h-auto" size=11 name="test[]">
+																				    <option value="AudiometerThresholdDecimats">AudiometerThresholdDecimats</option>
+																					<option value="BloodTest">BloodTest</option>
+																					<option value="Complaints">Complaints</option>
+																					<option value="Hematology">Hematology</option>
+																					<option value="LungFunctionTest">LungFunctionTest</option>
+																					<option value="MicroscopicExamination">MicroscopicExamination</option>
+																					<option value="OtherTests">OtherTests</option>
+																					<option value="PhysiologicalTest">PhysiologicalTest</option>
+																					<option value="SystematicExamination">SystematicExamination</option>
+																					<option value="VisualTest">VisualTest</option>
+																					<option value="Urine_Examination">Urine_Examination</option>
+																			</select>
+																			<!-- <input type="text" class="form-control" id="validationCustom10" placeholder="5.0" required> -->
+																			<div class="invalid-feedback">Please Select test</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-primary">submit</button>
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+
+				<!--############################################################# End Add Company ################################################################ -->
+
+									<!-- end of Edit Modal -->
+                                    <!-- end of Edit Modal -->
+                                </div>
+								<!-- end of newHeader -->
+								<!-- <h4 class="card-title">List of Companies</h4> -->
+								<!-- edit Modal -->
+
+                            </div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="example3" class="display" style="min-width: 845px">
+										<thead>
+											<tr>
+												<th class="sorting_desc">Id</th>
+<!--												<th aria-label="Id: activate to sort column descending" aria-sort="descending">Id</th>-->
+<!--												<th aria-label="Id: activate to sort column descending" aria-sort="descending">Id</th>-->
+												<th>Name</th>
+												<th>Email</th>
+												<th>Phone</th>
+												<th>Pincode</th>
+<!--												<th>Certificate</th>-->
+												<th>Address</th>
+<!--												<th>Pending Employees</th>-->
+<!--												<th>Country</th>-->
+<!--												<th>Test</th>-->
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+										{% for st in stu %}
+											<tr>
+												<th scope="row">{{st.id}}</th>
+												<a href="{% url 'profile' st.id %}"><td>{{st.name}}</td></a>
+												<td>{{st.email}}</td>
+												<td>{{st.phone}}</td>
+												<td>{{st.pincode}}</td>
+<!--												{% if st.company_registration_certificate %}-->
+<!--												<td><img src="{{st.company_registration_certificate.url}}" style="height: 50px;width: 50px;"></td>-->
+<!--												{% else %}-->
+<!--												<td>{{st.company_registration_certificate}}</td>-->
+<!--												{% endif %}-->
+												<td>{{st.address}}</td>
+<!--												<td>{{st.country}}</td>-->
+<!--												<td>{{st.test}}</td>-->
+												<td>
+													<div class="d-flex">
+														<button type="button" class="mb-2"  style="border: white;">
+															<a href="update_company_data/{{st.id}}" class="btn btn-primary shadow btn-xs sharp me-1" title="Edit"><i class="fas fa-pencil-alt"></i>
+															</a>
+														</button>
+
+<!--&lt;!&ndash;*******************************************************************************************************************************************************************************************************************************************-->
+<!--																			 		data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"		Modal-->  <!-- Edit New Company -->
+<!--********************************************************************************************************************************************************************************************************************************************&ndash;&gt;-->
+
+
+															<div class="modal fade" id="exampleModalCenter1">
+																<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title">Edit New Company</h5>
+																			<button type="button" class="btn-close" data-bs-dismiss="modal">
+																			</button>
+																		</div>
+																		<div class="modal-body">
+																			<div class="form-validation">
+																				<form class="needs-validation" novalidate >
+																					<div class="row">
+																						<div class="col-xl-12">
+
+																							<div class="mb-3 row">
+																								<label class="col-lg-4 col-form-label" for="validationCustom01">Company Name
+																									<span class="text-danger">*</span>
+																								</label>
+																								<div class="col-lg-6">
+																									<input type="text" class="form-control" id="validationCustom01"  placeholder="Enter a Company Name.." required>
+																									<div class="invalid-feedback">
+																										Please enter a Company Name.
+																									</div>
+																								</div>
+																							</div>
+
+																							<div class="mb-3 row">
+																								<label class="col-lg-4 col-form-label" for="validationCustom02">Email <span
+																										class="text-danger">*</span>
+																								</label>
+																								<div class="col-lg-6">
+																									<input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid email.." required>
+																									<div class="invalid-feedback">
+																										Please enter a Email.
+																									</div>
+																								</div>
+																							</div>
+
+																							<div class="mb-3 row">
+																								<label class="col-lg-4 col-form-label" for="validationCustom03">Phone
+																									<span class="text-danger"></span>
+																								</label>
+																								<div class="col-lg-6">
+																									<input type="tel" class="form-control" id="validationCustom03" placeholder="Phone.." >
+																									<div class="invalid-feedback">
+																										Please enter a Phone.
+																									</div>
+																								</div>
+																							</div>
+
+																							<div class="mb-3 row">
+																								<label class="col-lg-4 col-form-label" for="validationCustom04">Address: <span
+																										class="text-danger"></span>
+																								</label>
+																								<div class="col-lg-6">
+																									<textarea class="form-control" id="validationCustom04"  rows="5" placeholder="Your Address:" ></textarea>
+																									<div class="invalid-feedback">
+																										Please enter a Address:
+																									</div>
+																								</div>
+																							</div>
+
+																						</div>
+
+																							<div class="mb-3 row">
+																								<label class="col-lg-4 col-form-label" for="validationCustom05">Country
+																									<span class="text-danger"></span>
+																								</label>
+																								<div class="col-lg-6">
+																									<select class="default-select wide form-control" id="validationCustom05">
+																										<option  data-display="Select">Please select</option>
+																										<option value="India">India</option>
+																										<option value="Australia">Australia</option>
+																										<option value="UK">UK</option>
+																									</select>
+																									<div class="invalid-feedback">Please select a one.</div>
+																								</div>
+																							</div>
+
+																							<div class="mb-3 row">
+																								<label class="col-lg-4 col-form-label" for="validationCustom09">Company registration certificate : <span
+																										class="text-danger">*</span>
+																								</label>
+																								<div class="col-lg-6">
+																									<input type="file" class="form-control" id="validationCustom09" >
+																									<div class="invalid-feedback">Please Uplaod Company registration certificate :</div>
+																								</div>
+																							</div>
+
+																							<div class="mb-3 row">
+																								<label class="col-lg-4 col-form-label" value= for="validationCustom10">Test <span
+																										class="text-danger">*</span>
+																								</label>
+																								<div class="col-lg-6">
+																									<select multiple class="default-select form-control wide mt-3" >
+																										<option>AudiometerThresholdDecimats</option>
+																										<option>BloodTest</option>
+																										<option>Complaints</option>
+																										<option>Hematology</option>
+																										<option>LungFunctionTest</option>
+																										<option>MicroscopicExamination</option>
+																										<option>OtherTests</option>
+																										<option>PhysiologicalTest</option>
+																										<option>SystematicExamination</option>
+																										<option>VisualTest</option>
+																									</select>
+																									 <input type="text" class="form-control" id="validationCustom10" placeholder="5.0" required> 
+																									<div class="invalid-feedback">Please Select test</div>
+																								</div>
+																							</div>
+																					</div>
+																				</form>
+																			</div>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+																			<button type="button" class="btn btn-primary">Update changes</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														<!-- end of Edit Modal -->
+														<a href="{% url 'delete_company_data' st.id %}" class="btn btn-danger shadow btn-xs sharp me-1" title="Delete"><i class="fa fa-trash"></i></a>
+														<!--<a href="#" class="btn btn-info shadow btn-xs sharp" title="Employees"><i class="fa fa-user"></i></a>-->
+													</div>
+												</td>
+										</tr>
+										{% endfor %}
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+                        </div>
+                    </div>
+				</div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+           
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+<script src="{% static 'vendor/global/global.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'vendor/chart.js/Chart.bundle.min.js' %}"></script>
+	<!-- Apex Chart -->
+	<script src="{% static 'vendor/apexchart/apexchart.js' %}"></script>
+
+
+
+    <!-- Datatable -->
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/plugins-init/datatables.init.js' %}"></script>
+
+
+
+    <script src="{% static 'js/custom.min.js' %}"></script>
+	<script src="{% static 'js/deznav-init.js' %}"></script>
+	<script src="{% static 'js/demo.js' %}"></script>
+    <script src="{% static 'js/styleSwitcher.js' %}"></script>
+<!--<script>-->
+<!--	$(document).ready(function () {-->
+<!--    $('#example3').DataTable({-->
+<!--        order: [[3, 'desc']],-->
+<!--    });-->
+<!--});-->
+<!--</script>-->
+</body>
+</html>

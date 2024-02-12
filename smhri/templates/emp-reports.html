@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="robots" content="index, follow" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+    <title>Employees Report | SMHRI</title>
+   <!-- Favicon icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+	<link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+    <!-- Datatable -->
+    <link href="{% static 'vendor/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    	<link href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+<style>
+	.popup-content {
+		display : none;
+	}
+	.modal-main-content .popup-content {
+		display : block;
+	}
+	.reports-main{
+	display : flex;
+	flex-wrap : wrap;
+	gap : 25px;
+	}
+	.report-main__link:link, .report-main__link:visited{
+	flex: 1 1 30%;
+    display: block;
+    padding: 10px 20px;
+    border-radius: 100px;
+    color: #3c3c3c;
+    background: #eee;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+	}
+	#optionModal .modal-header .close{
+	padding: 2px 5px;
+    margin: 0;
+    position: relative;
+    border: 0px solid #3c3c3c;
+    background: none;
+    right: 0;
+    float: none;
+    top: 0;
+    font-size: 1.7rem;
+    font-weight: 100;}
+    .report-main__link:hover, .report-main__link:active{
+    	background :#363062;
+    	color : #fff;
+    }
+
+</style>
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header">
+            <a href="{% url 'index' %}" class="brand-logo">
+				<img class="logo-abbr" src="/static/images/logo-small.jpg" alt="Small Logo" />
+				<img class="brand-title" src="/static/images/logo-big.jpg" alt="Big Logo" />
+			</a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+		
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="dashboard_bar">Employees Reports</div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="deznav">
+            <div class="deznav-scroll">
+				<ul class="metismenu" id="menu">
+                    <li><a class="ai-icon" href="{% url 'index' %}" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Dashboard</span>
+						</a>
+                    </li>
+                    <li><a class="ai-icon" href="{% url 'view_company_data' %}" aria-expanded="false">
+						<i class="flaticon-381-internet"></i></i><span class="nav-text">Company</span>
+						</a>
+                    </li>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-television"></i><span class="nav-text">Employees</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href="{% url 'add_employees_data' %}">Add New Employees</a></li>
+						<li><a href="{% url 'view_employees_data' %}">View All Employees</a></li>
+					</ul>
+				</li>
+
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-notepad"></i>
+						<span class="nav-text">Reports</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href="{% url 'view_employee_reports' %}">Employee Reports</a></li>
+						<li><a href="{% url 'view_summary_reports' %}">Summary Reports</a></li>
+					</ul>
+				</li>
+
+                    <li><a class="ai-icon" href="{% url 'get_test' %}" aria-expanded="false">
+							<i class="flaticon-381-layer-1"></i>
+							<span class="nav-text">Tests</span>
+						</a>
+					</li>
+					<li><a class="ai-icon" href="{% url 'logout' %}" aria-expanded="false">
+						<i class="flaticon-381-turn-off"></i>
+						<span class="nav-text">Logout</span>
+					</a>
+				    </li>
+                        <!-- <ul aria-expanded="false">
+                            <li><a href="./page-register.html">Register</a></li>
+                            <li><a href="./page-login.html">Login</a></li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="./page-error-400.html">Error 400</a></li>
+                                    <li><a href="./page-error-403.html">Error 403</a></li>
+                                    <li><a href="./page-error-404.html">Error 404</a></li>
+                                    <li><a href="./page-error-500.html">Error 500</a></li>
+                                    <li><a href="./page-error-503.html">Error 503</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./page-lock-screen.html">Lock Screen</a></li>
+                        </ul>
+                    </li> -->
+                </ul>
+				<div class="copyright" style="margin-top:120px">
+					<p><strong>SMHRI</strong> © {% now "Y" %} All Rights Reserved.</p>
+					<p class="fs-12">Made with <span class="heart"></span> by <a href="https://anantsoftcomputing.com/">ASC</a></p>
+				</div>
+			</div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <!-- <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>Hi, welcome back!</h4>
+                            <span>Datatable</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Table</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Datatable</a></li>
+                        </ol>
+                    </div>
+                </div> -->
+                <!-- row -->
+
+
+                <div class="row">
+					<div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">List of Employees Report</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example3" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Collection Date</th>
+                                                <th>Company</th>
+                                                <th>Name</th>
+                                                <th>Employee Number</th>
+                                                <th>Ticket Number</th>
+                                                <th>Department</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+										{% for st in stu %}
+                                            <tr>
+<!--                                                <td><img class="rounded-circle" width="35" src="{% static 'images/profile/small/pic1.jpg' %}" alt=""></td>-->
+												<td>{{st.id}}</td>
+                                                <td>{{st.collection_date}}</td>
+                                                <td>{{st.company}}</td>
+												<td>{{st.first_name}}</td>
+                                                <td>{{st.employee_no}}</td>
+                                                <td>{{st.ticket_no}}</td>
+                                                <td>{{st.department}}</td>
+                                                <td>{{st.status}}</td>
+												<td style="background-color:#FF0000">
+													<button type="button"  class="btn btn-primary openModal" data-toggle="modal">
+  														See options
+													</button>
+													<div class="popup-content">
+														<div class="reports-main">
+															<a target="_blank" class="report-main__link" href="{% url 'audiometery' st.id %}">audiometery</a>
+												<a target="_blank" class="report-main__link" href="{% url 'biochemistry' st.id %}">biochemistry</a>
+												<a target="_blank" class="report-main__link" href="{% url 'cholinesterase' st.id %}">cholinesterase</a>
+												<a target="_blank" class="report-main__link" href="{% url 'form_32' st.id %}">form_32</a>
+												<a target="_blank" class="report-main__link" href="{% url 'form_33' st.id %}">form_33</a>
+												<a target="_blank" class="report-main__link" href="{% url 'form_new_o' st.id %}">form_new_o</a>
+												<a target="_blank" class="report-main__link" href="{% url 'form_o' st.id %}">form_o</a>
+												<a target="_blank" class="report-main__link" href="{% url 'form_xi' st.id %}">form_xi</a>
+												<a target="_blank" class="report-main__link" href="{% url 'g6pd' st.id %}">g6pd</a>
+												<a target="_blank" class="report-main__link" href="{% url 'hba1c' st.id %}">hba1c</a>
+												<a target="_blank" class="report-main__link" href="{% url 'hbsag' st.id %}">hbsag</a>
+												<a target="_blank" class="report-main__link" href="{% url 'hcv' st.id %}">hcv</a>
+												<a target="_blank" class="report-main__link" href="{% url 'health_card' st.id %}">health_card</a>
+												<a target="_blank" class="report-main__link" href="{% url 'hiv' st.id %}">hiv</a>
+												<a target="_blank" class="report-main__link" href="{% url 'medical' st.id %}">medical</a>
+												<a target="_blank" class="report-main__link" href="{% url 'medical_cert' st.id %}">medical_cert</a>
+												<a target="_blank" class="report-main__link" href="{% url 'psa' st.id %}">psa</a>
+												<a target="_blank" class="report-main__link" href="{% url 's_protien' st.id %}">s_protien</a>
+												<a target="_blank" class="report-main__link" href="{% url 'sautam' st.id %}">sputam</a>
+												<a target="_blank" class="report-main__link" href="{% url 'stool' st.id %}">stool</a>
+												<a target="_blank" class="report-main__link" href="{% url 'thyroid' st.id %}">thyroid</a>
+												<a target="_blank" class="report-main__link" href="{% url 'vdrl' st.id %}">vdrl</a>
+												<a target="_blank" class="report-main__link" href="{% url 'vitamin_b12' st.id %}">vitamin_b12</a>
+												<a target="_blank" class="report-main__link" href="{% url 'vitamin_d3' st.id %}">vitamin_d3</a></div>
+<!--														<select class="form-drop">-->
+<!--														<option value="select">select from list</option>-->
+<!--														<option value="{% url 'audiometery' st.id %}">audiometery</option>-->
+<!--														<option value="{% url 'biochemistry' st.id %}">biochemistry</option>-->
+<!--														<option value="{% url 'cholinesterase' st.id %}">cholinesterase</option>-->
+<!--														<option value="{% url 'form_32' st.id %}">form_32</option>-->
+<!--														<option value="{% url 'form_33' st.id %}">form_33</option>-->
+<!--														<option value="{% url 'form_new_o' st.id %}">form_new_o</option>-->
+<!--														<option value="{% url 'form_o' st.id %}">form_o</option>-->
+<!--														<option value="{% url 'form_xi' st.id %}">form_xi</option>-->
+<!--														<option value="{% url 'g6pd' st.id %}">g6pd</option>-->
+<!--														<option value="{% url 'hba1c' st.id %}">hba1c</option>-->
+<!--														<option value="{% url 'hbsag' st.id %}">hbsag</option>-->
+<!--														<option value="{% url 'hcv' st.id %}">hcv</option>-->
+<!--														<option value="{% url 'health_card' st.id %}">health_card</option>-->
+<!--														<option value="{% url 'hiv' st.id %}">hiv</option>-->
+<!--														<option value="{% url 'medical' st.id %}">medical</option>-->
+<!--														<option value="{% url 'medical_cert' st.id %}">medical_cert</option>-->
+<!--														<option value="{% url 'psa' st.id %}">psa</option>-->
+<!--														<option value="{% url 's_protien' st.id %}">s_protien</option>-->
+<!--														<option value="{% url 'sautam' st.id %}">sautam</option>-->
+<!--														<option value="{% url 'stool' st.id %}">stool</option>-->
+<!--														<option value="{% url 'thyroid' st.id %}">thyroid</option>-->
+<!--														<option value="{% url 'vdrl' st.id %}">vdrl</option>-->
+<!--														<option value="{% url 'vitamin_b12' st.id %}">vitamin_b12</option>-->
+<!--														<option value="{% url 'vitamin_d3' st.id %}">vitamin_d3</option>-->
+<!--													</select>-->
+													</div>
+
+<!--													<a href="{% url 'audiometery' st.id %}">audiometery</a><br>-->
+<!--												<a href="{% url 'biochemistry' st.id %}">biochemistry</a><br>-->
+<!--												<a href="{% url 'cholinesterase' st.id %}">cholinesterase</a><br>-->
+<!--												<a href="{% url 'form_32' st.id %}">form_32</a><br>-->
+<!--												<a href="{% url 'form_33' st.id %}">form_33</a><br>-->
+<!--												<a href="{% url 'form_new_o' st.id %}">form_new_o</a><br>-->
+<!--												<a href="{% url 'form_o' st.id %}">form_o</a><br>-->
+<!--												<a href="{% url 'form_xi' st.id %}">form_xi</a><br>-->
+<!--												<a href="{% url 'g6pd' st.id %}">g6pd</a><br>-->
+<!--												<a href="{% url 'hba1c' st.id %}">hba1c</a><br>-->
+<!--												<a href="{% url 'hbsag' st.id %}">hbsag</a><br>-->
+<!--												<a href="{% url 'hcv' st.id %}">hcv</a><br>-->
+<!--												<a href="{% url 'health_card' st.id %}">health_card</a><br>-->
+<!--												<a href="{% url 'hiv' st.id %}">hiv</a><br>-->
+<!--												<a href="{% url 'medical' st.id %}">medical</a><br>-->
+<!--												<a href="{% url 'medical_cert' st.id %}">medical_cert</a><br>-->
+<!--												<a href="{% url 'psa' st.id %}">psa</a><br>-->
+<!--												<a href="{% url 's_protien' st.id %}">s_protien</a><br>-->
+<!--												<a href="{% url 'sautam' st.id %}">sautam</a><br>-->
+<!--												<a href="{% url 'stool' st.id %}">stool</a><br>-->
+<!--												<a href="{% url 'thyroid' st.id %}">thyroid</a><br>-->
+<!--												<a href="{% url 'vdrl' st.id %}">vdrl</a><br>-->
+<!--												<a href="{% url 'vitamin_b12' st.id %}">vitamin_b12</a><br>-->
+<!--												<a href="{% url 'vitamin_d3' st.id %}">vitamin_d3</a>-->
+												</td>
+
+<!--                                                <td>-->
+<!--													<div class="d-flex">-->
+<!--														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1" title="Edit"><i class="fas fa-pencil-alt"></i></a>-->
+<!--														<a href="#" class="btn btn-danger shadow btn-xs sharp me-1" title="Delete"><i class="fa fa-trash"></i></a>-->
+<!--                                                    </div>-->
+<!--												</td>-->
+                                            </tr>
+										{% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+	<!-- Modal -->
+<div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="optionModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reports</h5>
+        <button type="button" class="close btn-modal-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modal-main-content">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+	<script>
+	const modalBtnClose = document.querySelectorAll('.btn-modal-close');
+	const modalBtn = document.querySelectorAll('.openModal');
+	const modal = document.querySelector('#optionModal');
+	const modalMainContent = document.querySelector('.modal-main-content');
+	const popupContent = document.querySelectorAll('.popup-content');
+
+	modalBtn.forEach((btn,i) => {
+        btn.addEventListener('click', function (e) {
+		const content = popupContent[i].innerHTML;
+		modalMainContent.innerHTML = content;
+        jQuery('#optionModal').modal('show');
+
+        })
+    });
+    modalBtnClose[0].addEventListener('click', function (e) {
+        jQuery('#optionModal').modal('hide');
+    });
+    modalBtnClose[1].addEventListener('click', function (e) {
+        jQuery('#optionModal').modal('hide');
+    });
+	</script>
+    <!-- Required vendors -->
+    <script src="{% static 'vendor/global/global.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'vendor/chart.js/Chart.bundle.min.js' %}"></script>
+	<!-- Apex Chart -->
+	<script src="{% static 'vendor/apexchart/apexchart.js' %}"></script>
+
+
+
+    <!-- Datatable -->
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/plugins-init/datatables.init.js' %}"></script>
+
+
+
+    <script src="{% static 'js/custom.min.js' %}"></script>
+	<script src="{% static 'js/deznav-init.js' %}"></script>
+	<script src="{% static 'js/demo.js' %}"></script>
+    <script src="{% static 'js/styleSwitcher.js' %}"></script>
+	<script>
+    const formDropdown = document.querySelectorAll('.form-drop');
+    formDropdown.forEach(formSel => {
+        formSel.addEventListener('change', function (e) {
+            if (e.target.value != "select" || e.target.value.length != 0) { window.open(e.target.value, '_blank'); }
+        })
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="robots" content="index, follow" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+    <title>Employees | SMHRI</title>
+   <!-- Favicon icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+	<link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+    <!-- Datatable -->
+    <link href="{% static 'vendor/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    	<link href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" />
+</head>
+
+<body> 
+
+    <!--*******************************************************************************************************************************************************************************************************************************
+                                                                                                        Preloader start
+    ********************************************************************************************************************************************************************************************************************************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************************************************************************************************************************************************************************************************************************
+                                                                                                         Preloader end
+    ********************************************************************************************************************************************************************************************************************************-->
+
+
+    <!--************************************************************************************************************************************************************************************************************
+                                                                                                        Main wrapper start
+    *************************************************************************************************************************************************************************************************************-->
+    <div id="main-wrapper">
+
+        <!--************************************************************************************************************************************************************************************************************
+                                                                                                         Nav header start
+        *************************************************************************************************************************************************************************************************************-->
+		<div class="nav-header">
+            <a href="{% url 'index' %}" class="brand-logo">
+				<img class="logo-abbr" src="{% static 'images/logo-small.jpg' %}" alt="Small Logo" />
+				<img class="brand-title" src="{% static 'images/logo-big.jpg' %}" alt="Big Logo" />
+			</a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--************************************************************************************************************************************************************************************************************
+                                                                                                    Nav header end
+        *************************************************************************************************************************************************************************************************************-->
+        <!--************************************************************************************************************************************************************************************************************
+                                                                                                     Header start
+        *************************************************************************************************************************************************************************************************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="dashboard_bar">Employees</div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**************************************************************************************************************************************************************************************
+           																		 Header end ti-comment-alt
+        ****************************************************************************************************************************************************************************************-->
+
+        <!--**************************************************************************************************************************************************************************************
+          																			  Sidebar start
+        ***************************************************************************************************************************************************************************************-->
+        <div class="deznav">
+            <div class="deznav-scroll">
+				<ul class="metismenu" id="menu">
+                    <li><a class="ai-icon" href="{% url 'index' %}" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Dashboard</span>
+						</a>
+                    </li>
+                    <li><a class="ai-icon" href="{% url 'view_company_data' %}" aria-expanded="false">
+						<i class="flaticon-381-internet"></i></i><span class="nav-text">Company</span>
+						</a>
+                    </li>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-television"></i><span class="nav-text">Employees</span>
+					</a>
+                    <ul aria-expanded="false">
+						<li><a href="{% url 'add_employees_data' %}">Add New Employees</a></li>
+						<li><a href="{% url 'view_employees_data' %}">View All Employees</a></li>
+					</ul>
+				</li>
+				<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-notepad"></i>
+						<span class="nav-text">Reports</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href="{% url 'view_employee_reports'  %}">Employee Reports</a></li>
+						<li><a href="{% url 'view_summary_reports' %}">Summary Reports</a></li>
+					</ul>
+				</li>
+
+				<li><a class="ai-icon" href="{% url 'get_test' %}" aria-expanded="false">
+						<i class="flaticon-381-layer-1"></i>
+						<span class="nav-text">Tests</span>
+					</a>
+				</li>
+				
+				<li><a class="ai-icon" href="{% url 'logout' %}" aria-expanded="false">
+						<i class="flaticon-381-turn-off"></i>
+						<span class="nav-text">Logout</span>
+					</a>
+				</li>
+			</ul>
+            <div class="copyright" style="margin-top:120px">
+                <p><strong>SMHRI</strong> © {% now "Y" %} All Rights Reserved.</p>
+                <p class="fs-12">Made with <span class="heart"></span> by <a href="https://anantsoftcomputing.com/">ASC</a></p>
+            </div>
+			</div>
+        </div>
+        <!--*************************************************************************************************************************************************************************************
+            																		Sidebar end
+        **************************************************************************************************************************************************************************************-->
+
+        <!--*************************************************************************************************************************************************************************************
+            																	Content body start
+        ***************************************************************************************************************************************************************************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <!-- <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>Hi, welcome back!</h4>
+                            <span>Datatable</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Table</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Datatable</a></li>
+                        </ol>
+                    </div>
+                </div> -->
+                <!-- row -->
+                
+			<!--#################################################### ADD EMPLOYEE DATA ############################################################-->
+
+                <div class="row">
+					<div class="col-12">
+                        <div class="card">
+                            <div class="card-header" style="gap :20px" >
+                                <h4 class="card-title">List of Employees</h4>
+                                      <!-- edit Modal -->
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary mb-2" onclick="ExportToExcel('xlsx')" style="margin-left:auto;">Export To Excel</button>
+                                    <a href="{% url 'add_employees_data' %}"><button type="button" class="btn btn-primary mb-2" >Add New</button></a>
+                                                                                                    <!--data-bs-toggle="modal" data-bs-target="#exampleModalCenter"-->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Add New Employee</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                   <!-- new tab -->
+                                                   <div class="custom-tab-1">
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" data-bs-toggle="tab" href="#home1"><i class="la la-user me-2"></i> Profile</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" data-bs-toggle="tab" href="#company1"><i class="la la-user me-2"></i> Company</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active" data-bs-toggle="tab" href="#details1"><i class="las la-id-card me-2"></i>Details</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" data-bs-toggle="tab" href="#contact1"><i class="la la-phone me-2"></i>  Contact</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" data-bs-toggle="tab" href="#message1"><i class="la la-info-circle me-2"></i> Info</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" data-bs-toggle="tab" href="#test1"><i class="la la-notes-medical me-2 "></i> Add Test</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane fade show active" id="home1" role="tabpanel">
+                                                            <div class="pt-4">
+                                                                <div class="form-validation">
+                                                                    <form class="needs-validation" method="post">
+																		{% csrf_token %}
+
+                                                                        <div class="row">
+                                                                            <div class="col-xl-12">
+                                                                                <div class="mb-3 row">
+                                                                                    <label  class="col-lg-4 col-form-label" for="validationCustom05">Name prefix:
+                                                                                        <span class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <select class="default-select wide form-control" name="name_pref" id="validationCustom05">
+                                                                                            <option  data-display="Select">Please select</option>
+                                                                                            <!--
+                                                                                            option value="Miss">Miss</option>-->
+                                                                                            <option value="Mr">Mr</option>
+                                                                                            <option value="Mrs">Mrs</option>
+                                                                                        </select>
+                                                                                        <div class="invalid-feedback">Please select a one.</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label  class="col-lg-4 col-form-label"  for="validationCustom01">First Name
+                                                                                        <span class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input type="text" name="first_name" class="form-control" id="validationCustom01"  placeholder="Enter a First Name.." required>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a First Name.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Middle Name <span
+                                                                                            class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input type="text" name="middle_name" class="form-control" id="validationCustom02"  placeholder="Your valid Middle Name.." >
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Middle Name.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label  class="col-lg-4 col-form-label" for="validationCustom03">Last name
+                                                                                        <span class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input type="tel" name="last_name" class="form-control" id="validationCustom03" placeholder="Last name .." >
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Last name .
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Gender : <span
+                                                                                            class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <select class="default-select wide form-control" name="sex" id="validationCustom04">
+                                                                                            <option  data-display="Select">Please select</option>
+                                                                                            <option value="Male">Male</option>
+                                                                                            <option value="Female">Female</option>
+                                                                                            <option value="Others">Others</option>
+                                                                                        </select>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Gender :
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="company1" role="tabpanel">
+                                                            <div class="pt-4">
+                                                                <div class="form-validation">
+                                                                    <form class="needs-validation" novalidate >
+                                                                        <div class="row">
+                                                                            <div class="col-xl-12">
+                                                                                <div class="mb-6 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Select Company
+                                                                                        <span class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <select class="default-select wide form-control" name="company" id="validationCustom01">
+                                                                                            <option  data-display="Select">Please select Company</option>
+                                                                                            <option value="Company">Company 1</option>
+                                                                                            <option value="Company">Company 2</option>
+                                                                                            <option value="Company">Company 3</option>
+                                                                                        </select>
+                                                                                        <div class="invalid-feedback">Please select a one.</div>
+                                                                                        <div class="invalid-feedback">Please enter a Name.</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <br/>
+<!--                                                                                <div class="mb-6 row">-->
+<!--                                                                                    <label  class="col-lg-4 col-form-label" for="validationCustom02">Employees No <span-->
+<!--                                                                                            class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <input name-="emp_no" type="text" class="form-control" id="validationCustom02"  placeholder="Your Employees No.." required>-->
+<!--                                                                                        <div class="invalid-feedback">-->
+<!--                                                                                            Please enter a Employees No .-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+                                                                                <br/>
+                                                                                <div class="mb-6 row">
+                                                                                    <label  class="col-lg-4 col-form-label" for="validationCustom03">Ticket no
+                                                                                        <span class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="ticket_no" type="tel" class="form-control" id="validationCustom03" placeholder="Ticket no.." required>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Ticket no.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <br/>
+                                                                                <div class="mb-6 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Aadhar card no : <span
+                                                                                            class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input  name="aadhar_card_no" type="text" class="form-control" id="validationCustom04"  placeholder="Your Aadhar card No.." >
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Aadhar card no :
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <br/>
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Pan number
+                                                                                        <span class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="pan_number" type="text" class="form-control" id="validationCustom05" placeholder="Your Pan number  :" >
+                                                                                        <div class="invalid-feedback">Please select a one.</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <br/>
+                                                                                <!-- <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Joining Date
+                                                                                        <span class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input type="text" class="form-control" id="validationCustom01"  placeholder="Enter a Joining Date.." required>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Joining Date.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Designation <span
+                                                                                            class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid Designation.." required>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Designation.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom03">Department
+                                                                                        <span class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input type="tel" class="form-control" id="validationCustom03" placeholder="Department.." required>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Department.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> -->
+
+                                                                            </div>
+                                                                            <!-- <div class="col-xl-6">
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Name prefix :
+                                                                                        <span class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <select class="default-select wide form-control" id="validationCustom05">
+                                                                                            <option  data-display="Select">Please select</option>
+                                                                                            <option value="Miss">Miss</option>
+                                                                                            <option value="Mr">Mr</option>
+                                                                                            <option value="Mrs">Mrs</option>
+                                                                                        </select>
+                                                                                        <div class="invalid-feedback">Please select a one.</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div> -->
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="details1" role="tabpanel">
+                                                            <div class="pt-4">
+                                                                <div class="form-validation">
+                                                                    <form class="needs-validation" novalidate >
+                                                                        <div class="row">
+                                                                            <div class="col-xl-12">
+<!--                                                                                <div class="mb-6 row">-->
+<!--                                                                                    <label  class="col-lg-4 col-form-label" for="validationCustom01">Select Company-->
+<!--                                                                                        <span class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <select class="default-select wide form-control" id="validationCustom01">-->
+<!--                                                                                            <option  data-display="Select">Please select Company</option>-->
+<!--                                                                                            <option value="Company">Company 1</option>-->
+<!--                                                                                            <option value="Company">Company 2</option>-->
+<!--                                                                                            <option value="Company">Company 3</option>-->
+<!--                                                                                        </select>-->
+<!--                                                                                        <div class="invalid-feedback">Please select a one.</div>-->
+<!--                                                                                        <div class="invalid-feedback">Please enter a Name.</div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+                                                                                <br/>
+<!--                                                                                <div class="mb-6 row">-->
+<!--                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Employees No <span-->
+<!--                                                                                            class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your Employees No.." required>-->
+<!--                                                                                        <div class="invalid-feedback">-->
+<!--                                                                                            Please enter a Employees No .-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+                                                                                <br/>
+<!--                                                                                <div class="mb-6 row">-->
+<!--                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom03">Ticket no-->
+<!--                                                                                        <span class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <input type="tel" class="form-control" id="validationCustom03" placeholder="Ticket no.." required>-->
+<!--                                                                                        <div class="invalid-feedback">-->
+<!--                                                                                            Please enter a Ticket no.-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+
+<!--                                                                                <div class="mb-6 row">-->
+<!--                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Aadhar card no : <span-->
+<!--                                                                                            class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <input type="text" class="form-control" id="validationCustom04"  placeholder="Your Aadhar card No.." required>-->
+<!--                                                                                        <div class="invalid-feedback">-->
+<!--                                                                                            Please enter a Aadhar card no :-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+
+<!--                                                                                <div class="mb-3 row">-->
+<!--                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Pan number -->
+<!--                                                                                        <span class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <input type="text" class="form-control" id="validationCustom05" placeholder="Your Pan number  :" required>-->
+<!--                                                                                        <div class="invalid-feedback">Please select a one.</div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Joining Date
+                                                                                        <span class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="date_joining" type="text" class="form-control" id="validationCustom01"  placeholder="Enter a Joining Date.." >
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Joining Date.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Designation <span
+                                                                                            class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="designation" type="text" class="form-control" id="validationCustom02"  placeholder="Your valid Designation.." >
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Designation.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom03">Department
+                                                                                        <span class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="department" type="tel" class="form-control" id="validationCustom03" placeholder="Department..">
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a Department.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- <div class="col-xl-6">
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Name prefix :
+                                                                                        <span class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <select class="default-select wide form-control" id="validationCustom05">
+                                                                                            <option  data-display="Select">Please select</option>
+                                                                                            <option value="Miss">Miss</option>
+                                                                                            <option value="Mr">Mr</option>
+                                                                                            <option value="Mrs">Mrs</option>
+                                                                                        </select>
+                                                                                        <div class="invalid-feedback">Please select a one.</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div> -->
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="profile1" role="tabpanel">
+                                                            <div class="pt-4">
+                                                                <div class="form-validation">
+                                                                    <form class="needs-validation" novalidate >
+                                                                        <div class="row">
+                                                                            <div class="col-xl-12">
+<!--                                                                                <div class="mb-3 row">-->
+<!--                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Name prefix :-->
+<!--                                                                                        <span class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <select class="default-select wide form-control" id="validationCustom05">-->
+<!--                                                                                            <option  data-display="Select">Please select</option>-->
+<!--                                                                                            <option value="Miss">Miss</option>-->
+<!--                                                                                            <option value="Mr">Mr</option>-->
+<!--                                                                                            <option value="Mrs">Mrs</option>-->
+<!--                                                                                        </select>-->
+<!--                                                                                        <div class="invalid-feedback">Please select a one.</div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+<!--                                                                                <div class="mb-3 row">-->
+<!--                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom01">First Name-->
+<!--                                                                                        <span class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <input type="text" class="form-control" id="validationCustom01"  placeholder="Enter a First Name.." required>-->
+<!--                                                                                        <div class="invalid-feedback">-->
+<!--                                                                                            Please enter a First Name.-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+<!--                                                                                <div class="mb-3 row">-->
+<!--                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Middle Name <span-->
+<!--                                                                                            class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid Middle Name.." required>-->
+<!--                                                                                        <div class="invalid-feedback">-->
+<!--                                                                                            Please enter a Middle Name.-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+<!--                                                                                <div class="mb-3 row">-->
+<!--                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom03">Last name -->
+<!--                                                                                        <span class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <input type="tel" class="form-control" id="validationCustom03" placeholder="Last name .." required>-->
+<!--                                                                                        <div class="invalid-feedback">-->
+<!--                                                                                            Please enter a Last name .-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+
+<!--                                                                                <div class="mb-3 row">-->
+<!--                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Gender : <span-->
+<!--                                                                                            class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <select class="default-select wide form-control" id="validationCustom04">-->
+<!--                                                                                            <option  data-display="Select">Please select</option>-->
+<!--                                                                                            <option value="Male">Male</option>-->
+<!--                                                                                            <option value="Female">Female</option>-->
+<!--                                                                                            <option value="Others">Others</option>-->
+<!--                                                                                        </select>-->
+<!--                                                                                        <div class="invalid-feedback">-->
+<!--                                                                                            Please enter a Gender :-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="contact1" role="tabpanel">
+                                                            <div class="pt-4">
+                                                                <div class="form-validation">
+                                                                    <form class="needs-validation" novalidate >
+                                                                        <div class="row">
+                                                                            <div class="col-xl-12">
+<!--                                                                                <div class="mb-3 row">-->
+<!--                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Phone <span-->
+<!--                                                                                            class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <input  type="text" class="form-control" id="validationCustom02"  placeholder="Your Phone No.." required>-->
+<!--                                                                                        <div class="invalid-feedback">-->
+<!--                                                                                            Please enter a Phone No .-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Address
+                                                                                        <span class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <textarea name="address" class="form-control" id="validationCustom04"  rows="5" placeholder="Your Address :" ></textarea>
+                                                                                        <!-- <input type="text" class="form-control" id="validationCustom05" placeholder="Your Address :" required> -->
+                                                                                        <div class="invalid-feedback">Please select a one.</div>
+                                                                                    </div>
+                                                                                </div>
+<!--                                                                                <div class="mb-3 row">-->
+<!--                                                                                    <label  class="col-lg-4 col-form-label" for="validationCustom10">Country <span-->
+<!--                                                                                            class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <select class="default-select form-control wide mt-3" name="country" >-->
+<!--                                                                                            <option>India</option>-->
+<!--                                                                                            <option>USA</option>-->
+<!--                                                                                            <option>AUSTRALIA</option>-->
+<!--                                                                                            <option>CANADA</option>-->
+<!--                                                                                            <option>UAE</option>-->
+<!--                                                                                        </select>-->
+<!--                                                                                        &lt;!&ndash; <input type="text" class="form-control" id="validationCustom10" placeholder="5.0" required> &ndash;&gt;-->
+<!--                                                                                        <div class="invalid-feedback">Please Select Country</div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+<!--                                                                                <div class="mb-3 row">-->
+<!--                                                                                    <label  class="col-lg-4 col-form-label" for="validationCustom10">state <span-->
+<!--                                                                                            class="text-danger">*</span>-->
+<!--                                                                                    </label>-->
+<!--                                                                                    <div class="col-lg-6">-->
+<!--                                                                                        <select class="default-select form-control wide mt-3" name="state">-->
+<!--                                                                                            <option>GUJARAT</option>-->
+<!--                                                                                            <option>MAHARASHTRA</option>-->
+<!--                                                                                            <option>MADHYAPTADESH</option>-->
+<!--                                                                                            <option>RAJASHTHAN</option>-->
+<!--                                                                                            <option>UTTARAKHAND</option>-->
+<!--                                                                                        </select>-->
+<!--                                                                                        <div class="invalid-feedback">Please Select State</div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+                                                                                <div class="mb-3 row">
+                                                                                    <label  class="col-lg-4 col-form-label" for="validationCustom10">City <span
+                                                                                            class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <select class="default-select form-control wide mt-3" name="city">
+                                                                                            <option>VADODARA</option>
+                                                                                            <option>SURAT</option>
+                                                                                            <option>ANAND</option>
+                                                                                            <option>AHEMEDABAD</option>
+                                                                                            <option>RAJKOT</option>
+                                                                                        </select>
+                                                                                        <div class="invalid-feedback">Please Select City</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="message1">
+                                                            <div class="pt-4">
+                                                                <div class="form-validation">
+                                                                    <form class="needs-validation">
+                                                                        <div class="row">
+                                                                            <div class="col-xl-12">
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Birthdate
+                                                                                        <span class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="birthdate" type="text" class="form-control" id="validationCustom05" placeholder="Your Birthdate :" required>
+                                                                                        <div class="invalid-feedback">Please select a one.</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom09">Photo : <span
+                                                                                            class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="photo" type="file" class="form-control" id="validationCustom09">
+                                                                                        <div class="invalid-feedback">Please Uplaod Photo :</div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom10">Fitness certificate date   <span
+                                                                                            class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="fitness_certificate_date" type="date" class="form-control" id="validationCustom09" >
+                                                                                        <div class="invalid-feedback">Please Select Fitness certificate date </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom10">Previous certificate no <span
+                                                                                            class="text-danger"></span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="previous_certificate_number" type="text" class="form-control" id="validationCustom10" >
+                                                                                        <div class="invalid-feedback">Please Select Previous certificate no.</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="test1">
+                                                            <div class="pt-4">
+                                                                <div class="form-validation">
+                                                                    <form class="needs-validation" novalidate >
+                                                                        <div class="row">
+                                                                            <div class="col-xl-12">
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Collection Date
+                                                                                        <span class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="collection_date"  type="date" class="form-control" id="validationCustom05" placeholder="Collection Date.." required>
+                                                                                        <div class="invalid-feedback">Please select a one.</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom10">Test Date  <span
+																							class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <input name="test_date" type="date" class="form-control" id="validationCustom09" required>
+                                                                                        <div class="invalid-feedback">Please Select test Date</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!--<div class="mb-3 row">-->
+                                                                                <!--    <label class="col-lg-4 col-form-label" for="validationCustom05">Select Type of Test-->
+                                                                                <!--        <span class="text-danger">*</span>-->
+                                                                                <!--    </label>-->
+                                                                                    <!-- <div class="col-lg-6">
+                                                                                <!--        <input type="date" class="form-control" id="validationCustom05" placeholder="Collection Date.." required>-->
+                                                                                <!--        <div class="invalid-feedback">Please select a one.</div>-->
+                                                                                <!--    </div> -->-->
+                                                                                <!--</div>-->
+                                                                                <div class="mb-3 row">
+                                                                                    <label class="col-lg-4 col-form-label" for="validationCustom09">Status : <span
+                                                                                        class="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <div class="col-lg-6">
+                                                                                        <select class="default-select wide form-control" id="validationCustom05">
+                                                                                            <option  data-display="Select">Please select Status </option>
+                                                                                            <option value="Approved">Approved</option>
+                                                                                            <option value="Pending">Pending</option>
+                                                                                        </select>
+                                                                                        <div class="invalid-feedback">Please Uplaod Status :</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+											<!--############################################# start code checkbox ##############################################-->
+                                                                        <div class="row">
+                                                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                <div class="form-check custom-checkbox mb-3">
+                                                                                    <input name="audiometerThresholdDecimats" type="checkbox" class="form-check-input" id="customCheckBox1" required="">
+                                                                                    <label class="form-check-label" for="customCheckBox1">Audiometer Threshold Decimats</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                <div class="form-check custom-checkbox mb-3">
+                                                                                    <input type="checkbox" name="bloodTest" class="form-check-input" checked="" id="customCheckBox2" required="">
+                                                                                    <label class="form-check-label" for="customCheckBox2">Blood</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                <div class="form-check custom-checkbox mb-3">
+                                                                                    <input type="checkbox" name="complaints" class="form-check-input" checked="" id="customCheckBox3" required="">
+                                                                                    <label class="form-check-label" for="customCheckBox3">Complaints</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                <div class="form-check custom-checkbox mb-3">
+                                                                                    <input type="checkbox" name="hematology" class="form-check-input" checked="" id="customCheckBox4" required="">
+                                                                                    <label class="form-check-label" for="customCheckBox4">Hematology</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                <div class="form-check custom-checkbox mb-3">
+                                                                                    <input name="lungFunctionTest" type="checkbox" class="form-check-input" checked="" id="customCheckBox5" required="">
+                                                                                    <label class="form-check-label" for="customCheckBox5">Lung Function</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                <div class="form-check custom-checkbox mb-3">
+                                                                                    <input name="microscopicExamination" type="checkbox" class="form-check-input" checked="" id="customCheckBox6" required="">
+                                                                                    <label class="form-check-label" for="customCheckBox5">Microscopic Examination</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                <div class="form-check custom-checkbox mb-3">
+                                                                                    <input name="otherTests" type="checkbox" class="form-check-input" checked="" id="customCheckBox7" required="">
+                                                                                    <label class="form-check-label" for="customCheckBox5">Other Tests</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                <div class="form-check custom-checkbox mb-3">
+                                                                                    <input name="physiologicalTest" type="checkbox" class="form-check-input" checked="" id="customCheckBox8" required="">
+                                                                                    <label class="form-check-label" for="customCheckBox5">Physiological</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                <div class="form-check custom-checkbox mb-3">
+                                                                                    <input name="systematicExamination" type="checkbox" class="form-check-input" checked="" id="customCheckBox9" required="">
+                                                                                    <label class="form-check-label" for="customCheckBox5">
+                                                                                        Systematic Examination</label>
+                                                                                </div>
+                                                                            </div>
+<!--                                                                            <div class="col-xl-4 col-xxl-6 col-6">-->
+<!--                                                                                <div class="form-check custom-checkbox mb-3">-->
+<!--                                                                                    <input type="checkbox" class="form-check-input" checked="" id="customCheckBox10" required="">-->
+<!--                                                                                    <label class="form-check-label" for="customCheckBox5">Urine Examination</label>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+                                                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                <div class="form-check custom-checkbox mb-3">
+                                                                                    <input name="visualTest" type="checkbox" class="form-check-input" checked="" id="customCheckBox11" required="">
+                                                                                    <label class="form-check-label" for="customCheckBox5">Visual</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+											<!--############################################# end of checkbox ##############################################-->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                   <!-- end tab -->
+                                                    <!-- <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p> -->
+                                                    <!-- <div class="form-validation">
+                                                        <form class="needs-validation" novalidate >
+                                                            <div class="row">
+                                                                <div class="col-xl-6">
+                                                                    <div class="mb-3 row">
+                                                                        <label class="col-lg-4 col-form-label" for="validationCustom01">Name
+                                                                            <span class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="col-lg-6">
+                                                                            <input type="text" class="form-control" id="validationCustom01"  placeholder="Enter a Name.." required>
+                                                                            <div class="invalid-feedback">
+                                                                                Please enter a Name.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mb-3 row">
+                                                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Email <span
+                                                                                class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="col-lg-6">
+                                                                            <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid email.." required>
+                                                                            <div class="invalid-feedback">
+                                                                                Please enter a Email.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mb-3 row">
+                                                                        <label class="col-lg-4 col-form-label" for="validationCustom03">Phone
+                                                                            <span class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="col-lg-6">
+                                                                            <input type="tel" class="form-control" id="validationCustom03" placeholder="Phone.." required>
+                                                                            <div class="invalid-feedback">
+                                                                                Please enter a Phone.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3 row">
+                                                                        <label class="col-lg-4 col-form-label" for="validationCustom04">Address 1: <span
+                                                                                class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="col-lg-6">
+                                                                            <textarea class="form-control" id="validationCustom04"  rows="5" placeholder="Your Address 1:" required></textarea>
+                                                                            <div class="invalid-feedback">
+                                                                                Please enter a Address 1:
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <div class="mb-3 row">
+                                                                        <label class="col-lg-4 col-form-label" for="validationCustom05">Country
+                                                                            <span class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="col-lg-6">
+                                                                            <select class="default-select wide form-control" id="validationCustom05">
+                                                                                <option  data-display="Select">Please select</option>
+                                                                                <option value="India">India</option>
+                                                                                <option value="Australia">Australia</option>
+                                                                                <option value="UK">UK</option>
+                                                                            </select>
+                                                                            <div class="invalid-feedback">Please select a one.</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mb-3 row">
+                                                                        <label class="col-lg-4 col-form-label" for="validationCustom09">Company registration certificate : <span
+                                                                                class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="col-lg-6">
+                                                                            <input type="file" class="form-control" id="validationCustom09" required>
+                                                                            <div class="invalid-feedback">Please Uplaod Company registration certificate :</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mb-3 row">
+                                                                        <label class="col-lg-4 col-form-label" for="validationCustom10">Test <span
+                                                                                class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="col-lg-6">
+                                                                            <select multiple class="default-select form-control wide mt-3" >
+                                                                                <option>Test 1</option>
+                                                                                <option>Test 2</option>
+                                                                                <option>Test 3</option>
+                                                                                <option>Test 4</option>
+                                                                                <option>Test 5</option>
+                                                                            </select>
+
+                                                                            <div class="invalid-feedback">Please Select test</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mb-3 row">
+                                                                        <div class="col-lg-8 ms-auto">
+                                                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div> -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+										 </form>
+                                        </div>
+                                    </div>
+								<!--#################################################### END OF ADD EMPLOYEE ############################################################-->
+                                    <!-- end of Edit Modal -->
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example3" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Company Name</th>
+                                                <th>Name</th>
+                                                <th>Ticket Number</th>
+                                                <th>Address</th>
+                                                <th>City</th>
+                                                <th>Birthdate</th>
+                                                <th>Designation</th>
+                                                <th>Department</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+										 {% for st in stu %}
+                                            <tr>
+                                                <th scope="row">{{st.id}}</th>
+												<td>{{st.list_company}}</td>
+												<td><a href="{% url 'profile' st.id %}">{{st.first_name}}</a></td>
+<!--												<td>{{st.name_pref}}</td>-->
+												<td>{{st.ticket_no}}</td>
+											 	<td>{{st.address}}</td>
+												<td>{{st.city}}</td>
+												<td>{{st.birthdate}}</td>
+												<td>{{st.designation}}</td>
+												<td>{{st.department}}</td>
+												<td>{{st.status}}</td>
+
+							<!--##################### Data Dont Show #####################-->
+
+<!--                                                <td>{{st.emp_id}}</td>-->
+<!--                                            <td>{{st.emp_no}}</td>-->
+<!--                                                <td>{{st.aadhar_card_no}}</td>-->
+<!--                                                <td>{{st.middle_name}}</td>-->
+<!--                                                <td>{{st.last_name}}</td>-->
+<!--                                                <td>{{st.father_name}}</td>-->
+<!--												<td>{{st.mother_name}}</td>-->
+<!--                                                <td>{{st.photo}}</td>-->
+<!--                                                <td>{{st.pan_number}}</td>-->
+<!--                                                <td>{{st.country}}</td>-->
+<!--                                                <td>{{st.state}}</td>-->
+<!--                                                <td>{{st.sex}}</td>-->
+<!--                                                <td>{{st.date_joining}}</td>-->
+<!--                                                <td>{{st.test_type}}</td>-->
+<!--                                                <td>{{st.collection_date}}</td>-->
+<!--                                                <td>{{st.test_date}}</td>-->
+<!--                                                <td>{{st.fitness_certificate_date}}</td>-->
+<!--                                                <td>{{st.previous_certificate_number}}</td>-->
+<!--                                                <td>{{st.emp_added_date}}</td>-->
+<!--												<th>Collection Date</th>-->
+<!--												<td>{{st.audiometerThresholdDecimats}}</td>-->
+<!--                                                <td>{{st.bloodTest}}</td>-->
+<!--                                                <td>{{st.complaints}}</td>-->
+<!--                                                <td>{{st.hematology}}</td>-->
+<!--                                                <td>{{st.lungFunctionTest}}</td>-->
+<!--                                                <td>{{st.microscopicExamination}}</td>-->
+<!--                                                <td>{{st.otherTests}}</td>-->
+<!--                                                <td>{{st.physiologicalTest}}</td>-->
+<!--												<td>{{st.systematicExamination}}</td>-->
+<!--                                                <td>{{st.visualTest}}</td>-->
+<!--                                                <td>{{st.testMaster}}</td>-->
+                                                <td>
+													<div class="d-flex">
+													    <a href="{% url 'profile' st.id %}" class="btn btn-primary shadow btn-xs sharp me-1" title="Edit"><i class="fas fa-file"></i></a>
+														<a href="{% url 'delete_employees_data' st.id %}" class="btn btn-danger shadow btn-xs sharp me-1" title="Delete"><i class="fa fa-trash"></i></a>
+                                                        <!-- <a href="#" class="btn btn-info shadow btn-xs sharp" title="Employees"><i class="fa fa-user"></i></a> -->
+                                                    </div>
+												</td>
+                                            </tr>
+										{% endfor %}
+                                        </tbody>
+                                    </table>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+            </div>
+        </div>
+        <!--************************************************************************************************************************************************************************************************************
+      																						      Content body end
+        *************************************************************************************************************************************************************************************************************-->
+
+
+        <!--************************************************************************************************************************************************************************************************************
+          																							  Footer start
+        *************************************************************************************************************************************************************************************************************-->
+        <div class="footer">
+            
+        </div>
+        <!--************************************************************************************************************************************************************************************************************
+          																							  Footer end
+        *************************************************************************************************************************************************************************************************************-->
+
+        <!--************************************************************************************************************************************************************************************************************
+																							Support ticket button start
+        *************************************************************************************************************************************************************************************************************-->
+
+        <!--************************************************************************************************************************************************************************************************************
+         																					  Support ticket button end
+        *************************************************************************************************************************************************************************************************************-->
+
+
+    </div>
+    <!--************************************************************************************************************************************************************************************************************
+    																							    Main wrapper end
+    *************************************************************************************************************************************************************************************************************-->
+
+    <!--************************************************************************************************************************************************************************************************************
+       																									 Scripts
+    *************************************************************************************************************************************************************************************************************-->
+    <table id="printIt" class="display" style="display: none;">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Company Name</th>
+                                                <th>Name</th>
+                                                <th>Ticket Number</th>
+                                                <th>Address</th>
+                                                <th>City</th>
+                                                <th>Birthdate</th>
+                                                <th>Designation</th>
+                                                <th>Department</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+										 {% for st in stu %}
+                                            <tr>
+                                                <th scope="row">{{st.id}}</th>
+												<td>{{st.list_company}}</td>
+												<td><a href="{% url 'profile' st.id %}">{{st.first_name}}</a></td>
+                                        		<td>{{st.ticket_no}}</td>
+											 	<td>{{st.address}}</td>
+												<td>{{st.city}}</td>
+												<td>{{st.birthdate}}</td>
+												<td>{{st.designation}}</td>
+												<td>{{st.department}}</td>
+												<td>{{st.status}}</td>
+                                                
+                                            </tr>
+										{% endfor %}
+                                        </tbody>
+                                    </table>
+    <!-- Required vendors -->
+    <script src="{% static 'vendor/global/global.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'vendor/chart.js/Chart.bundle.min.js' %}"></script>
+	<!-- Apex Chart -->
+	<script src="{% static 'vendor/apexchart/apexchart.js' %}"></script>
+
+
+
+    <!-- Datatable -->
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/plugins-init/datatables.init.js' %}"></script>
+
+
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+Exportbtn
+  <script>
+        function ExportToExcel(type, fn, dl) {
+       var elt = document.getElementById('printIt');
+       var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+       return dl ?
+         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+         XLSX.writeFile(wb, fn || ('emp.' + (type || 'xlsx')));
+    }
+    </script>
+    <script src="{% static 'js/custom.min.js' %}"></script>
+	<script src="{% static 'js/deznav-init.js' %}"></script>
+	<script src="{% static 'js/demo.js' %}"></script>
+    <script src="{% static 'js/styleSwitcher.js' %}"></script>
+</body>
+</html>
+
+
+

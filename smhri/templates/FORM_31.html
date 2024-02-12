@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <style>
+        .mt60 {
+            margin-top: 60px;
+            padding-left: 2rem;
+
+        }
+
+        .mt90 {
+            margin-top: 90px;
+            padding-left: 2rem;
+        }
+
+        .flexR,
+        ol,
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .flexHalf {
+            display: flex;
+            flex: 1 1 50%;
+            justify-content: space-around;
+        }
+
+        .noListDisc {
+            list-style-type: none;
+        }
+
+        .report_header_form {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .report_header_form {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        #srno {
+            text-align: center;
+        }
+
+        tr td {
+            /*padding: 0.7em;*/
+        }
+
+        tbody,
+        td,
+        tfoot,
+        th,
+        thead,
+        tr {
+            border-width: inherit;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .div_res,
+            .div_res * {
+                visibility: visible;
+            }
+
+            .report_header_form {
+                display: none;
+            }
+
+            table,
+            div {
+                font-size: 14px !important;
+            }
+
+            ol,
+            ul {
+                font-size: 14px;
+            }
+
+            table.firstt {
+                font-size: 14px !important;
+            }
+
+            .div_res {
+                margin-top: 25px;
+            }
+        }
+
+        div {
+            font-size: 14px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="report_header_form">
+                    <input type="button" value="Print Report" class="btn btn-primary" onclick="window.print()"
+                        id="create_print" />
+                </div>
+                <div class="div_res">
+                    <div class="text-center">
+                        <h3>Form No. 31</h3>
+                        <p>[Prescribed under clause (10) of Schedule XI annexed to Rule 100]</p>
+                        <h4>Certificate of Fitness</h4>
+                    </div>
+                    <br />
+                    <div class="report_content flexHalf">
+                        <div>
+                            <ol>
+                                {% if report.ticket_no %} 
+                                <li>Serial No: {{report.ticket_no}}</li>
+                                {% endif %}
+                                
+                                {% if report.collection_date %} 
+                                <li>Date: {{report.collection_date}}</li>
+                                {% endif %}
+                                
+                                {% if report.first_name %}
+                                <li>Name: {{report.first_name}}</li>
+                                {% endif %}
+                                
+                                
+                                <li>Father's name: {{report.middle_name}}</li>
+                                
+                                
+                                {% if report.sex %}
+                                <li>Sex: {{report.sex}}</li>
+                                {% endif %}
+                                
+                                
+                                <li>Residence: {{report.address}}</li>
+                                
+                                </br>
+                                {% if report.birthdate %}
+                                <li>Date of birth, if
+                                    available and/or
+                                    certified age: {{report.birthdate}}</li>
+                                {% endif %}    
+                                
+                                
+                                </br>
+                                <li>Descriptive marks: {{report.id_mark_scar}} {{report.id_mark_mole}}</li>
+                                
+                                </br>
+                                <li>Reason for:
+                                    <ol type="I">
+                                        <li>Refusal certificate.</li>
+                                        <li>Certificate being
+                                            revoked.</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                            </br>
+                            <p class="mt90">Thumb impression</p>
+                            <p class="mt60">Initials of certifying<br>
+                                Surgeon</p>
+                        </div>
+                        <div>
+                            <ul class="noListDisc">
+                                {% if report.list_company %} 
+                                <li>Serial No: {{report.ticket_no}}</li>
+                                {% endif %}
+                                
+                                
+                                {% if report.collection_date %} 
+                                <li>Date: {{report.collection_date}}</li>
+                                {% endif %}
+                                
+                                
+                                <li>I Certify that I have personally<br>
+                                examined (name): {{report.first_name}}<br>
+                                Son/daughter of …........................<br>
+                                </li>
+                                
+                                <li>...............................................................</li>
+                                </br>
+                          
+                                <li>Residing<br>
+                                at : {{company}} <br>
+                                who is desirous of being employed in
+                                <br>a factory engaged in the manufacturing<br>
+                                of ceramics or pottery</li>
+                                </br>
+                                <li>On the basis of these examinations I<br>
+                                hereby certify that he/she is fit to be<br>
+                                employed /continue working in the<br>
+                                above factory. His/Her descriptive<br>
+                                marks are: {{report.id_mark_scar}} {{report.id_mark_mole}}<br>
+                                </li>
+                            </ul>
+                            <p class="mt90">Thumb impression</p>
+                            <p class="mt60">Certifying Surgeon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

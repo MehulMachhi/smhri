@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <style>
+    
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+        margin-bottom : 0 !important;
+    }
+    hr{
+        opacity : 1 !important;
+    }
+    .div_res {
+    margin: 0 20px;
+}
+     .pink {
+color : #FF00FF;
+}
+.red{
+color : red;
+}
+    body{
+        overflow-x : hidden;
+    }
+        .report_header_form {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .report_header_form {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        #srno {
+            text-align: center;
+        }
+
+        h3,
+        h6 {
+            margin: 0;
+            padding: 0;
+        }
+
+        hr {
+            margin: 5px !important;
+        }
+
+        tr td {
+            padding: 0 0.1em;
+            margin: 0;
+        }
+        
+        tbody,
+        td,
+        tfoot,
+        th,
+        thead,
+        tr {
+            border-width: inherit;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .div_res,
+            .div_res * {
+                visibility: visible;
+            }
+
+            .div_res {
+                /*margin-top : 90px;*/
+            }
+            
+            .res1,.res1 td{
+            font-size : 11px;
+        }
+        .res1 th{
+            font-size : 12px;        
+        }
+        
+        
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="report_header_form">
+                    <input type="button" value="Print Report" class="btn btn-primary" onclick="window.print()"
+                        id="create_print" />
+                </div>
+                <!-- page 1 -->
+                <div class="div_res res1" style = "padding : 20px 0; margin-top : 90px;">
+                    <div align="center">
+                        <h3>
+                            <font color="#00CC00">Medical Report</font>
+                        </h3>
+                    </div>
+                    <div class="report_content">
+                        <table width="100%">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <h4>
+                                            <b>
+                                                <font color="#0066FF">{{report.test_type}} Medical Report</font>
+                                            </b>
+                                        </h4>
+                                    </th>
+                                   
+                                    
+                                   
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr style="border-width: thin; border-color: #333" />
+                        <table cellspacing="0px" cellpadding="0px" width="100%" style="font-size: 13px">
+                            <colgroup>
+                                <col width="290" />
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    {% if report.list_company %}
+                                    <th>Company Name</th>
+                                    <td>:&nbsp;{{report.list_company}}</td>
+                                    {% endif %}
+                                    
+                                   
+                                    
+                                     
+                                    {% if report.photo %}
+                                         <td rowspan="7" align="center">
+                                         <img src="{{report.photo.url}}" width="90" height="100" />
+                                         </td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    {% if report.first_name %}
+                                    <th>Employee Name</th>
+                                    <td>:&nbsp;{% if report.sex == "Male" %}Mr. {% elif report.sex == "Female" %}Mrs. {% endif %}  {{report.first_name}}</td>
+                                    {% endif %}
+                                    <!--                    <td align="right" rowspan="9">-->
+                                    <!--                      <img-->
+                                    <!--                        src="https://quantum-techs.com/smhri/assets/uploads/images/1ee03-selfie-16-.png"-->
+                                    <!--                        width="150"-->
+                                    <!--                        height="150"-->
+                                    <!--                      />-->
+                                    <!--                    </td>-->
+                                </tr>
+                                <tr>
+                                    
+                                    <th>Employee Id</th>
+                                    <td>:&nbsp;{{report.employee_no}}</td>
+                                    
+                                </tr>
+                                <tr>
+                                    {% if report.ticket_no %}
+                                    <th>Ticket No.</th>
+                                    <td>:&nbsp;{{report.ticket_no}}</td>
+                                    {% endif %}
+                                   
+                                </tr>
+                               
+                                <tr>
+                                    {% if report.birthdate %}
+                                    <th>Date of Birth</th>
+                                    <td>:&nbsp;{{report.birthdate}}</td>
+                                    {% endif %}
+                                </tr>
+                                <tr></tr>
+                                {% if report.age or report.sex %} 
+                                <tr>
+                                    <th>Age / Sex</th>
+                                   
+                                    <td>:&nbsp; {% if report.age %} {{report.age}} Year {% endif %} /     {% if report.sex %} {{report.sex}} {% endif %}</td>
+                                </tr>
+                                {% endif %}
+                                
+                                {% if report.designation %}
+                                <tr><th>Designation</th>
+                                    <td>:&nbsp;{{report.designation}}</td></tr>
+                                {% endif %}
+                                
+                                {% if report.department %}
+                                <tr><th>Department</th>
+                                    <td>:&nbsp;{{report.department}}</td></tr>
+                                {% endif %}
+                                
+                                <tr>
+                                    {% if report.test_date %}
+                                    <th>Date</th>
+                                    <td>: {{ report.test_date|date:"d/m/Y" }}</td>
+                                    {% endif %}
+                                </tr>
+                                
+                                <tr>
+                                {% if report.test_date %}
+                                <th>Reporting Date</th>
+                                    <td>: {{report.test_date|date:"d/m/Y"}}</td>
+                                    {% endif %}
+                                </tr>
+                                
+                                <!--<tr>-->
+                                <!--{% if report.test_date %}-->
+                                <!--    <td style="text-align: right">-->
+                                <!--        <b>Reporting Date &amp; Time :</b>&nbsp;{{report.test_date}}-->
+
+                                <!--    </td>-->
+                                <!--{% else %}-->
+                                <!--{% endif %}   -->
+                                <!--</tr>-->
+                                
+                            </tbody>
+                        </table>
+                       <hr />
+                        <table cellspacing="0px" cellpadding="0px" width="100%" border="1" style="border-bottom: 0.5px;     border: none;">
+                            <tbody>
+                                <tr></tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th colspan="6" style="text-align: center; border-right: 2px solid">
+                                        <font color="#00CC00">Physical Examination</font>
+                                    </th>
+                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;Vision</th>
+                                    <th>
+                                        Right
+                                    </th>
+                                    <th>
+                                        Left
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    
+                                    {% if report.height %}
+                                    <th>Height</th>
+                                    
+                                    <td>:&nbsp;{{report.height}}&nbsp;cm</td>
+                                    {% endif %}
+                                    <th colspan="3">Body Mass Index</th>
+                                    <td style="border-right: 2px solid">
+                                       <span class="bmi"></span> :&nbsp; (Healthy 19 to 25)
+                                    </td>
+                                    {% if report.nearvision_without_glass %}
+                                    <th>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Near
+                                    </th>
+                                    <td>{{report.nearvision_without_glass}}</td>
+                                    {% endif %}
+                                    
+                                    {% if report.nearvision_without_glass_right %}
+                                    <td>{{report.nearvision_without_glass_right}}</td>
+                                    {% endif %}
+                                    <td>Without Glasses</td>
+                                </tr>
+                                <tr>
+                                    {% if report.weight %}
+                                    <th>Weight</th>
+                                    <td>:&nbsp;{{report.weight}}&nbsp;kg</td>
+                                    {% endif %}
+                                    
+                                    {% if report.chest_on_expiration %}
+                                    <th colspan="3">Chest: on Expiration</th>
+                                    <td style="border-right: 2px solid">:&nbsp;{{report.chest_on_expiration}} Cm.</td>
+                                     {% endif %}
+                                     
+                                    {% if report.distance_vision_without_glass %} 
+                                    <th>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Far
+                                    </th>
+                                    <td>{{report.distance_vision_without_glass}}</td>
+                                    {% endif %}
+                                    
+                                    {% if report.distance_vision_without_glass_right %}
+                                    <td>{{report.distance_vision_without_glass_right}}</td>
+                                    {% endif %}
+                                    <td>Without Glasses</td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    {% if report.chest_on_inspiration %}
+                                    <th colspan="3">Chest: on Inspiration</th>
+                                    <td style="border-right: 2px solid">:&nbsp;{{report.chest_on_inspiration}} Cm.</td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    {% if report.blood_pressure %}
+                                    <th>B.P</th>
+                                    <td>:&nbsp;{{report.blood_pressure}} mm of hg</td>
+                                    {% endif %}
+                                    
+                                    {% if report.waist %}
+                                    <th>Waist:</th>
+                                    <td>:{{report.waist}}&nbsp;</td>
+                                    {% endif %}
+                                    
+                                    {% if report.hips %}
+                                    <th>Hips</th>
+                                    <td style="border-right: 2px solid">:&nbsp;{{report.hips}}</td>
+                                    {% endif %}
+                                    
+                                    
+                                    <th>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Near<font color="#00CCFF"></font>
+                                    </th>
+                                    {% if report.nearvision_with_glass %}
+                                    <td>{{report.nearvision_with_glass}}</td>
+                                    {% endif %}
+                                    
+                                    {% if report.nearvision_with_glass_right %}
+                                    <td>{{report.nearvision_with_glass_right}}</td>
+                                    {% endif %}
+                                    <td>With Glasses</td>
+                                </tr>
+                                <tr>
+                                    {% if report.pulse %}
+                                    <th>Pulse</th>
+                                    <td>:&nbsp;{{report.pulse}} min</td>
+                                    {% endif %}
+                                    
+                                    {% if report.waist_hip_ratio %}
+                                    <th colspan="3">Waist Hip Ratio</th>
+                                    <td style="border-right: 2px solid">:&nbsp;{{report.waist_hip_ratio}}</td>
+                                    {% endif %}
+                                    <th>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Far
+                                    </th>
+                                     {% if report.distance_vision_with_glass %}
+                                    <td>{{report.distance_vision_with_glass}}</td>
+                                    {% endif %}
+                                    
+                                    {% if report.distance_vision_with_glass_right %}
+                                    <td>{{report.distance_vision_with_glass_right}}</td>
+                                    {% endif %}
+                                    <td>With Glasses</td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <td colspan="4" style="border-right: 2px solid">
+                                        (Normal: Female Upto 0.85, Male Upto 1.00)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="1">ID Mark</th>
+                                    <td colspan="5" style="border-right: 2px solid">
+                                        :{% if report.id_mark_scar %} {{report.id_mark_scar}} {% endif %} {% if report.id_mark_mole %} {{report.id_mark_mole}} {% endif %}&nbsp;&nbsp;
+                                    </td>
+                                    
+                                     {% if report.color_vision %}
+                                    <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Color Vision</th>
+                                    <td colspan="2">:{{report.color_vision}}&nbsp;</td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    {% if report.heart_sound %}
+                                    <th colspan="1">Heart Sound</th>
+                                    <td colspan="5" style="border-right: 2px solid">:&nbsp;{{report.heart_sound}}</td>
+                                    {% endif %}
+                                    
+                                    {% if report.vision_remark %}
+                                    <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Comment</th>
+                                    <td colspan="2">:{{report.vision_remark}}</td>
+                                    {% endif %}
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <script>
+                            const bmiDetails = document.querySelector('.bmi');
+                            const heightInCM = {{report.height}};
+                            const weightInKG = {{report.weight}};
+                            const actualBMI = Math.round(weightInKG / heightInCM / heightInCM * 10000);
+                            bmiDetails.innerText = actualBMI; 
+                            if(actualBMI < 19) bmiDetails.classList.add("pink")
+                            if(actualBMI > 25) bmiDetails.classList.add("red")
+                            
+                        </script>
+                     
+                        <table width="100%">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <hr style="border-width: thin; border-color: #333" />
+                                        <h6 align="center" style="font-size: 12px">
+                                            <b>
+                                                <font color="#00CC00">Systematic Examination</font>
+                                            </b>
+                                        </h6>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table cellspacing="0px" cellpadding="0px" width="100%">
+                                            <colgroup>
+                                                <col width="300" />
+                                                <col width="100" />
+                                                <col width="200" />
+                                                <col width="100" />
+                                                <col width="130" />
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th style="text-align: center" colspan="6"></th>
+                                                </tr>
+                                                <tr>
+                                                    <th>SKIN</th>
+                                                    <td>:&nbsp;{{report.skin}}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    {% if report.respiratory_system %}
+                                                    <th>Respiratory System</th>
+                                                    <td>:&nbsp;{{report.respiratory_system}}</td>
+                                                     {% endif %}
+                                                     
+                                                     {% if report.breath_sound %} 
+                                                    <th>Breath/Advintitous Sound</th>
+                                                    <td>:&nbsp;{{report.breath_sound}}</td>
+                                                     {% endif %}
+                                                     
+                                                    {% if report.abdomen %}
+                                                    <th>Abdomen</th>
+                                                    <td>:&nbsp;{{report.abdomen}}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    {% if report.cardiovascular_system %}
+                                                    <th>Cardivascular System</th>
+                                                    <td>:&nbsp;{{report.cardiovascular_system}}</td>
+                                                    {% endif %}
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    {% if report.genito_urinary_system %}
+                                                    <th>Genito Urinary System</th>
+                                                    <td>:&nbsp{{report.genito_urinary_system}}</td>
+                                                    {% endif %}
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    {% if report.skeletal_system %}
+                                                    <th>Musculo-Skeletal System Spine/Bones/Joints/</th>
+                                                    <td>:&nbsp;{{report.skeletal_system}}</td>
+                                                    {% endif %}
+                                                    <td></td>
+                                                    <td></td>
+                                                    {% if report.other_finding %}
+                                                    <th>Other Finding</th>
+                                                    <td>:&nbsp;{{report.other_finding}}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    {% if report.cns %}
+                                                    <th>CNS</th>
+                                                    <td>:&nbsp;{{report.cns}}</td>
+                                                     {% endif %}
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                
+                                
+                                <tr>
+                                    <td>
+                                        <hr style="border-width: thin; border-color: #333" />
+                                        <h6 align="center" style="font-size: 12px">
+                                            <b>
+                                                <font color="#00CC00">Complaints</font>
+                                            </b>
+                                        </h6>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table cellspacing="0px" cellpadding="0px" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    {% if report.present_complaints %}
+                                                    <th width="25%">Present Complaints</th>
+                                                    
+                                                    <td>:&nbsp;{{report.present_complaints}}</td>
+                                                     {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    {% if report.occupational_complaints %}
+                                                    <th>Occupational History</th>
+                                                    
+                                                    <td>:&nbsp;{{report.occupational_complaints}}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    {% if report.family_health_history %}
+                                                    <th>Family Health History</th>
+                                                    
+                                                    <td>:&nbsp;{{report.family_health_history}}</td>
+                                                     {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    {% if report.personal_health_history %}
+                                                    <th>Personal Health History</th>
+                                                    
+                                                    <td>:&nbsp;{{report.personal_health_history}}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    {% if report.past_history %}
+                                                    <th>Past History</th>
+                                                    
+                                                    <td>:&nbsp;{{report.past_history}}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    {% if report.allergic_to %}
+                                                    <th>Allergic To</th>
+                                                    
+                                                    <td>:&nbsp;{{report.allergic_to}}</td>
+                                                     {% endif %}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr style="border-width: thin; border-color: #333" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table cellspacing="0px" cellpadding="0px" width="100%" style="font-size: 15px">
+                                            <tbody>
+                                                <tr>
+                                                    {% if report.audiometery %}
+                                                    <th width="25%">
+                                                        <font color="#0066FF">Audiometery</font>
+                                                    </th>
+                                                     
+                                                    <td>:&nbsp;{{report.audiometery}}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                     {% if report.spirometry %}
+                                                    <th>
+                                                        <font color="#0066FF">Spirometry</font>
+                                                    </th>
+                                                    
+                                                    <td>:&nbsp;{{report.spirometry}}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    {% if report.ecg_report %}
+                                                    <th>
+                                                        <font color="#0066FF">ECG</font>
+                                                    </th>
+                                                    
+                                                    <td>:&nbsp;{{report.ecg_report}}</td>
+                                                    {% endif %}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <hr style="border-width: thin; border-color: #333" />
+                                        <table cellspacing="0px" cellpadding="0px" width="100%" style="font-size: 15px">
+                                            <tbody>
+                                                <tr>
+                                                     {% if report.xray_report %}
+                                                    <th width="25%">X-Ray</th>
+                                                   
+                                                    <td>:&nbsp;{{report.xray_report}}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    {% if report.ultra_sonographic %}
+                                                    <th>Sonography</th>
+                                                    
+                                                    <td>:&nbsp;{{report.ultra_sonographic}}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                      {% if report.remarks_and_advice %}
+                                                    <th>Remarks and Advice</th>
+                                                   
+                                                    <td>:{{report.remarks_and_advice}}&nbsp;</td>
+                                                    {% endif %}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <hr style="border-width: thin; border-color: #333" />
+                    </div>
+                    <table cellspacing="0px" cellpadding="0px" width="100%" style="font-size: 15px; text-align: center">
+                        <tbody>
+                            <tr>
+                                <td width="33%">&nbsp;</td>
+                                <td width="33%">
+                                    <!-- <img src="https://quantum-techs.com/smhri/assets/uploads/images/signatures/mrk.png" width="90px;" /> -->
+                                </td>
+                                <td width="33%">
+                                    <img src="https://quantum-techs.com/smhri/assets/uploads/images/signatures/rpl5.jpeg" width="140px;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- Dr. Kinnary Parmar <br />MBBS, M S, C.I.H <br />(Opthalmology) -->
+                                </td>
+                                <td>
+                                    <!-- Dr. Mahesh R Kakadiya <br> M.D (PATHOLOGY), <br /> Reg.No:- G - 23663 -->
+                                </td>
+                                <td>
+                                    Dr. Ranjit I. Parmar <br />M.D.DIRPM, FCGP, C.I.H
+                                    <br />Occupational Health Physician <br />Reg.No:- G-8096
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                            
+                    
+                   
+                    <!-- <div style="text-align:right; margin-right:10px;">Page 1 of 3</div> -->
+                </div>
+                <br>
+                <!-- page 1 over -->
+                                         
+                <!-- page 2 start -->
+                <div  style="page-break-after: always;"></div>
+                <div class="div_res res1" style = "margin-top : 150px;">
+                   
+                    <table cellspacing="0px" cellpadding="0px" width="100%">
+                        <tbody>
+                            <tr>
+                                                          {% if report.list_company %} 
+                                                         <th width="20%">Company Name</th>
+                                                         <td width="50%">:&nbsp;&nbsp;{{report.list_company}}</td>
+                                                          {% endif %}
+                                                          
+                                                         {% if report.collection_date %} 
+                                                         <th width="1%">Collection Date &amp; Time</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.collection_date}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                                                      <tr>
+                                                         {% if report.first_name %} 
+                                                         <th width="20%">Employee Name</th>
+                                                         <td width="40%">:&nbsp;&nbsp;{% if report.sex == "Male" %}Mr. {% elif report.sex == "Female" %}Mrs. {% endif %}  {{report.first_name}} </td>
+                                                         {% endif %}
+                                                         
+                                                         {% if report.test_date %} 
+                                                         <th width="20%">Testing Date &amp; Time</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.test_date|date:"d/m/Y"}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                                                      <tr>
+                                                          
+                                                         <th width="20%">Employee ID</th>
+                                                         <td width="40%">:&nbsp;&nbsp;{{report.employee_no}}</td>
+                                                         
+                                                         
+                                                         {% if report.collection_date %} 
+                                                         <th width="20%">Reporting Date &amp; Time</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.collection_date}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                                                      <tr>
+                                                          {% if report.age %}  {% if report.sex %} 
+                                                         <th width="20%">Age / Sex</th>
+                                                         <td width="40%">:&nbsp;&nbsp;{{report.age}} Year  {% endif %}
+                                                            &nbsp;/&nbsp;{{report.sex}}{% endif %}
+                                                         </td>
+                                                         
+                                                         {% if report.ticket_no %} 
+                                                         <th width="20%">Ticket No</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.ticket_no}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                        </tbody>
+                    </table>
+                    <hr style="border-width: thin; border-color: #333" />
+                    <div style="page-break-after:avoid"></div>
+                                            <!--################################################-->
+                                            <!--############## start Hematology ################-->
+                                            <!--################################################-->
+                                            
+                    {% if report.hemoglobin or  report.total_wbc_count or report.polymorphs or report.lymphocytes or report.eosinophils1 or report.monocytes1 or report.basophils1 or report.leucocytes_count or report.platelet_count or report.rdw_cv or report.pdw or report.mpv or report.mch or report.mchc or report.pct or report.mcv or report.peripheral_smear or report.abs or report.esr or report.blood_group or report.hct %}
+                    <table cellspacing="0px" cellpadding="0px" width="100%">
+                        <tbody>
+                            <tr>
+                                <th style="text-align:center;" colspan="4">
+                                    <font color="#00CC00"><u>HEMATOLOGY</u></font>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="text-align:center;" colspan="4">
+                                    <font color="#3f577c"><u>Sample Type: Whole Blood EDTA</u></font>
+                                </th>
+                            </tr>
+                            <tr style="line-height:20px;">
+                                <th style="text-align:center;"><u>Test</u></th>
+                                <th width="20%" style="text-align:center;"><u>Result</u></th>
+                                <th width="10%" style="text-align:center;"><u>Unit</u></th>
+                                <th width="30%" style="line-height:20px; padding-left:7%;"><u>Normal Range</u></th>
+                            </tr>
+                            {% if report.hemoglobin %}
+                            <tr style="line-height:20px;">
+                                <td><b>*&nbsp;Hemoglobin</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Non Cyanide
+                                        Anac lysis)</span></td>
+                                        
+                                <td style="text-align:center;" class=" {% if report.hemoglobin < 13 %} pink {% elif report.hemoglobin > 17 %} red  {% endif %}">
+                                    {{report.hemoglobin}}
+                                </td>
+                                 
+                                <td style="text-align:center;">gm%</td>
+                                <td style="text-align:left; padding-left:7%;">13-17</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.red_blood_cells %}
+                            <tr style="line-height:20px;">
+                                <td><b>*&nbsp;RBC Total</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical Impedance + Laser)</span></td>
+                                        
+                                <td style="text-align:center;" class=" {% if report.red_blood_cells < 4.0 %} pink {% elif report.hemoglobin > 5.0 %} red  {% endif %}">
+                                    {{report.red_blood_cells}}
+                                </td>
+                                 
+                                <td style="text-align:center;">mili/mm3</td>
+                                <td style="text-align:left; padding-left:7%;">4.0-5.0</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.total_wbc_count %}        
+                            <tr style="line-height:20px;">
+                                <td><b>*&nbsp;WBC Count</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser)</span></td>
+                               
+                                <td style="text-align:center;" class=" {% if report.total_wbc_count < 5000 %} pink {% elif report.total_wbc_count > 10000 %} red  {% endif %}">
+                                    {{report.total_wbc_count}}
+                                </td>
+                               
+                                <td style="text-align:center;">/cumm</td>
+                                <td style="text-align:left; padding-left:7%;">5000-10000</td>
+                                
+                            </tr>
+                            
+                            <tr style="line-height:20px;">
+                                <td><b>*&nbsp;Differential Count (WIC)</b></td>
+                                <td style="text-align:center;"></td>
+                                <td style="text-align:center;"></td>
+                                <td style="text-align:left; padding-left:7%;"></td>
+                            </tr>
+                            {% endif %}
+                            {% if report.polymorphs %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>Polymorphs</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.polymorphs < 40 %} pink {% elif report.polymorphs > 70 %} red  {% endif %}">
+                                    {{report.polymorphs}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">40-70</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.lymphocytes %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>Lymphocytes</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.lymphocytes < 20 %} pink {% elif report.lymphocytes > 40 %} red  {% endif %}">
+                                    {{report.lymphocytes}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">20-40</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.eosinophils1 %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>Eosinophils</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.eosinophils < 0 %} pink {% elif report.eosinophils > 7 %} red  {% endif %}">
+                                    {{report.eosinophils1}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">0-7</td>
+                            </tr>
+                             {% endif %}
+                            
+                            
+                            {% if report.monocytes1 %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>Monocytes</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.monocytes < 0 %} pink {% elif report.monocytes > 6 %} red  {% endif %}">
+                                    {{report.monocytes1}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">0-6</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.basophils1 %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>Basophils</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.basophils < 0 %} pink {% elif report.basophils > 1 %} red  {% endif %}">
+                                    {{report.basophils1}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">0-1</td>
+                            </tr>
+                            {% endif %}
+                            <!--New Field Add-->
+                            
+                            {% if report.leucocytes_count %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>leucocytes_count</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.leucocytes_count < 0 %} pink {% elif report.leucocytes_count > 1 %} red  {% endif %}">
+                                    {{report.leucocytes_count}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">0-1</td>
+                            </tr> 
+                            {% endif %}
+                            
+                            {% if report.platelet_count %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>Platelet Count</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.platelet_count < 150000 %} pink {% elif report.platelet_count > 450000 %} red  {% endif %}">
+                                    {{report.platelet_count}}
+                                </td>
+                                <td style="text-align:center;">Lakhs</td>
+                                <td style="text-align:left; padding-left:7%;">150000-450000</td>  
+                            </tr>
+                            {% endif %}
+                            
+                            <!--<tr style="line-height:20px;">-->
+                            <!--    <td style="padding-left:30px;"><b>ESR</b> <span-->
+                            <!--            style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical-->
+                            <!--            Impedance + Laser + Microscopy)</span></td>-->
+                            <!--    <td style="text-align:center;">-->
+                            <!--        <font color="#000">{{report.esr}}</font>-->
+                            <!--    </td>-->
+                            <!--    <td style="text-align:center;">%</td>-->
+                            <!--    <td style="text-align:left; padding-left:7%;">0-1</td>  -->
+                            <!--</tr>-->
+                            
+                            <!--<tr style="line-height:20px;">-->
+                            <!--    <td style="padding-left:30px;"><b>HCT </b> <span-->
+                            <!--            style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical-->
+                            <!--            Impedance + Laser + Microscopy)</span></td>-->
+                            <!--    <td style="text-align:center;">-->
+                            <!--        <font color="#000">{{report.hct}}</font>-->
+                            <!--    </td>-->
+                            <!--    <td style="text-align:center;">%</td>-->
+                            <!--    <td style="text-align:left; padding-left:7%;">0-1</td>  -->
+                            <!--</tr>-->
+                            
+                            {% if report.rdw_cv %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>RDW</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser & Calculated)</span></td>
+                                <td style="text-align:center;" class=" {% if report.rdw_cv < 11.5 %} pink {% elif report.rdw_cv > 14.0 %} red  {% endif %}">
+                                    {{report.rdw_cv}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">11.5-14.0</td>  
+                            </tr>
+                            {% endif %}
+                            
+                            
+                            {% if report.pdw %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>PDW</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.pdw < 8.3 %} pink {% elif report.pdw > 56.6 %} red  {% endif %}">
+                                    <font color="#000">{{report.pdw}}</font>
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">8.3-56.6</td>  
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.mpv %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>MPV</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.mpv < 7 %} pink {% elif report.mpv > 9 %} red  {% endif %}">
+                                    {{report.mpv}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">7-9</td>  
+                            </tr>
+                             {% endif %}
+                            
+                            {% if report.mch %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>MCH</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">Calculated</span></td>
+                                <td style="text-align:center;" class=" {% if report.mch < 27 %} pink {% elif report.mch > 31 %} red  {% endif %}">
+                                    {{report.mch}}
+                                </td>
+                                <td style="text-align:center;">pg</td>
+                                <td style="text-align:left; padding-left:7%;">27-31</td>  
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.mchc %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>MCHC</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">Calculated</span></td>
+                                <td style="text-align:center;" class=" {% if report.mchc < 32 %} pink {% elif report.mchc > 36 %} red  {% endif %}">
+                                    {{report.mchc}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">32-36</td>  
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.pct %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>PCT</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.pct < 0 %} pink {% elif report.pct > 1 %} red  {% endif %}">
+                                    {{report.pct}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">0-1</td>  
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.mcv %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>MCV</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">Calculated</span></td>
+                                <td style="text-align:center;" class=" {% if report.mcv < 78 %} pink {% elif report.mcv > 100 %} red  {% endif %}">
+                                    {{report.mcv}}
+                                </td>
+                                <td style="text-align:center;">fl</td>
+                                <td style="text-align:left; padding-left:7%;">78-100</td>  
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.peripheral_smear %} 
+                            <tr style="line-height:20px;">
+                                <td style="padding-left:30px;"><b>Peripheral smear</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Microscopy)</span></td>
+                                <td style="text-align:center;" class=" {% if report.peripheral_smear < 0 %} pink {% elif report.peripheral_smear > 1 %} red  {% endif %}">
+                                    {{report.peripheral_smear}}
+                                </td>
+                                <td style="text-align:center;">%</td>
+                                <td style="text-align:left; padding-left:7%;">0-1</td>  
+                            </tr>
+                            {% endif %}
+                            
+                            <!--End New Field -->
+                            
+                            {% if report.abs %} 
+                            <tr style="line-height:20px;">
+                                <td><b>*&nbsp;Absolute Eosinophil Count (AEC)</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Electrical
+                                        Impedance + Laser + Calculation)</span></td>
+                                <td style="text-align:center;" class="calculated_eosino">{{report.abs}}</td>
+                                <td style="text-align:center;">cu/mm3</td>
+                                <td style="text-align:left; padding-left:7%;">40-440</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.esr %} 
+                            <tr style="line-height:20px;">
+                                <td><b>&nbsp;&nbsp;&nbsp;ESR - AT 1 HOUR</b> <span
+                                        style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Westergen
+                                        Method)</span></td>
+                                <td style="text-align:center;" class=" {% if report.esr < 3 %} pink {% elif report.esr > 15 %} red  {% endif %}">
+                                    {{report.esr}}
+                                </td>
+                                <td style="text-align:center;">mm/hr</td>
+                                <td style="text-align:left; padding-left:7%;">3-15</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.blood_group %} 
+                            <tr style="line-height:20px;">
+                               <td><b>*&nbsp;Blood Group</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Slide/Tube Agglutination)</span></td>
+                               <td style="text-align:center;">{{report.blood_group}}</td>
+                               <td style="text-align:center;"></td>
+                               <td style="text-align:left; padding-left:7%;"></td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.hct %} 
+                            <tr style="line-height:20px;">
+                               <td><b>*&nbsp;HCT</b></td>
+                               <td style="text-align:center;" class=" {% if report.hct < 40.5 %} pink {% elif report.hct > 54 %} red  {% endif %}">{{report.hct}}</td>
+                               <td style="text-align:center;">%</td>
+                               <td style="text-align:left; padding-left:7%;">40.5 - 54.0</td>
+                            </tr>
+                            {% endif %}
+                            <script>
+                            const eos = {{report.eosinophils}}; 
+                            const count = {{report.total_wbc_count}};
+                            const newData = (count * eos) / 100 ;
+                            const tdField = document.querySelector('.calculated_eosino');
+                            console.log("it is",tdField)
+                            tdField.innerText = newData;
+                            if(newData < 40) tdField.classList.add("pink");
+                            if(newData > 440) tdField.classList.add("red");
+                            </script>
+                                <!--################################################-->
+                                <!--############## End Hematology ##################-->
+                                <!--################################################-->
+                                
+                        </tbody>
+                    </table>
+                    {% endif %}
+                    <table cellspacing="0px" cellpadding="0px" width="100%">
+                        <tbody>
+                            <tr>
+                                <td colspan="5" style="font-size: 12px">
+                                    <hr style="border-width: thin; border-color: #333" />
+                                    <b>*NABL ACCREDITED MEDICAL LABORATORY</b><br />
+                                    <b>*Denotes Test is in NABL Scope</b><br />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table cellspacing="0px" cellpadding="0px" width="100%"
+                        style="font-size: 15px; text-align: center; margin-left: 30%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <!-- Dr. Mahesh R Kakadiya --><br /><!-- M.D (PATHOLOGY), --><br /><!-- Reg.No:- G - 23663 -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- Dr. Mahesh R Kakadiya --><br /><!-- M.D (PATHOLOGY), --><br /><!-- Reg.No:- G - 23663 -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br /><br />
+                    <table cellspacing="0px" cellpadding="0px" width="100%"></table>
+                    <br />
+                    <!-- <div style="text-align:right; margin-right:10px;">Page 2 of 3</div> -->
+                </div>
+                <!-- page 2 end -->
+
+
+
+                                                                    <!-- start Clinical Biochemistry -->
+                                            <div style="page-break-after: always;"></div>
+                                              <div class="div_res res1" style="margin-top : 150px;">
+                                                <table cellspacing="0px" cellpadding="0px" width="100%">
+                                                   <tbody>
+                                                      <tr>
+                                                          {% if report.list_company %} 
+                                                         <th width="20%">Company Name</th>
+                                                         <td width="50%">:&nbsp;&nbsp;{{report.list_company}}</td>
+                                                          {% endif %}
+                                                          
+                                                         {% if report.collection_date %} 
+                                                         <th width="1%">Collection Date &amp; Time</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.collection_date}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                                                      <tr>
+                                                         {% if report.first_name %} 
+                                                         <th width="20%">Employee Name</th>
+                                                         <td width="40%">:&nbsp;&nbsp;{% if report.sex == "Male" %}Mr. {% elif report.sex == "Female" %}Mrs. {% endif %}  {{report.first_name}} </td>
+                                                         {% endif %}
+                                                         
+                                                         {% if report.test_date %} 
+                                                         <th width="20%">Testing Date &amp; Time</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.test_date|date:"d/m/Y"}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                                                      <tr>
+                                                         
+                                                         <th width="20%">Employee ID</th>
+                                                         <td width="40%">:&nbsp;&nbsp;{{report.employee_no}}</td>
+                                                         
+                                                         
+                                                         {% if report.collection_date %} 
+                                                         <th width="20%">Reporting Date &amp; Time</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.collection_date}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                                                      <tr>
+                                                          {% if report.age %}  {% if report.sex %} 
+                                                         <th width="20%">Age / Sex</th>
+                                                         <td width="40%">:&nbsp;&nbsp;{{report.age}} Year  {% endif %}
+                                                            &nbsp;/&nbsp;{{report.sex}}{% endif %}
+                                                         </td>
+                                                         
+                                                         {% if report.ticket_no %} 
+                                                         <th width="20%">Ticket No</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.ticket_no}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                                                   </tbody>
+                                                </table>
+                                                <hr style="border-width:thin; border-color:#333;">
+                                                {% if report.random_blood_glucose or report.fasting_blood_glucose or report.post_prandial_blood_glucose or report.creatinine or report.blood_urea or report.bun or report.total_bilirubin or report.direct_bilirubin or report.indirect_bilirubin or report.sgot or report.sgpt or report.ggt1 or report.alkaline_phosphatase1  %}
+                                                <table cellspacing="0px" cellpadding="0px" width="100%">
+                                                <tbody>
+                                                   <tr>
+                                                      <th colspan="4" style="text-align:center;"><font color="#00CC00"><u>CLINICAL BIOCHEMISTRY</u></font></th>
+                                                   </tr>
+                                                   <tr>
+                                                      <th style="text-align:center;" colspan="4"><font color="#3f577c"><u>Sample Type: Serum</u></font></th>
+                                                   </tr>
+                                                   <tr style="line-height:20px;">
+                                                      <th style="text-align:center;"><u>Test</u></th>
+                                                      <th width="20%" style="text-align:center;"><u>Result</u></th>
+                                                      <th width="10%" style="text-align:center;"><u>Unit</u></th>
+                                                      <th width="30%" style="line-height:20px; padding-left:7%;"><u>Normal Range</u></th>
+                                                   </tr>
+                                                   {% if report.random_blood_glucose %} 
+                                                   <tr>
+                                                      <th><font color="#0066FF"><u>GLUCOSE</u></font></th>
+                                                      <th colspan="3"></th>
+                                                   </tr>
+                                                   
+                                                   
+                                                   <tr>
+                                                      <td><b>*&nbsp;Random Glucose</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(RBS) (GOD PAP)</span></td>
+                                                      <td style="text-align:center;" class=" {% if report.random_blood_glucose < 60 %} pink {% elif report.random_blood_glucose > 140 %} red  {% endif %}">{{report.random_blood_glucose}}</td>
+                                                      <td style="text-align:center;">mg/dL</td>
+                                                      <td style="text-align:left; padding-left:7%;">60-140</td>
+                                                   </tr>
+                                                   {% endif %}
+                                                   
+                                                   {% if report.fasting_blood_glucose %} 
+                                                    <tr>
+                                                       <td><b>*&nbsp;Fasting_blood_glucose</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(FBS) (GOD PAP)</span></td>
+                                                       <td style="text-align:center;" class=" {% if report.fasting_blood_glucose < 70 %} pink {% elif report.fasting_blood_glucose > 110 %} red  {% endif %}">{{report.fasting_blood_glucose}}</td>
+                                                       <td style="text-align:center;">mg/dL</td>
+                                                       <td style="text-align:left; padding-left:7%;">70-110</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    
+                                                    {% if report.post_prandial_blood_glucose %} 
+                                                    <tr>
+                                                       <td><b>*&nbsp;Post_prandial_blood_glucose</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(PPBS) (GOD PAP)</span></td>
+                                                       <td style="text-align:center;" class=" {% if report.post_prandial_blood_glucose < 70 %} pink {% elif report.post_prandial_blood_glucose > 110 %} red  {% endif %}">{{report.post_prandial_blood_glucose}}</td>
+                                                       <td style="text-align:center;">mg/dL</td>
+                                                       <td style="text-align:left; padding-left:7%;">70-110</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    
+                                                    {% if report.creatinine or report.blood_urea or report.bun %}
+                                                        <tr>
+                                                          <th><font color="#0066FF"><u>Renal Function Test (RFT)</u></font></th>
+                                                          <th colspan="3"></th>
+                                                        </tr>
+                                                        
+                                                        {% if report.creatinine %} 
+                                                        <tr>
+                                                           <td><b>*&nbsp;Creatinine</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Jafee Without Compensation)</span></td>
+                                                           <td style="text-align:center;" class=" {% if report.creatinine < 0.4 %} pink {% elif report.creatinine > 1.3 %} red  {% endif %}">{{report.creatinine}}</td>
+                                                           <td style="text-align:center;">mg/dL</td>
+                                                           <td style="text-align:left; padding-left:7%;">0.4-1.3</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                        
+                                                        {% if report.blood_urea %} 
+                                                        <tr>
+                                                           <td><b>*&nbsp;Blood_urea</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Urease UV)</span></td>
+                                                           <td style="text-align:center;" class=" {% if report.blood_urea < 13 %} pink {% elif report.blood_urea > 44 %} red  {% endif %}">{{report.blood_urea}}</td>
+                                                           <td style="text-align:center;">mg/dL</td>
+                                                           <td style="text-align:left; padding-left:7%;">13-44</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                        
+                                                        {% if report.bun %} 
+                                                        <tr>
+                                                           <td><b>*&nbsp;BUN</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Calculated)</span></td>
+                                                           <td style="text-align:center;" class=" {% if report.bun < 6.1 %} pink {% elif report.bun > 21 %} red  {% endif %}">{{report.bun}}</td>
+                                                           <td style="text-align:center;">mg/dL</td>
+                                                           <td style="text-align:left; padding-left:7%;">6.1-21.0</td>
+                                                        </tr>
+                                                       {% endif %}
+                                                    {% endif %}
+                                                    
+                                                    {% if report.total_bilirubin or report.direct_bilirubin or report.indirect_bilirubin or report.sgot or report.sgpt or report.ggt1 or report.alkaline_phosphatase1 %}
+                                                       <tr>
+                                                          <th colspan="4"><font color="#0066FF"><u>Liver Functional Test (LFT)</u></font></th>
+                                                       </tr>
+                                                       
+                                                       {% if report.total_bilirubin %} 
+                                                       <tr>
+                                                           <td><b>*&nbsp;Total Bilirubin</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(DCA)</span></td>
+                                                           <td style="text-align:center;"  class="{% if report.total_bilirubin < 0.2 %} pink {% elif report.total_bilirubin > 1.2 %} red  {% endif %}">{{report.total_bilirubin}}</td>
+                                                           <td style="text-align:center;">mg/dL</td>
+                                                           <td style="text-align:left; padding-left:7%;">0.2-1.2</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                        
+                                                        {% if report.direct_bilirubin %} 
+                                                        <tr>
+                                                           <td><b>*&nbsp;Direct Bilirubin</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(DCA)</span></td>
+                                                           <td style="text-align:center;" class="{% if report.direct_bilirubin < 0 %} pink {% elif report.direct_bilirubin > 0.4 %} red  {% endif %}">{{report.direct_bilirubin}}</td>
+                                                           <td style="text-align:center;">mg/dL</td>
+                                                           <td style="text-align:left; padding-left:7%;">0.0-0.4</td>
+                                                        </tr>
+                                                         {% endif %}
+                                                        
+                                                         {% if report.indirect_bilirubin %} 
+                                                        <tr>
+                                                           <td><b>*&nbsp;Indirect_Bilirubin</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Calculated)</span></td>
+                                                           <td style="text-align:center;" class="{% if report.indirect_bilirubin < 0.8 %} pink {% elif report.indirect_bilirubin > 0.8 %} red  {% endif %}">{{report.indirect_bilirubin}}</td>
+                                                           <td style="text-align:center;">mg/dL</td>
+                                                           <td style="text-align:left; padding-left:7%;">0.0-1.0</td>
+                                                        </tr>
+                                                         {% endif %}
+                                                       
+                                                       {% if report.sgot %} 
+                                                       <tr>
+                                                          <td><b>*&nbsp;SGOT</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>
+                                                          <td style="text-align:center;" class="{% if report.sgot < 0 %} pink {% elif report.sgot > 40 %} red  {% endif %}">{{report.sgot}}</td>
+                                                          <td style="text-align:center;">U/L</td>
+                                                          <td style="text-align:left; padding-left:7%;">0-40</td>
+                                                       </tr>
+                                                        {% endif %}
+                                                       
+                                                       {% if report.sgpt %} 
+                                                        <tr>
+                                                           <td><b>*&nbsp;SGPT</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>
+                                                           <td style="text-align:center;" class="{% if report.sgpt < 0 %} pink {% elif report.sgpt > 40 %} red  {% endif %}">{{report.sgpt}}</td>
+                                                           <td style="text-align:center;">U/L</td>
+                                                           <td style="text-align:left; padding-left:7%;">0-40</td>
+                                                        </tr>
+                                                         {% endif %}
+                                                        
+                                                        {% if report.ggt1 %} 
+                                                        <tr>
+                                                           <td><b>*&nbsp;Gamma GT</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC, DGKC)</span></td>
+                                                           <td style="text-align:center;" class="{% if report.ggt < 7 %} pink {% elif report.ggt > 50 %} red  {% endif %}">{{report.ggt1}}</td>
+                                                           <td style="text-align:center;">U/L</td>
+                                                           <td style="text-align:left; padding-left:7%;">7.0-50.0</td>
+                                                        </tr>
+                                                         {% endif %}
+                                                        
+                                                        {% if report.alkaline_phosphatase1 %} 
+                                                        <tr>
+                                                           <td><b>*&nbsp;Alkaline_Phosphatase</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(p-NPP, AMP Buffer IFCC)</span></td>
+                                                           <td style="text-align:center;" class="{% if report.alkaline_phosphatase < 30 %} pink {% elif report.alkaline_phosphatase > 115 %} red  {% endif %}">{{report.alkaline_phosphatase1}}</td>
+                                                           <td style="text-align:center;">U/L</td>
+                                                           <td style="text-align:left; padding-left:7%;">30-115</td>
+                                                        </tr>
+                                                         {% endif %}
+                                                    {% endif %}
+
+                                                                    <!--Start New Code Clinical-->
+                                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;Blood_cholestrol</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.blood_cholestrol}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;Total_Cholesterol</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.total_cholesterol}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;Triglycerides</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.triglycerides}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;Direct_hdl</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.direct_hdl}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;VLDL</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.vldl}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;LDL</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.ldl}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;Ch_ratio</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.ch_ratio}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;Lh_ratio</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.lh_ratio}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;rdw_sd</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.rdw_sd}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;Plcc</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.plcc}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;Plcr</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.plcr}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;vitaminb12</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.vitaminb12}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;Vitamind3</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.vitamind3}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;HCV</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.hcv}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                    <!--<tr>-->
+                                                    <!--   <td><b>*&nbsp;PSA</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                    <!--   <td style="text-align:center;">{{report.psa}}</td>-->
+                                                    <!--   <td style="text-align:center;">U/L</td>-->
+                                                    <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                    <!--</tr>-->
+                                                    
+                                                                                            <!--Second Clinical Means LIPID-->
+                                                    
+                                                    {% if report.total_cholesterol or report.triglycerides1 or report.direct_hdl or report.ldl or report.vldl or report.ch_ratio or report.lh_ratio  %}
+                                                    <table cellspacing="0px" cellpadding="0px" width="100%">
+                                                <tbody>
+                                                   <tr>
+                                                      <th colspan="4" style="text-align:center;"><font color="#00CC00"><u>LIPID PROFILE</u></font></th>
+                                                   </tr>
+                                                   
+                                                   <tr>
+                                                      <th style="text-align:center;" colspan="4"><font color="#3f577c"><u>Sample Type: Serum</u></font></th>
+                                                   </tr>
+                                                   
+                                                    <br>
+                                                    <br>
+                                                   <tr style="line-height:20px;">
+                                                      <th style="text-align:center;"><u>Test</u></th>
+                                                      <th width="20%" style="text-align:center;"><u>Result</u></th>
+                                                      <th width="10%" style="text-align:center;"><u>Unit</u></th>
+                                                      <th width="30%" style="line-height:20px; padding-left:7%;"><u>Normal Range</u></th>
+                                                   </tr>
+                                                   <!--<tr>-->
+                                                   <!--   <th><font color="#0066FF"><u>GLUCOSE</u></font></th>-->
+                                                   <!--   <th colspan="3"></th>-->
+                                                   <!--</tr>-->
+                                                   
+                                                   {% if report.total_cholesterol %} 
+                                                   <tr style="margin-bottom:20px">
+                                                   <td><b>*&nbsp;Cholesterol (CHOD PAP)</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;"></span></td>
+                                                   <td style="text-align:center;" class="{% if report.total_cholesterol > 200 %} red  {% endif %}">{{report.total_cholesteroll}}</td>
+                                                   <td style="text-align:center;">mg/dL</td>
+                                                   <td style="text-align:left; padding-left:7%;">Desirable:
+                                                      < 200 mg/dL
+                                                   </td>
+                                                   </tr>
+                                                   
+                                                
+                                                   
+                                                   <tr>
+                                                   <td></td>
+                                                   <td style="text-align:center;"><font color="#000"></font></td>
+                                                   <td style="text-align:center;">mg/dL</td>
+                                                   <td style="text-align:left; padding-left:7%;">Borderline High: 200-240
+                                                   </td>
+                                                   </tr>
+                                                   
+                                                   
+                                                   <tr>
+                                                   <td><b></b>
+                                                   <td style="text-align:center;"><font color="#000"></font></td>
+                                                   <td style="text-align:center;">mg/dL</td>
+                                                   <td style="text-align:left; padding-left:7%;">High Risk: > 240
+                                                   </td>
+                                                   </tr>
+                                                    {% endif %}
+                                                   
+                                                   {% if report.triglycerides1 %} 
+                                                    <tr>
+                                                       <td><b>*&nbsp;Triglycerides (GPO GAP)</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(FBS) (GOD PAP)</span></td>
+                                                       <td style="text-align:center;" class="{% if report.triglycerides > 200 %} red  {% endif %}">{{report.triglycerides1}}</td>
+                                                       <td style="text-align:center;">mg/dL</td>
+                                                       <td style="text-align:left; padding-left:7%;">Desirable: < 150</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                    <td><b></b>
+                                                    <td style="text-align:center;"><font color="#000"></font></td>
+                                                    <td style="text-align:center;">mg/dL</td>
+                                                    <td style="text-align:left; padding-left:7%;">Borderline High: 150-200
+                                                    </td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                    <td><b></b>
+                                                    <td style="text-align:center;"><font color="#000"></font></td>
+                                                    <td style="text-align:center;">mg/dL</td>
+                                                    <td style="text-align:left; padding-left:7%;">Elevated:> 200
+                                                    </td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    
+                                                    {% if report.direct_hdl %} 
+                                                    <tr>
+                                                       <td><b>*&nbsp;HDL Cholesterol (Polymer Ditergen)</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;"></span></td>
+                                                       <td style="text-align:center;"  class=" 
+                                                       {% if report.direct_hdl < 36  == 'Female' %}pink{% elif report.direct_hdl > 92 and report.sex == 'Female' %}red{% elif report.direct_hdl < 35 and report.sex == 'Male' %}pink{% elif report.direct_hdl > 75 and report.sex == 'Male' %}red{% endif %}">{{report.direct_hdl}}</td>
+                                                       <td style="text-align:center;">mg/dL</td>
+                                                       <td style="text-align:left; padding-left:7%;">Feamle: 36-92</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                    <td><b></b>
+                                                    <td style="text-align:center;"><font color="#000"></font></td>
+                                                    <td style="text-align:center;">mg/dL</td>
+                                                    <td style="text-align:left; padding-left:7%;">Male : 35-75
+                                                    </td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    
+                                                    {% if report.ldl %} 
+                                                    <tr>
+                                                       <td><b>*&nbsp;LDL Cholesterol (Calculated)</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;"></span></td>
+                                                       <td style="text-align:center;" class=" {% if report.direct_hdl > 130 %} red  {% endif %}">{{report.ldl}}</td>
+                                                       <td style="text-align:center;">mg/dL</td>
+                                                       <td style="text-align:left; padding-left:7%;">Desirable: < 130</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                    <td><b></b>
+                                                    <td style="text-align:center;"><font color="#000"></font></td>
+                                                    <td style="text-align:center;">mg/dL</td>
+                                                    <td style="text-align:left; padding-left:7%;">Borderline High: 130-159
+                                                    </td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                    <td><b></b>
+                                                    <td style="text-align:center;"><font color="#000"></font></td>
+                                                    <td style="text-align:center;">mg/dL</td>
+                                                    <td style="text-align:left; padding-left:7%;">Risk: >160
+                                                    </td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    
+                                                    {% if report.vldl %} 
+                                                    <tr>
+                                                       <td><b>*&nbsp;VLDL Cholesterol (Calculated)</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;"></span></td>
+                                                       <td style="text-align:center;" class=" {% if report.vldl > 30 %} red  {% endif %}">{{report.vldl}}</td>
+                                                       <td style="text-align:center;">mg/dL</td>
+                                                       <td style="text-align:left; padding-left:7%;">< 30</td>
+                                                    </tr>
+                                                     {% endif %}
+                                                    
+                                                    {% if report.ch_ratio %}
+                                                    <tr>
+                                                       <td><b>*&nbsp;CHOL/S.HDL Ratio (Calculated)</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;"></span></td>
+                                                       <td style="text-align:center;" class=" {% if report.ch_ratio > 5 %} red  {% endif %}">{{report.ch_ratio}}</td>
+                                                       <td style="text-align:center;"></td>
+                                                       <td style="text-align:left; padding-left:7%;">< 5.0</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    
+                                                    {% if report.lh_ratio %}
+                                                    <tr>
+                                                       <td><b>*&nbsp;LDL/S.HDL Ratio (Calculated)</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;"></span></td>
+                                                       <td style="text-align:center;"  class="{% if report.lh_ratio > 4.5 %} red  {% endif %}">{{report.lh_ratio}}</td>
+                                                       <td style="text-align:center;"></td>
+                                                       <td style="text-align:left; padding-left:7%;">< 4.5</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                   <!-- <tr>-->
+                                                   <!--   <th><font color="#0066FF"><u>Renal Function Test (RFT)</u></font></th>-->
+                                                   <!--   <th colspan="3"></th>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Creatinine</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Jafee Without Compensation)</span></td>-->
+                                                   <!--    <td style="text-align:center;">0.85</td>-->
+                                                   <!--    <td style="text-align:center;">mg/dL</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0.4-1.3</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Blood_urea</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Urease UV)</span></td>-->
+                                                   <!--    <td style="text-align:center;">22.4</td>-->
+                                                   <!--    <td style="text-align:center;">mg/dL</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">13-44</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;BUN</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Calculated)</span></td>-->
+                                                   <!--    <td style="text-align:center;">10.467</td>-->
+                                                   <!--    <td style="text-align:center;">mg/dL</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">6.1-21.0</td>-->
+                                                   <!-- </tr>-->
+                                                   
+                                                   <!--<tr>-->
+                                                   <!--   <th colspan="4"><font color="#0066FF"><u>Liver Functional Test (LFT)</u></font></th>-->
+                                                   <!--</tr>-->
+                                                   
+                                                   <!--<tr>-->
+                                                   <!--    <td><b>*&nbsp;Total Bilirubin</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(DCA)</span></td>-->
+                                                   <!--    <td style="text-align:center;">0.38</td>-->
+                                                   <!--    <td style="text-align:center;">mg/dL</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0.2-1.2</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Direct Bilirubin</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(DCA)</span></td>-->
+                                                   <!--    <td style="text-align:center;">0.31</td>-->
+                                                   <!--    <td style="text-align:center;">mg/dL</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0.0-0.4</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Indirect_Bilirubin</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(Calculated)</span></td>-->
+                                                   <!--    <td style="text-align:center;">0.07</td>-->
+                                                   <!--    <td style="text-align:center;">mg/dL</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0.8-0.8</td>-->
+                                                   <!-- </tr>-->
+                                                   
+                                                   <!--<tr>-->
+                                                   <!--   <td><b>*&nbsp;SGOT</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--   <td style="text-align:center;">25.2</td>-->
+                                                   <!--   <td style="text-align:center;">U/L</td>-->
+                                                   <!--   <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!--</tr>-->
+                                                   
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;SGPT</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">38.2</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Gamma GT</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC, DGKC)</span></td>-->
+                                                   <!--    <td style="text-align:center;">170</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">7.0-50.0</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Alkaline_Phosphatase</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(p-NPP, AMP Buffer IFCC)</span></td>-->
+                                                   <!--    <td style="text-align:center;">15.3</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">30-115</td>-->
+                                                   <!-- </tr>-->
+                                                                    
+                                                                    
+                                                                    
+                                                                    <!--Start New Code Clinical-->
+                                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Blood_cholestrol</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">156</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                   
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                   
+                                                    
+                                                   
+                                                   
+                                                    
+                                                   
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Total_Cholesterol</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">184</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Triglycerides</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">168</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Direct_hdl</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">39.1</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;VLDL</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">33.6</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;LDL</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">111.30</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Ch_ratio</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">4.706</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Lh_ratio</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">2.847</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;rdw_sd</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">10</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Plcc</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">10</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Plcr</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">10</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;vitaminb12</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">10</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;Vitamind3</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">10</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;HCV</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">NEGATIVE</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                   <!-- <tr>-->
+                                                   <!--    <td><b>*&nbsp;PSA</b> <span style="font-family: 'open sans',arial,sans-serif; font-size:12px;">(IFCC Without PSP)</span></td>-->
+                                                   <!--    <td style="text-align:center;">10</td>-->
+                                                   <!--    <td style="text-align:center;">U/L</td>-->
+                                                   <!--    <td style="text-align:left; padding-left:7%;">0-40</td>-->
+                                                   <!-- </tr>-->
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                                    <!--End Code Clinical-->
+
+</tbody></table>
+                                                    {% endif %}
+                                                    
+                                                                    <!--Start New Code Clinical-->
+
+</tbody></table><!-- end Clinical Biochemistry --><br>   <hr style="border-width:thin; border-color:#333;"> <b>*NABL ACCREDITED MEDICAL LABORATORY</b><br> <b>*Denotes Test is in NABL Scope</b><br>   <table cellspacing="0px" cellpadding="0px" width="100%" style="font-size:15px; text-align:center; margin-left:30%;"> <tbody><tr><td><!-- <img src="https://quantum-techs.com/smhri/assets/uploads/images/signatures/mrk.png" width="90px;" /> --></td> </tr> <tr> <td><!-- Dr. Mahesh R Kakadiya --><br><!-- M.D (PATHOLOGY), --><br><!-- Reg.No:- G - 23663 --></td> </tr> </tbody></table><br> <table cellspacing="0px" cellpadding="0px" width="100%"></table> <!-- <div style="text-align:right; margin-right:10px;">Page 2 of 3</div> --> </div>
+                                                {% endif %}
+                <!-- page 3 start -->
+                 <div style="page-break-after: always;"></div>
+                <div class="div_res res1" style="margin-top : 150px;">
+                    <table cellspacing="0px" cellpadding="0px" width="100%">
+                        <tbody>
+                           <tr>
+                                                          {% if report.list_company %} 
+                                                         <th width="20%">Company Name</th>
+                                                         <td width="50%">:&nbsp;&nbsp;{{report.list_company}}</td>
+                                                          {% endif %}
+                                                          
+                                                         {% if report.collection_date %} 
+                                                         <th width="1%">Collection Date &amp; Time</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.collection_date}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                                                      <tr>
+                                                         {% if report.first_name %} 
+                                                         <th width="20%">Employee Name</th>
+                                                         <td width="40%">:&nbsp;&nbsp;{% if report.sex == "Male" %}Mr. {% elif report.sex == "Female" %}Mrs. {% endif %}  {{report.first_name}} </td>
+                                                         {% endif %}
+                                                         
+                                                         {% if report.test_date %} 
+                                                         <th width="20%">Testing Date &amp; Time</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.test_date|date:"d/m/Y"}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                                                      <tr>
+                                                          
+                                                         <th width="20%">Employee ID</th>
+                                                         <td width="40%">:&nbsp;&nbsp;{{report.employee_no}}</td>
+                                                         
+                                                         
+                                                         {% if report.collection_date %} 
+                                                         <th width="20%">Reporting Date &amp; Time</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.collection_date}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                                                      <tr>
+                                                          {% if report.age %}  {% if report.sex %} 
+                                                         <th width="20%">Age / Sex</th>
+                                                         <td width="40%">:&nbsp;&nbsp;{{report.age}} Year  {% endif %}
+                                                            &nbsp;/&nbsp;{{report.sex}}{% endif %}
+                                                         </td>
+                                                         
+                                                         {% if report.ticket_no %} 
+                                                         <th width="20%">Ticket No</th>
+                                                         <td width="30%">:&nbsp;&nbsp;{{report.ticket_no}}</td>
+                                                         {% endif %}
+                                                      </tr>
+                        </tbody>
+                    </table>
+                    <hr style="border-width: thin; border-color: #333" />
+                    {% if report.volume or report.transparency or report.deposit or report.colour or report.sp_gravity or report.ph_reaction or report.albumin or report.sugar or report.bile_salts or report.bile_pigments or report.acetone or report.urobilinogen or report.pus_cells or report.rbc or report.epi_cells or report.casts or report.crystals or report.bacteria or report.yeast_cells or report.trichomonas or report.amorphous_deposit %}
+                    <center><b><font color="#00CC00">Urine Analysis</font></b></center>
+                    <table cellspacing="0px" cellpadding="0px" width="100%">
+                        <tbody>
+                            <tr>
+                                <th style="text-align: center" width="40%"><u>Test</u></th>
+                                <th width="20%" style="text-align: center"><u>Result</u></th>
+                                <th width="10%" style="text-align: center"><u>Unit</u></th>
+                                <th style="text-align: center; line-height: 20px">
+                                    <u>Normal Range</u>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <font color="#0066FF">Physical Examination</font>
+                                </th>
+                                
+                            </tr>
+                            
+                            {% if report.volume %}
+                            <tr style="line-height: 30px">
+                                 
+                                <th>Volume</th>
+                                <td style="text-align: center">{{report.volume}}</td>
+                                <td style="text-align: center">ml</td>
+                                <td style="text-align: center"></td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.transparency %}
+                            <tr style="line-height: 30px">
+                                <th>Transparency</th>
+                                <td style="text-align: center">{{report.transparency}}</td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center"></td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.deposit %}
+                            <tr style="line-height: 30px">
+                                <th>Deposit</th>
+                                <td style="text-align: center">{{report.deposit}}</td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center"></td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.colour %}
+                            <tr style="line-height: 30px">
+                                <th>Colour</th>
+                                <td style="text-align: center">{{report.colour}}</td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center"></td>
+                            </tr>
+                            {% endif %}
+                            
+                            <tr style="line-height: 40px">
+                                <th colspan="4">
+                                    <font color="#0066FF">Chemical Examination</font>
+                                </th>
+                            </tr>
+                            
+                            {% if report.sp_gravity %}
+                            <tr style="line-height: 30px">
+                                <th>Sp. Gravity</th>
+                                <td style="text-align: center" class=" {% if report.sp_gravity < 1.003 %} pink {% elif report.sp_gravity > 1.025 %} red  {% endif %}">
+                                    {{report.sp_gravity}}
+                                </td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center">1.003-1.025</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.ph_reaction %}
+                            <tr style="line-height: 30px">
+                                <th>pH (Reaction)</th>
+                                <td style="text-align: center" class=" {% if report.ph_reaction > 7 %} red  {% endif %}">
+                                    {{report.ph_reaction}}
+                                </td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center">&lt; 7.0 [Acidic]</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.albumin %}
+                            <tr style="line-height: 30px">
+                                <th>Albumin</th>
+                                <td style="text-align: center">{{report.albumin}}</td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center">Absent [&lt; 5 mg/dL]</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.sugar %}
+                            <tr style="line-height: 30px">
+                                <th>Glucose</th>
+                                <td style="text-align: center">{{report.sugar}}</td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center">Absent</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.bile_salts %}
+                            <tr style="line-height: 30px">
+                                <th>U. Bile Salt</th>
+                                <td style="text-align: center">{{report.bile_salts}}</td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center">Absent</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.bile_pigments %}
+                            <tr style="line-height: 30px">
+                                <th>U. Bile Pigment</th>
+                                <td style="text-align: center">{{report.bile_pigments}}</td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center">Absent</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.acetone %}
+                            <tr style="line-height: 30px">
+                                <th>Acetone</th>
+                                <td style="text-align: center">{{report.acetone}}</td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center">Absent</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.urobilinogen %}
+                            <tr style="line-height: 30px">
+                                <th>Urobilinogen</th>
+                                <td style="text-align: center">{{report.urobilinogen}}</td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center">Absent</td>
+                            </tr>
+                            {% endif %}
+                            
+                            <tr style="line-height: 40px">
+                                <th colspan="4">
+                                    <font color="#0066FF">Microscopic Examination</font>
+                                </th>
+                            </tr>
+                            
+                            {% if report.pus_cells %}
+                            <tr style="line-height: 30px">
+                                <th>PUS Cells</th>
+                                <td style="text-align: center">
+                                    <font color="#000">{{report.pus_cells}}</font>
+                                </td>
+                                <td style="text-align: center">/hpf</td>
+                                <td style="text-align: center">Occasional/hpf</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.rbc %}
+                            <tr style="line-height: 30px">
+                                <th>R.B.C</th>
+                                <td style="text-align: center">
+                                    <font color="#000">{{report.rbc}}</font>
+                                </td>
+                                <td style="text-align: center">/hpf</td>
+                                <td style="text-align: center">0-1/hpf</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.epi_cells %}
+                            <tr style="line-height: 30px">
+                                <th>Epi. Cells</th>
+                                <td style="text-align: center">
+                                    <font color="#000">{{report.epi_cells}}</font>
+                                </td>
+                                <td style="text-align: center">/hpf</td>
+                                <td style="text-align: center">0-5/hpf</td>
+                            </tr>
+                            {% endif %}
+                            
+                             {% if report.casts %}
+                            <tr style="line-height: 30px">
+                                <th>Casts</th>
+                                <td style="text-align: center">{{report.casts}}</td>
+                                <td style="text-align: center">/hpf</td>
+                                <td style="text-align: center">Absent/hpf</td>
+                            </tr>
+                             {% endif %}
+                            
+                             {% if report.crystals %}
+                            <tr style="line-height: 30px">
+                                <th>Crystals</th>
+                                <td style="text-align: center">{{report.crystals}}</td>
+                                <td style="text-align: center">/hpf</td>
+                                <td style="text-align: center">Absent/hpf</td>
+                            </tr>
+                             {% endif %}
+                            
+                            {% if report.bacteria %}
+                            <tr style="line-height: 30px">
+                                <th>Bacteria</th>
+                                <td style="text-align: center">{{report.bacteria}}</td>
+                                <td style="text-align: center">/hpf</td>
+                                <td style="text-align: center">Absent/hpf</td>
+                            </tr>
+                              {% endif %}
+                            
+                             {% if report.yeast_cells %}
+                            <tr style="line-height: 30px">
+                                <th>Yeast Cells</th>
+                                <td style="text-align: center">{{report.yeast_cells}}</td>
+                                <td style="text-align: center">/hpf</td>
+                                <td style="text-align: center">Absent</td>
+                            </tr>
+                              {% endif %}
+                            
+                             {% if report.trichomonas %}
+                            <tr style="line-height: 30px">
+                                <th>Trichomonas</th>
+                                <td style="text-align: center">{{report.trichomonas}}</td>
+                                <td style="text-align: center">/hpf</td>
+                                <td style="text-align: center">Absent</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if report.amorphous_deposit %}
+                            <tr style="line-height: 30px">
+                                <th>Amorphous Deposit</th>
+                                <td style="text-align: center">{{report.amorphous_deposit}}</td>
+                                <td style="text-align: center">/hpf</td>
+                                <td style="text-align: center">Absent</td>
+                            </tr>
+                            {% endif %}
+                            <tr>
+                                <td colspan="5" style="text-align: center; font-size: 12px">
+                                    <hr style="border-width: thin; border-color: #333" />
+                                    <b><!-- *NABL ACCREDITED MEDICAL LABORATORY--></b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% endif %}
+                    <table cellspacing="0px" cellpadding="0px" width="100%"
+                        style="font-size: 15px; text-align: center; margin-left: 30%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <!-- <img src="https://quantum-techs.com/smhri/assets/uploads/images/signatures/mrk.png" width="90px;" /> -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- Dr. Mahesh R Kakadiya --><br /><!-- M.D (PATHOLOGY), --><br /><!-- Reg.No:- G - 23663 -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br /><br /><br />
+                    <table cellspacing="0px" cellpadding="0px" width="100%">
+                        <tbody>
+                            <tr>
+                                <th style="text-align: center">
+                                    ----------- End of the Report -----------
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br /><br />
+                    <!-- <div style="text-align:right; margin-right:10px;">Page 3 of 3</div> -->
+                </div>
+                <!-- page 3 end -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

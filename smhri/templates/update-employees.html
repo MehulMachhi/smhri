@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="robots" content="index, follow" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+    <title>Update Employee Details | SMHRI</title>
+      <!-- Favicon icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+	<link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+    <!-- Custom Stylesheet -->
+    	<link href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+          <a href="{% url 'index' %}" class="brand-logo">
+				<img class="logo-abbr" src="/static/images/logo-small.jpg" alt="Small Logo" />
+				<img class="brand-title" src="/static/images/logo-big.jpg" alt="Big Logo" />
+			</a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+
+
+
+        <!--*************************************************************************************************************************************************************************************
+            																			Header start
+        **************************************************************************************************************************************************************************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="dashboard_bar">Employee</div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**************************************************************************************************************************************************************************************
+            																		Header end ti-comment-alt
+        ******************************************************************************************************************************************************************************************-->
+
+        <!--**************************************************************************************************************************************************************************************
+            																			Sidebar start
+        ******************************************************************************************************************************************************************************************-->
+        <div class="deznav">
+            <div class="deznav-scroll">
+				<ul class="metismenu" id="menu">
+                    <li><a class="ai-icon" href="{% url 'index' %}" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Dashboard</span>
+						</a>
+                    </li>
+                    <li><a class="ai-icon" href="{% url 'view_company_data' %}" aria-expanded="false">
+						<i class="flaticon-381-internet"></i></i><span class="nav-text">Company</span>
+						</a>
+<!--                        <ul aria-expanded="false">-->
+<!--                            <li><a href="{% url 'view_company_data' %}">Add New Company</a></li>-->
+<!--							<li><a href="view-companies.html">View All Companies</a></li>-->
+<!--                        </ul>-->
+                    </li>
+					<li class="mm-active"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-television"></i><span class="nav-text">Employees</span>
+					</a>
+					<ul aria-expanded="false" class="mm-collapse mm-show">
+						<li><a href="{% url 'add_employees_data' %}">Add New Employee</a></li>
+						<li><a href="{% url 'view_employees_data' %}" class="mm-active">View All Employees</a></li>
+					</ul>
+				</li>
+
+                   <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-notepad"></i>
+						<span class="nav-text">Reports</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href="{% url 'view_employee_reports' %}">Employee Reports</a></li>
+						<li><a href="{% url 'view_summary_reports' %}">Summary Reports</a></li>
+					</ul>
+				</li>
+
+                    <li><a class="ai-icon" href="{% url 'get_test' %}" aria-expanded="false">
+							<i class="flaticon-381-layer-1"></i>
+							<span class="nav-text">Tests</span>
+						</a>
+                        <!-- <ul aria-expanded="false">
+                            <li><a href="./page-register.html">Register</a></li>
+                            <li><a href="./page-login.html">Login</a></li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="./page-error-400.html">Error 400</a></li>
+                                    <li><a href="./page-error-403.html">Error 403</a></li>
+                                    <li><a href="./page-error-404.html">Error 404</a></li>
+                                    <li><a href="./page-error-500.html">Error 500</a></li>
+                                    <li><a href="./page-error-503.html">Error 503</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./page-lock-screen.html">Lock Screen</a></li>
+                        </ul> -->
+                    </li>
+                    	<li><a class="ai-icon" href="{% url 'logout' %}" aria-expanded="false">
+							<i class="flaticon-381-turn-off"></i>
+							<span class="nav-text">Logout</span>
+						</a>
+					</li>
+                </ul>
+
+			
+				<div class="copyright" style="margin-top:120px">
+				<p><strong>SMHRI</strong> © {% now "Y" %} All Rights Reserved.</p>
+				<p class="fs-12">Made with <span class="heart"></span> by <a href="https://anantsoftcomputing.com/">ASC</a></p>
+			</div>
+			</div>
+        </div>
+        <!--***************************************************************************************************************************************************************************************************************************************************
+           																												 Sidebar end
+        ****************************************************************************************************************************************************************************************************************************************************-->
+
+        <!--***************************************************************************************************************************************************************************************************************************************************
+																													Update Employee Data
+        ****************************************************************************************************************************************************************************************************************************************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Update Employee Details</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-validation">
+                                    <form class="needs-validation"   method="post">
+										{% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-xl-6">
+
+                                                <div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom05">Company Name :
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-lg-6">
+														<select class="default-select wide form-control" name="list_company" id="validationCustom05">
+															<option  data-display="Select">Please select</option>
+															{{% for x in companies %}
+															<option  value={{x.id}}>{{x.name}}</option>
+															{% endfor %}}
+														</select>
+														<div class="invalid-feedback">Please select a one.</div>
+													</div>
+												</div>
+
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom05">Name prefix :
+														<span class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<select class="default-select wide form-control" name="name_pref" value="{{uuser.name_pref}}" id="validationCustom05">
+															<option  data-display="Select">Please select</option>
+															<option value="Miss">Miss</option>
+															<option value="Mr">Mr</option>
+															<option value="Mrs">Mrs</option>
+														</select>
+														<div class="invalid-feedback">Please select a one.</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom01">First Name
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-lg-6">
+														<input type="text" name="first_name" value="{{uuser.first_name}}" class="form-control" id="validationCustom01"  placeholder="Enter a First Name.." required>
+														<div class="invalid-feedback">
+															Please enter a First Name.
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom02">Middle Name <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="text" name="middle_name" value="{{uuser.middle_name}}" class="form-control" id="validationCustom02"  placeholder="Your valid Middle Name.." >
+														<div class="invalid-feedback">
+															Please enter a Middle Name.
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom03">Last name
+														<span class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="tel" name="last_name" value="{{uuser.last_name}}" class="form-control" id="validationCustom03" placeholder="Last name .." >
+														<div class="invalid-feedback">
+															Please enter a Last name .
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom04">Gender : <span
+															class="text-danger">*</span>
+													</label>
+													<div class="col-lg-6">
+														<select class="default-select wide form-control" name="sex" value="{{uuser.sex}}" id="validationCustom04">
+															<option  data-display="Select">Please select</option>
+															<option value="Male">Male</option>
+															<option value="Female">Female</option>
+															<option value="Others">Others</option>
+														</select>
+														<div class="invalid-feedback">
+															Please enter a Gender :
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom01">Select Company
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-lg-6">
+														<select class="default-select wide form-control" name="company" value="{{uuser.company}}" id="validationCustom01">
+															<option  data-display="Select">Please select Company</option>
+															<option value="Company">Flat Management Company</option>
+															<option value="Company">Private Limited Company</option>
+															<option value="Company">Unlimited Company</option>
+															<option value="Company">Limited Liability Partnership</option>
+															<option value="Company">Proprietary</option>
+															<option value="Company">Right to Management Company</option>
+															<option value="Company">Community Interest Company</option>
+															<option value="Company">Public Limited Company</option>
+														</select>
+														<div class="invalid-feedback">Please select a one.</div>
+														<div class="invalid-feedback">Please enter a Name.</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom02">Employees No <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="text" name="employee_no" value="{{uuser.employee_no}}" class="form-control" id="validationCustom02"  placeholder="Your Employees No.." >
+														<div class="invalid-feedback">
+															Please enter a Employees No .
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom03">Ticket no
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-lg-6">
+														<input type="tel" name="ticket_no" value="{{uuser.ticket_no}}" class="form-control" id="validationCustom03" placeholder="Ticket no.." required>
+														<div class="invalid-feedback">
+															Please enter a Ticket no.
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom04">Aadhar card no : <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="text" name="aadhar_card_no" value="{{uuser.aadhar_card_no}}" class="form-control" id="validationCustom04"  placeholder="Your Aadhar card No.." >
+														<div class="invalid-feedback">
+															Please enter a Aadhar card no :
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom05">Pan number
+														<span class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="text" name="pan_number" value="{{uuser.pan_number}}" class="form-control" id="validationCustom05" placeholder="Your Pan number  :" >
+														<div class="invalid-feedback">Please select a one.</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom01">Joining Date
+														<span class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="date" name="date_joining" value="{{uuser.date_joining}}" class="form-control" id="validationCustom01"  placeholder="Enter a Joining Date.." >
+														<div class="invalid-feedback">
+															Please enter a Joining Date.
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom02">Designation <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="text" name="designation" value="{{uuser.designation}}" class="form-control" id="validationCustom02"  placeholder="Your valid Designation.." >
+														<div class="invalid-feedback">
+															Please enter a Designation.
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom03">Department
+														<span class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="tel" name="department" value="{{uuser.department}}" class="form-control" id="validationCustom03" placeholder="Department.." >
+														<div class="invalid-feedback">
+															Please enter a Department.
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom05">Address
+														<span class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<textarea class="form-control" name="address" value="{{uuser.address}}" id="validationCustom04"  rows="5" placeholder="Your Address :" ></textarea>
+														<!-- <input type="text" class="form-control" id="validationCustom05" placeholder="Your Address :" required> -->
+														<div class="invalid-feedback">Please select a one.</div>
+													</div>
+												</div>
+
+<!--												<div class="mb-3 row">-->
+<!--													<label class="col-lg-4 col-form-label" for="validationCustom10">Country <span-->
+<!--															class="text-danger">*</span>-->
+<!--													</label>-->
+<!--													<div class="col-lg-6">-->
+<!--														<select class="default-select form-control wide mt-3" name="country" value="{{uuser.country}}">-->
+<!--															<option>Country 1</option>-->
+<!--															<option>Country 2</option>-->
+<!--															<option>Country 3</option>-->
+<!--															<option>Country 4</option>-->
+<!--															<option>Country 5</option>-->
+<!--														</select>-->
+<!--														&lt;!&ndash; <input type="text" class="form-control" id="validationCustom10" placeholder="5.0" required> &ndash;&gt;-->
+<!--														<div class="invalid-feedback">Please Select Country</div>-->
+<!--													</div>-->
+<!--												</div>-->
+
+<!--												<div class="mb-3 row">-->
+<!--													<label class="col-lg-4 col-form-label" for="validationCustom10">state <span-->
+<!--															class="text-danger">*</span>-->
+<!--													</label>-->
+<!--													<div class="col-lg-6">-->
+<!--														<select class="default-select form-control wide mt-3" name="state" value="{{uuser.state}}">-->
+<!--															<option>state 1</option>-->
+<!--															<option>state 2</option>-->
+<!--															<option>state 3</option>-->
+<!--															<option>state 4</option>-->
+<!--															<option>state 5</option>-->
+<!--														</select>-->
+<!--														<div class="invalid-feedback">Please Select State</div>-->
+<!--													</div>-->
+<!--												</div>-->
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom10">City <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<select class="default-select form-control wide mt-3" name="city" value="{{uuser.city}}">
+															<option>Vadodara</option>
+															<option>Ahemedabad</option>
+															<option>Bharuch</option>
+															<option>Rajkot</option>
+															<option>Surat</option>
+															<option>Anand</option>
+
+														</select>
+														<div class="invalid-feedback">Please Select City</div>
+													</div>
+												</div>
+
+											<!--######################  New second right line  ####################-->
+
+                                            </div>
+                                            <div class="col-xl-6">
+                                               <div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom05">Birthdate
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-lg-6">
+														<input type="Date" name="birthdate" value="{{uuser.birthdate|date:"Y-m-d"}}"  class="form-control" id="validationCustom05" placeholder="Your Birthdate :" required>
+														<div class="invalid-feedback">Please select a one.</div>
+													</div>
+												</div>
+
+                                                <div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom09">current Photo : <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<img src="{{uuser.photo}}" style="width : auto;height:150px" />
+													</div>
+												</div>
+												
+                                               <div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom09">Photo : <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="file" name="photo" value="{{uuser.photo}}" class="form-control" id="validationCustom09" >
+														<div class="invalid-feedback">Please Uplaod Photo :</div>
+													</div>
+												</div>
+
+                                                <div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom10">Fitness certificate date   <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="datetime-local" name="fitness_certificate_date" value="{{uuser.fitness_certificate_date}}" class="form-control" id="validationCustom09" >
+														<div class="invalid-feedback">Please Select Fitness certificate date </div>
+													</div>
+												</div>
+
+                                                <div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom10">Previous certificate no <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="text" name="previous_certificate_number" value="{{uuser.previous_certificate_number}}" class="form-control" id="validationCustom10" >
+														<div class="invalid-feedback">Please Select Previous certificate no.</div>
+													</div>
+												</div>
+
+                                                <div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom05">Collection Date
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-lg-6">
+														<input type="date" name="collection_date" value="{{uuser.collection_date|date:"Y-m-d"}}" class="form-control" id="validationCustom05" placeholder="Collection Date.." required>
+														<div class="invalid-feedback">Please select a one.</div>
+													</div>
+												</div>
+
+                                                <div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom10">Test Date <span
+															class="text-danger">*</span>
+													</label>
+													<div class="col-lg-6">
+														<input type="date" name="test_date" value="{{uuser.test_date|date:"Y-m-d"}}" class="form-control" id="validationCustom09" required>
+														<div class="invalid-feedback">Please Select test Date</div>
+													</div>
+												</div>
+
+												<!--<div class="mb-3 row">-->
+												<!--	<label class="col-lg-4 col-form-label" for="validationCustom05">Select Type of Test-->
+												<!--		<span class="text-danger">*</span>-->
+												<!--	</label>-->
+													<!-- <div class="col-lg-6">
+												<!--		<input type="date" class="form-control" id="validationCustom05" placeholder="Collection Date.." required>-->
+												<!--		<div class="invalid-feedback">Please select a one.</div>-->
+												<!--	</div> -->
+												<!--</div>-->
+
+                                                <div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom09">Status : <span
+														class="text-danger">*</span>
+													</label>
+													<div class="col-lg-6">
+														<select class="default-select wide form-control" id="validationCustom05" name="status" value="">
+															<option  data-display="Select">Please select Status </option>
+															<option value="approved">Approved</option>
+															<option value="pending">Pending</option>
+														</select>
+														<div class="invalid-feedback">Please Uplaod Status :</div>
+													</div>
+												</div>
+<!--											<div class="row">-->
+<!--												<div class="col-xl-4 col-xxl-6 col-6">-->
+<!--													<div class="form-check custom-checkbox mb-3">-->
+<!--														<input type="checkbox" name="audiometerThresholdDecimats" class="form-check-input" id="customCheckBox1" required="">-->
+<!--														<label class="form-check-label" for="customCheckBox1">Audiometer Threshold Decimats</label>-->
+<!--													</div>-->
+<!--												</div>-->
+
+<!--                                               <div class="col-xl-4 col-xxl-6 col-6">-->
+<!--													<div class="form-check custom-checkbox mb-3">-->
+<!--														<input type="checkbox" name="bloodTest" class="form-check-input" checked="" id="customCheckBox2" required="">-->
+<!--														<label class="form-check-label" for="customCheckBox2">Blood</label>-->
+<!--													</div>-->
+<!--											   </div>-->
+
+<!--											 	<div class="col-xl-4 col-xxl-6 col-6">-->
+<!--													<div class="form-check custom-checkbox mb-3">-->
+<!--														<input type="checkbox" name="complaints" class="form-check-input" checked="" id="customCheckBox3" required="">-->
+<!--														<label class="form-check-label" for="customCheckBox3">Complaints</label>-->
+<!--													</div>-->
+<!--												</div>-->
+
+<!--												<div class="col-xl-4 col-xxl-6 col-6">-->
+<!--													<div class="form-check custom-checkbox mb-3">-->
+<!--														<input type="checkbox" name="hematology" class="form-check-input" checked="" id="customCheckBox4" required="">-->
+<!--														<label class="form-check-label" for="customCheckBox4">Hematology</label>-->
+<!--													</div>-->
+<!--												</div>-->
+
+<!--												<div class="col-xl-4 col-xxl-6 col-6">-->
+<!--													<div class="form-check custom-checkbox mb-3">-->
+<!--														<input type="checkbox" name="lungFunctionTest" class="form-check-input" checked="" id="customCheckBox5" required="">-->
+<!--														<label class="form-check-label" for="customCheckBox5">Lung Function</label>-->
+<!--													</div>-->
+<!--												</div>-->
+
+<!--												<div class="col-xl-4 col-xxl-6 col-6">-->
+<!--													<div class="form-check custom-checkbox mb-3">-->
+<!--														<input type="checkbox" name="microscopicExamination" class="form-check-input" checked="" id="customCheckBox6" required="">-->
+<!--														<label class="form-check-label" for="customCheckBox5">Microscopic Examination</label>-->
+<!--													</div>-->
+<!--												</div>-->
+
+<!--												<div class="col-xl-4 col-xxl-6 col-6">-->
+<!--													<div class="form-check custom-checkbox mb-3">-->
+<!--														<input type="checkbox" name="otherTests" class="form-check-input" checked="" id="customCheckBox7" required="">-->
+<!--														<label class="form-check-label" for="customCheckBox5">Other Tests</label>-->
+<!--													</div>-->
+<!--												</div>-->
+
+<!--												<div class="col-xl-4 col-xxl-6 col-6">-->
+<!--													<div class="form-check custom-checkbox mb-3">-->
+<!--														<input type="checkbox" name="physiologicalTest" class="form-check-input" checked="" id="customCheckBox8" required="">-->
+<!--														<label class="form-check-label" for="customCheckBox5">Physiological</label>-->
+<!--													</div>-->
+<!--												</div>-->
+
+<!--												<div class="col-xl-4 col-xxl-6 col-6">-->
+<!--													<div class="form-check custom-checkbox mb-3">-->
+<!--														<input type="checkbox" name="systematicExamination" class="form-check-input" checked="" id="customCheckBox9" required="">-->
+<!--														<label class="form-check-label" for="customCheckBox5">-->
+<!--															Systematic Examination</label>-->
+<!--													</div>-->
+<!--												</div>-->
+
+<!--&lt;!&ndash;                                                                            <div class="col-xl-4 col-xxl-6 col-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                                <div class="form-check custom-checkbox mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                                    <input type="checkbox" class="form-check-input" checked="" id="customCheckBox10" required="">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                                    <label class="form-check-label" for="customCheckBox5">Urine Examination</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                            </div>&ndash;&gt;-->
+
+<!--												<div class="col-xl-4 col-xxl-6 col-6">-->
+<!--													<div class="form-check custom-checkbox mb-3">-->
+<!--														<input type="checkbox" name="visualTest" class="form-check-input" checked="" id="customCheckBox11" required="">-->
+<!--														<label class="form-check-label" for="customCheckBox5">Visual</label>-->
+<!--													</div>-->
+<!--												</div>-->
+                                                <div class="mb-3 row">
+                                                    <div class="col-lg-8 ms-auto">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+          
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="{% static 'vendor/global/global.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+    <!-- Jquery Validation -->
+    <script src="{% static 'vendor/jquery-validation/jquery.validate.min.js' %}"></script>
+    <!-- Form validate init -->
+    <script src="{% static 'js/plugins-init/jquery.validate-init.js' %}"></script>
+    <script src="{% static 'js/custom.min.js' %}"></script>
+	<script src="{% static 'js/deznav-init.js' %}"></script>
+	<script src="{% static 'js/demo.js' %}"></script>
+    <script src="{% static 'js/styleSwitcher.js' %}"></script>
+	<script>
+		(function () {
+		  'use strict'
+
+		  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+		  var forms = document.querySelectorAll('.needs-validation')
+
+		  // Loop over them and prevent submission
+		  Array.prototype.slice.call(forms)
+			.forEach(function (form) {
+			  form.addEventListener('submit', function (event) {
+				if (!form.checkValidity()) {
+				  event.preventDefault()
+				  event.stopPropagation()
+				}
+
+				form.classList.add('was-validated')
+			  }, false)
+			})
+		})()
+	</script>
+	
+</body>
+</html>

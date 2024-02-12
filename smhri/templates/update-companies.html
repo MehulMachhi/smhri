@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="robots" content="index, follow" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+    <title>Update Company | SMHRI</title>
+     <!-- Favicon icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+	<link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+    <!-- Custom Stylesheet -->
+    	<link href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--****************************************************************************************************************************************************************************************************************
+     																		 	  Preloader start
+    *****************************************************************************************************************************************************************************************************************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--************************************************************************************************************************************************************************************************************
+																					 Preloader end
+    *************************************************************************************************************************************************************************************************************-->
+
+
+    <!--**************************************************************************************************************************************************************************************************
+																					 Main wrapper start
+    ***************************************************************************************************************************************************************************************************-->
+    <div id="main-wrapper">
+
+        <!--************************************************************************************************************************************************************************************************************
+          																		 	 Nav header start
+        *************************************************************************************************************************************************************************************************************-->
+        <div class="nav-header">
+            <a href="{% url 'index' %}" class="brand-logo">
+				<img class="logo-abbr" src="/static/images/logo-small.jpg" alt="Small Logo" />
+				<img class="brand-title" src="/static/images/logo-big.jpg" alt="Big Logo" />
+			</a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--************************************************************************************************************************************************************************************************************
+																								Nav header end
+        *************************************************************************************************************************************************************************************************************-->
+		
+        <!--***************************************************************************************************************************************************************************************************
+          																	  	Header start
+        *****************************************************************************************************************************************************************************************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="dashboard_bar">Company
+                            </div>
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--***********************************************************************************************************************************************************************************************************
+            																Header end ti-comment-alt
+        *************************************************************************************************************************************************************************************************************-->
+        <!--************************************************************************************************************************************************************************************************************
+            																	Sidebar start
+        *************************************************************************************************************************************************************************************************************-->
+        <div class="deznav">
+            <div class="deznav-scroll">
+				<ul class="metismenu" id="menu">
+                    <li><a class="ai-icon" href="{% url 'index' %}" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Dashboard</span>
+						</a>
+                    </li>
+                    <li><a class="ai-icon" href="{% url 'view_company_data' %}" aria-expanded="false">
+						<i class="flaticon-381-internet"></i></i><span class="nav-text">Company</span>
+						</a>
+                    </li>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-television"></i><span class="nav-text">Employees</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href="{% url 'add_employees_data' %}">Add New Employee</a></li>
+						<li><a href="{% url 'view_employees_data' %}">View All Employees</a></li>
+					</ul>
+				</li>
+				<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-notepad"></i>
+						<span class="nav-text">Reports</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href="./emp-reports.html">Employee Reports</a></li>
+						<li><a href="{% url 'view_summary_reports' %}">Summary Reports</a></li>
+					</ul>
+				</li>
+                 
+				<li><a class="ai-icon" href="{% url 'get_test' %}" aria-expanded="false">
+						<i class="flaticon-381-layer-1"></i>
+						<span class="nav-text">Tests</span>
+					</a>
+				</li>
+				<li><a class="ai-icon" href="{% url 'logout' %}" aria-expanded="false">
+						<i class="flaticon-381-turn-off"></i>
+						<span class="nav-text">Logout</span>
+					</a>
+				</li>
+			</ul>
+			<div class="copyright" style="margin-top:120px">
+				<p><strong>SMHRI</strong> © {% now "Y" %} All Rights Reserved.</p>
+				<p class="fs-12">Made with <span class="heart"></span> by <a href="https://anantsoftcomputing.com/">ASC</a></p>
+			</div>
+			</div>
+        </div>
+        <!--**********************************************************************************************************************************************************************************************************
+            																	Sidebar end
+        ***********************************************************************************************************************************************************************************************************-->
+
+        <!--***********************************************************************************************************************************************************************************************************
+            																Content body start
+        ************************************************************************************************************************************************************************************************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Update Company</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-validation">
+                                    <form class="needs-validation"  method="post">
+										{% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-xl-6">
+
+                                                <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Company Name
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+														<input type="text" name="name" value="{{uuser.name}}" class="form-control" id="validationCustom01"  placeholder="Enter a Company Name.." required>
+														<div class="invalid-feedback">
+															Please enter a Name.
+														</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Email <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" name="email" value="{{uuser.email}}" class="form-control" id="validationCustom02"  placeholder="Your valid email.." required>
+														<div class="invalid-feedback">
+															Please enter a Email.
+														</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom03">Phone
+                                                        <span class="text-danger"></span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input type="tel"  name="phone" value="{{uuser.phone}}" class="form-control" id="validationCustom03" placeholder="Phone.." >
+														<div class="invalid-feedback">
+															Please enter a Phone.
+														</div>
+                                                    </div>
+                                                </div>
+
+                                               <div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom09">Registered Certificate : <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="file" name="company_registration_certificate"  class="form-control" id="validationCustom09" >
+														<div class="invalid-feedback">Please Uplaod Company registration certificate :</div>
+													</div>
+											   </div>
+
+                                              	<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom04">Address : <span
+															class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<textarea class="form-control" name="address"  id="validationCustom04"  rows="5" placeholder="Your Address :" >{{uuser.address}}</textarea>
+														<div class="invalid-feedback">
+															Please enter a Address :
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom03">Pincode
+														<span class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<input type="tel" name="pincode" value="{{uuser.pincode}}" class="form-control" id="validationCustom03" placeholder="Pincode.." >
+														<div class="invalid-feedback">
+															Please enter a Pincode.
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3 row">
+													<label class="col-lg-4 col-form-label" for="validationCustom05">Country
+														<span class="text-danger"></span>
+													</label>
+													<div class="col-lg-6">
+														<select class="default-select wide form-control" name="country"  id="validationCustom05">
+
+															<option  data-display="Select">Please select</option>
+															<option value="India">India</option>
+															<option value="Australia">Australia</option>
+															<option value="UK">UK</option>
+														</select>
+
+														<div class="invalid-feedback">Please select a one.</div>
+													</div>
+												</div>
+
+        											<div class="mb-3 row">
+                                                      <label class="col-lg-4 col-form-label" for="validationCustom10">Test <span class="text-danger">*</span></label>
+                                                      <div class="col-lg-6">
+                                                        <select multiple class="default-select form-control wide mt-3 h-auto" size=11 name="test[]"  id="validationCustom04">
+                                                          <option value="AudiometerThresholdDecimats" {% if "AudiometerThresholdDecimats" in uuser.test %}selected{% endif %}>AudiometerThresholdDecimats</option>
+                                                          <option value="BloodTest" {% if "BloodTest" in uuser.test %}selected{% endif %}>BloodTest</option>
+                                                          <option value="Complaints" {% if "Complaints" in uuser.test %}selected{% endif %}>Complaints</option>
+                                                          <option value="Hematology" {% if "Hematology" in uuser.test %}selected{% endif %}>Hematology</option>
+                                                          <option value="LungFunctionTest" {% if "LungFunctionTest" in uuser.test %}selected{% endif %}>LungFunctionTest</option>
+                                                          <option value="MicroscopicExamination" {% if "MicroscopicExamination" in uuser.test %}selected{% endif %}>MicroscopicExamination</option>
+                                                          <option value="OtherTests" {% if "OtherTests" in uuser.test %}selected{% endif %}>OtherTests</option>
+                                                          <option value="PhysiologicalTest" {% if "PhysiologicalTest" in uuser.test %}selected{% endif %}>PhysiologicalTest</option>
+                                                          <option value="SystematicExamination" {% if "SystematicExamination" in uuser.test %}selected{% endif %}>SystematicExamination</option>
+                                                          <option value="VisualTest" {% if "VisualTest" in uuser.test %}selected{% endif %}>VisualTest</option>
+                                                          <option value="Urine_Examination" {% if "Urine_Examination" in uuser.test %}selected{% endif %}>Urine_Examination</option>
+                                                        </select>
+                                                        <!--<input type="text" class="form-control" id="validationCustom10" placeholder="5.0" required> -->
+                                                        <!--<div class="invalid-feedback">Please Select test</div>-->
+                                                      </div>
+                                                    </div>
+
+		
+												
+
+<!--                                                <div class="mb-3 row">-->
+<!--                                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Address 1: <span-->
+<!--                                                            class="text-danger">*</span>-->
+<!--                                                    </label>-->
+<!--                                                    <div class="col-lg-6">-->
+<!--                                                        <textarea class="form-control" id="validationCustom04"  rows="5" placeholder="Your Address 1:" required></textarea>-->
+<!--														<div class="invalid-feedback">-->
+<!--															Please enter a Address 1:-->
+<!--														</div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--												-->
+<!--                                                <div class="mb-3 row">-->
+<!--                                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Address 2 : <span-->
+<!--                                                            class="text-danger">*</span>-->
+<!--                                                    </label>-->
+<!--                                                    <div class="col-lg-6">-->
+<!--                                                        <textarea class="form-control" id="validationCustom04"  rows="5" placeholder="Your  Address 2 :" required></textarea>-->
+<!--														<div class="invalid-feedback">-->
+<!--															Please enter a  Address 2 :-->
+<!--														</div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                                
+                                            </div>
+<!--                                            <div class="col-xl-6">-->
+<!--                                                <div class="mb-3 row">-->
+<!--                                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Pincode : <span-->
+<!--                                                            class="text-danger">*</span>-->
+<!--                                                    </label>-->
+<!--                                                    <div class="col-lg-6">-->
+<!--                                                        <input type="text" class="form-control" id="validationCustom04"  placeholder="Your valid Pincode.." required>-->
+<!--                                                        &lt;!&ndash; <textarea class="form-control" id="validationCustom04"  rows="5" placeholder="Your  <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid email.." required> :" required></textarea> &ndash;&gt;-->
+<!--														<div class="invalid-feedback">Please enter a Pincode : </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="mb-3 row">-->
+<!--                                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Country-->
+<!--                                                        <span class="text-danger">*</span>-->
+<!--                                                    </label>-->
+<!--                                                    <div class="col-lg-6">-->
+<!--                                                        <select class="default-select wide form-control" id="validationCustom05">-->
+<!--                                                            <option  data-display="Select">Please select</option>-->
+<!--                                                            <option value="India">India</option>-->
+<!--                                                            <option value="Australia">Australia</option>-->
+<!--                                                            <option value="UK">UK</option>-->
+<!--                                                        </select>-->
+<!--														<div class="invalid-feedback">Please select a one.</div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="mb-3 row">-->
+<!--                                                    <label class="col-lg-4 col-form-label" for="validationCustom06">State-->
+<!--                                                        <span class="text-danger">*</span>-->
+<!--                                                    </label>-->
+<!--                                                    <div class="col-lg-6">-->
+<!--                                                        <select class="default-select wide form-control" id="validationCustom06">-->
+<!--                                                            <option  data-display="Select">Please select</option>-->
+<!--                                                            <option value="Gujarat">State 1</option>-->
+<!--                                                            <option value="Rajasthan">State 2</option>-->
+<!--                                                            <option value="MP">State 3</option>-->
+<!--                                                        </select>-->
+<!--														<div class="invalid-feedback">Please select a one.</div>-->
+<!--                                                        &lt;!&ndash; <input type="text" class="form-control" id="validationCustom06" placeholder="$21.60" required> &ndash;&gt;-->
+<!--														<div class="invalid-feedback">-->
+<!--															Please enter a State.-->
+<!--														</div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="mb-3 row">-->
+<!--                                                    <label class="col-lg-4 col-form-label" for="validationCustom07">City-->
+<!--                                                        <span class="text-danger">*</span>-->
+<!--                                                    </label>-->
+<!--                                                    <div class="col-lg-6">-->
+<!--                                                        <select class="default-select wide form-control" id="validationCustom07">-->
+<!--                                                            <option  data-display="Select">Please select</option>-->
+<!--                                                            <option value="Gujarat">City 1</option>-->
+<!--                                                            <option value="Rajasthan">City 2</option>-->
+<!--                                                            <option value="MP">City 3</option>-->
+<!--                                                        </select>-->
+<!--                                                        &lt;!&ndash; <input type="text" class="form-control" id="validationCustom07"  placeholder="http://example.com" required> &ndash;&gt;-->
+<!--														<div class="invalid-feedback">Please enter a City.</div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="mb-3 row">-->
+<!--                                                    <label class="col-lg-4 col-form-label" for="validationCustom08">Company Type-->
+<!--                                                        <span class="text-danger">*</span>-->
+<!--                                                    </label>-->
+<!--                                                    <div class="col-lg-6">-->
+<!--                                                        <select class="default-select wide form-control" id="validationCustom08">-->
+<!--                                                            <option  data-display="Select">Please select</option>-->
+<!--                                                            <option value="Gujarat">Type 1</option>-->
+<!--                                                            <option value="Rajasthan">Type 2</option>-->
+<!--                                                            <option value="MP">Type 3</option>-->
+<!--                                                        </select>-->
+<!--                                                        &lt;!&ndash; <input type="text" class="form-control" id="validationCustom08" placeholder="212-999-0000" required> &ndash;&gt;-->
+<!--														<div class="invalid-feedback">Please enter a phone no.</div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="mb-3 row">-->
+<!--                                                    <label class="col-lg-4 col-form-label" for="validationCustom09">Company registration certificate : <span-->
+<!--                                                            class="text-danger">*</span>-->
+<!--                                                    </label>-->
+<!--                                                    <div class="col-lg-6">-->
+<!--                                                        <input type="file" class="form-control" id="validationCustom09" required>-->
+<!--														<div class="invalid-feedback">Please Uplaod Company registration certificate :</div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="mb-3 row">-->
+<!--                                                    <label class="col-lg-4 col-form-label" for="validationCustom10">Test <span-->
+<!--                                                            class="text-danger">*</span>-->
+<!--                                                    </label>-->
+<!--                                                    <div class="col-lg-6">-->
+<!--                                                        <select multiple class="default-select form-control wide mt-3" >-->
+<!--                                                            <option>Test 1</option>-->
+<!--                                                            <option>Test 2</option>-->
+<!--                                                            <option>Test 3</option>-->
+<!--                                                            <option>Test 4</option>-->
+<!--                                                            <option>Test 5</option>-->
+<!--                                                        </select>-->
+<!--                                                        &lt;!&ndash; <input type="text" class="form-control" id="validationCustom10" placeholder="5.0" required> &ndash;&gt;-->
+<!--														<div class="invalid-feedback">Please Select test</div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                                <div class="mb-3 row">
+                                                    <div class="col-lg-8 ms-auto">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+<!--                                            </div>-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+          
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="{% static 'vendor/global/global.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+    <!-- Jquery Validation -->
+    <script src="{% static 'vendor/jquery-validation/jquery.validate.min.js' %}"></script>
+    <!-- Form validate init -->
+    <script src="{% static 'js/plugins-init/jquery.validate-init.js' %}"></script>
+    <script src="{% static 'js/custom.min.js' %}"></script>
+	<script src="{% static 'js/deznav-init.js' %}"></script>
+	<script src="{% static 'js/demo.js' %}"></script>
+    <script src="{% static 'js/styleSwitcher.js' %}"></script>
+	<script>
+		(function () {
+		  'use strict'
+
+		  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+		  var forms = document.querySelectorAll('.needs-validation')
+
+		  // Loop over them and prevent submission
+		  Array.prototype.slice.call(forms)
+			.forEach(function (form) {
+			  form.addEventListener('submit', function (event) {
+				if (!form.checkValidity()) {
+				  event.preventDefault()
+				  event.stopPropagation()
+				}
+
+				form.classList.add('was-validated')
+			  }, false)
+			})
+		})()
+	</script>
+</body>
+</html>

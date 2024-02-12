@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .report_header_form {
+        margin: 10px 0;
+        text-align: center;
+      }
+      .report_header_form {
+        margin: 10px 0;
+        text-align: center;
+      }
+      #srno {
+        text-align: center;
+      }
+      tr td {
+        /*padding: 0.7em;*/
+      }
+      tbody,
+      td,
+      tfoot,
+      th,
+      thead,
+      tr {
+        border-width: inherit;
+      }
+      
+       @media print {
+        body * {
+            visibility: hidden;
+        }
+        .div_res, .div_res * {
+            visibility: visible;
+        }
+         .report_header_form{
+            display: none;
+        }
+        table,div{
+                font-size: 11px !important;
+        }
+        table.firstt{
+            font-size : 14px !important;
+        }
+        .div_res{
+            margin-top : 25px;
+        }
+}
+div{
+    font-size : 14px !important;
+}
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+         <div class="report_header_form">
+            <input
+              type="button"
+              value="Print Report"
+              class="btn btn-primary"
+              onclick="window.print()"
+              id="create_print"
+            />
+          </div>
+          <div class="div_res" style="border: solid 1px; padding: 10px;margin-left:50px;margin-right:50px" >
+            <div align="center">
+              <h3>FORM - 33</h3>
+              <h4>Prescribed under 68-T and 102</h4>
+              CERTIFICATE OF FITNESS OF EMPLOYEMENT IN HAZARDOUS PROCESS AND
+              OPERATION <br />TO BE ISSUEDED BY THE FACTORY MEDICAL OFFICER
+            </div>
+            <br />
+            <div class="report_content">
+              <table class="firstt"
+                style="
+                  width: 90%;
+                  font-size: 14px;
+                  table-layout: fixed;
+                "
+              >
+                <colgroup>
+                  <col width="150" />
+                  <col width="200" />
+                </colgroup>
+                <tbody>
+                    
+                  {% if report.ticket_no %}    
+                  <tr>
+                    <td>Ticket No.</td>
+                    <td>: {{report.ticket_no}}</td>
+                  </tr>
+                  {% endif %}
+                  
+                  {% if report.employee_no %}    
+                  <tr>
+                    <td>Employee Code No.</td>
+                    <td>: {{report.employee_no}}</td>
+                  </tr>
+                  {% endif %}
+                  
+                  <tr></tr>
+                  <tr>
+                    <td>Name of the person examination</td>
+                    <td>: {{report.first_name}}</td>
+                  </tr>
+                  <tr></tr>
+                  
+                  {% if report.middle_name %}    
+                  <tr>
+                    <td>Father Name</td>
+                    <td>: {{report.middle_name}}</td>
+                   {% endif %}    
+                    
+                  </tr>
+                  <tr></tr>
+                   {% if report.sex %}    
+                  <tr>
+                    <td>Sex</td>
+                    <td>: {{report.sex}} / {{report.age}} Year</td>
+                  </tr>
+                   {% endif %}    
+<!--                  <tr>-->
+<!--                    <td>Residence</td>-->
+<!--                    <td>:</td>-->
+<!--                  </tr>-->
+                   {% if report.birthdate %}    
+                  <tr>
+                    <td>Date of birth if available</td>
+                    <td>: {{report.birthdate}}</td>
+                  </tr>
+                  {% endif %}    
+                  
+                   {% if report.list_company %}    
+                  <tr>
+                    <td>
+                      Name &amp; Adress of the factory The worker is <br />
+                      employeed / proposed
+                    </td>
+                    <td>: {{report.list_company}}</td>
+                  </tr>
+                   {% endif %}  
+                  
+                  <tr>
+                    <td>A.Hazadous</td>
+                    <td>:</td>
+                  </tr>
+                  <tr>
+                    <td>B.Dangerous operation</td>
+                    <td>:</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <br />
+            <div style="text-align: justify;font-size:10px">
+              I certify that i have Personally examined the above named person
+              whose identification marks are<u
+                >&nbsp;{{report.id_mark_mole}}<b
+                  >&nbsp;&nbsp;&nbsp;&nbsp;</b
+                ></u
+              ><u></u> and who is desirous of begin employed in above mentioned
+              process /operation and his/her , age as nearly as can be
+              asserained form my examination is <b><u>{{report.age}}</u></b> years.
+            </div>
+        
+            <div style="text-align: justify">
+              in my opinion he/she is fit for employment in the said
+              manufacturing process/opreation. <br />
+              in my opinion he/she is fit for employment in the said
+              manufacturing process/opreation for the reason
+              _____________________________________________________________ is
+              refered for further examination to the certifying Surgeon.
+              <br />
+              The Serial Number of the previous Certificate is
+              __________________________________________
+            </div>
+        
+            <div style="width: 100%">
+                <br />
+              <br />
+              <br />
+              <br /><br /><br />
+              <div style="width: 50%; float: left">
+                Signature / Left hand Thumb<br />
+                Impression of building workers<br /><br />
+              </div>
+              
+              <div style="width: 50%; float: right; text-align: right">
+                Signature with seal<br />
+                Medical Inspector / C.M.O.
+              </div>
+            </div>
+            
+            <div class="report_bottom" style="text-align: center;clear: both;">
+              Stamp of Factory Medcial officer With Name of The Factory
+            </div>
+            <div>
+              <table
+                style="
+                 
+                  width: 100%;
+                  font-size: 14px;
+                  table-layout: fixed;
+                  text-align: center;
+                "
+                border="1"
+              >
+                <tbody>
+                  <tr>
+                    <td>
+                      | Certify that |<br />
+                      examined the person<br />
+                      above on(date of examination)
+                    </td>
+                    <td>
+                      I extend this certificate untill
+                      (if certificate is not extended the 
+                      period for which the worker is 
+                      considered untill for work is to be 
+                      mentioned)
+                    </td>
+                    <td>
+                      Signs and symptoms observed
+                      during examination
+                    </td>
+                    <td>
+                      Signature of 
+                      the factory medicial officer 
+                      with date
+                    </td>
+                  </tr>
+                  
+                 
+                  <tr>
+                       {% if report.fitness_certificate_date %} 
+                    <td>{{report.fitness_certificate_date}}</td>
+                     {% endif %}  
+                    <td></td>
+                    
+                     {% if report.blood_pressure or report.pulse %} 
+                    <td>
+                      B.P.: {% if report.blood_pressure %} {{report.blood_pressure}} {% endif %} <br />
+                      Pulse :{% if report.pulse %} {{report.pulse}} {% endif %}
+                    </td>
+                    {% endif %}
+                    
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="font-size:12px;">
+              <b style="font-size:12px;"
+                >Note.
+                <ol>
+                  <li style="font-size:12px;">
+                    If declared only performance should be made immediately to
+                    the certifying surgeon.
+                  </li>
+                  <li style="font-size:12px;">
+                    Certifying surgeon should communicate his finding to the
+                    occupier within 30 days of the recipt of this reference.
+                  </li>
+                </ol>
+              </b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .report_header_form {
+        margin: 10px 0;
+        text-align: center;
+      }
+      @media print {
+        body * {
+            visibility: hidden;
+        }
+        .div_res, .div_res * {
+            visibility: visible;
+        }
+         .report_header_form{
+            display: none;
+        }
+        .div_res{
+            page-break-after: always;
+            margin-top : 90px;
+        }
+
+}
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row" style="margin-left:30px;margin-right:30px">
+        <div class="col">
+        <div class="report_header_form">
+            <input
+              type="button"
+              value="Print Report"
+              class="btn btn-primary"
+              onclick="window.print()"
+              id="create_print"
+            />
+          </div>
+          <div class="div_res">
+            <div align="center">
+              <h3>FORM - XI</h3>
+              <h4>[SEE RULE 233 (C)]</h4>
+              Certificate of Medical Examination
+            </div>
+            <div class="report_content">
+              <ol type="1">
+                <li>
+                  Certificate Serial No: <br />
+                  Date: &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;/202<br />
+                  <br />
+                  Name:{{report.first_name}} <br />
+                  Identification Marks
+                  <ol type="1" style="margin-left: 80px">
+                    <li>
+                      ..............................................................................
+                    </li>
+                    <li>
+                      ..............................................................................
+                    </li>
+                  </ol>
+                </li>
+                <li>Fathers Name:{{report.middle_name}}</li>
+                <li>Sex: {{report.sex}}</li>
+                <li>
+                  Residence <b></b> Son/Daughter Of
+                  ..................................................................................
+                </li>
+                <li>
+                  Date of Birth, if available: 30/11/-0001<br />
+                  And/or certificate Age: {{report.age}}
+                </li>
+                <li>
+                  Physicals Fitness
+                  <div style="margin-left: 80px">
+                    I hereby certify that I have personally examined
+                    <b>{{report.first_name}} </b> son/daughter/wife of
+                    ................................................................................
+                    Residing at <b></b> who is desirous of being employed in
+                    building and construction work and that his/her age as
+                    nearly as can be ascertained from my examination is
+                    <b>{{report.age}}</b> years and that. He/She is fit for employment in
+                    <b>{{report.list_company}}</b> as an <b>{{report.designation}}</b>.
+                  </div>
+                </li>
+                <li>
+                  Reason for-
+                  <ol type="1">
+                    <li>
+                      Refusal of
+                      certificate...................................................................
+                    </li>
+                    <li>
+                      Certificate being
+                      revoked.......................................................................
+                    </li>
+                  </ol>
+                </li>
+              </ol>
+            </div>
+            <br /><br />
+            <div style="width: 100%">
+              <div style="width: 50%; float: left">
+                Signature / Left hand Thumb<br />
+                Impression of building workers<br /><br />
+              </div>
+              <div style="width: 50%; float: right; text-align: right">
+                Signature with seal<br />
+                Medical Inspector / C.M.O.
+              </div>
+            </div>
+            <br /><br /><br /><br /><br />
+            <div>
+              <b
+                >Note.
+                <ol>
+                  <li>
+                    Exact details of cause of physical disability should be
+                    clear stated
+                  </li>
+                  <li>
+                    Functional/productive abilities should be Stated if
+                    desability is stated
+                  </li>
+                </ol>
+              </b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .pink {
+color : #FF00FF;
+}
+.red{
+color : red;
+}
+      .report_header_form {
+        margin: 10px 0;
+        text-align: center;
+      }
+      .report_header_form {
+        margin: 10px 0;
+        text-align: center;
+      }
+      #srno {
+        text-align: center;
+      }
+      tr td {
+        /*padding: 0.7em;*/
+      }
+      tbody,
+      td,
+      tfoot,
+      th,
+      thead,
+      tr {
+        border-width: inherit;
+      }
+       @media print {
+        body * {
+            visibility: hidden;
+        }
+        .div_res, .div_res * {
+            visibility: visible;
+        }
+        .report_header_form{
+            display: none;
+        }
+         table{
+                font-size: 12px !important;
+        }
+        .div_res{
+            page-break-after: always;
+            margin-top : 90px;
+        }
+
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="report_header_form">
+            <input
+              type="button"
+              value="Print Report"
+              class="btn btn-primary"
+              onclick="window.print()"
+              id="create_print"
+            />
+          </div>
+          <div>
+            <br />
+            <div
+             class="div_res"
+            >
+              <table
+              cellspacing="0px"
+              cellpadding="0px"
+              width="100%"
+              style="font-size: 14px"
+            >
+              <tbody>
+                  {% if report.employee_no %}   
+                <tr>
+                  <th width="20%">Emp No</th>
+                  <th width="50%">:&nbsp;{{report.employee_no}}</th>
+                  {% endif %}
+                 
+                 {% if report.collection_date %}   
+                  <th width="1%">Date</th>
+                  <th width="30%">:&nbsp;{{report.collection_date}}</th>
+                </tr>
+                {% endif %}
+                
+                
+                <tr>
+                  {% if report.first_name %}   
+                  <th width="20%">Patient's Name</th>
+                  <th width="50%">:&nbsp;{{report.first_name}}</th>
+                  {% endif %}
+                  {% if report.birthdate %}   
+                  <th width="1%">BirthDate</th>
+                  <th width="30%">:&nbsp;{{report.birthdate}}</th>
+                  {% endif %}
+                </tr>
+                
+                
+                <tr>
+<!--                  <th width="20%">Age</th>-->
+<!--                  <th>-->
+<!--                    :&nbsp;&nbsp;62 &nbsp;Yrs &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sex-->
+<!--                    :&nbsp;&nbsp;Male-->
+<!--                  </th>-->
+                </tr>
+                
+                     
+                <tr>
+                    {% if report.list_company %}
+                  <th width="20%">Company Name</th>
+                  <th width="40%">:&nbsp;{{report.list_company}}</th>
+                   {% endif %}
+                  {% if report.age %}   
+                  <th width="20%">Age</th>
+                  <th width="40%">:&nbsp;{{report.age}} Year</th>
+                     {% endif %}
+                   
+                </tr>
+                
+                 <tr>
+                   
+                 {% if report.ticket_no %}   
+                  <th width="1%">Ticket Number</th>
+                  <th width="30%">:&nbsp;{{report.ticket_no}}</th>
+                  {% endif %}
+                 
+                  {% if report.sex %}   
+                  <th width="20%">Sex</th>
+                  <th width="40%">:&nbsp;{{report.sex}}</th>
+                    {% endif %}
+                </tr>
+                
+                
+              </tbody>
+            </table>
+              <hr style="border-width: thin; border-color: #333" />
+              <div align="center">
+                <h3><u>SERUM CHOLINESTERASE LEVEL</u></h3>
+              </div>
+              <center>
+                <table
+                  cellspacing="0px"
+                  cellpadding="0px"
+                  width="100%"
+                  style="margin-top: 30px"
+                >
+                  <tbody>
+                    <tr>
+                      <th width="33.33%"><u>TEST</u></th>
+                      <th width="33.33%" style="text-align: center">
+                        <u>RESULT</u>
+                      </th>
+                      <th width="33.33%" style="text-align: right">
+                        <u>NORMAL RANGE</u>
+                      </th>
+                    </tr>
+                    
+                      {% if report.serum_cholinesterase %}
+                    <tr style="line-height: 70px; font-size: 18px">
+                      <td>SERUM CHOLINESTERASE</td>
+                      <td style="text-align: center" class=" {% if report.serum_cholinesterase < 4850 %} pink {% elif report.serum_cholinesterase > 12000 %} red  {% endif %}">&nbsp;&nbsp;{{report.serum_cholinesterase}}   U/L</td>
+                      <td style="text-align: right">(4850 – 12000.00)</td>
+                    </tr>
+                     {% endif %}
+                    
+                  </tbody>
+                </table>
+              </center>
+              <br /><br />
+              <div style="line-height: 20px; font-size: 16px">
+                <b>Note:</b><br /><br />
+                <ol>
+                  <li>
+                    How analysis each patient are recommended with an interval
+                    between each of atlas one within a period of 2 month if
+                    there is significant difference between the first and second
+                    report a third analysis is warranted.
+                  </li>
+                  <br />
+                  <li>
+                    The above readings are subjected to the collection procedure
+                    (incomplete Sample-as when there is spillage or collected
+                    trough coitus interrupts) volume and quality of sample. So,
+                    correlation with clinical findings is advisable.
+                  </li>
+                </ol>
+              </div>
+              <br />
+              <hr style="border-width: thin; border-color: #333" />
+              <table width="100%">
+                <tbody>
+                  <tr>
+                    <td align="center">
+                      <font style="font-size: 13px"><b></b></font>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br />
+              <div style="text-align: center">
+                <b
+                  ><i><u>End of The Report</u></i></b
+                >
+              </div>
+              <br />
+              <div>
+                <i
+                  >Note: This report is not for legal implication and purpose,
+                  confidential report only for company use.</i
+                >
+              </div>
+              <br /><br />
+              <table
+                cellspacing="0px"
+                cellpadding="0px"
+                width="100%"
+                style="margin-top: 30px; font-size: 20px"
+              >
+                <tbody>
+                  <tr>
+                    <th width="70%" align="left">
+                      <img
+                        src="https://quantum-techs.com/smhri/assets/uploads/images/signatures/rpl5.jpeg"
+                        width="150px;"
+                      />
+                    </th>
+                    <th width="70%" align="center">
+                      <!-- <img src="https://quantum-techs.com/smhri/assets/uploads/images/signatures/mrk.png" width="150px;" /> -->
+                    </th>
+                  </tr>
+                  <tr>
+                    <th width="70%">
+                      DR.R.I.PARMAR<br />(M.D.C.I.H)<br />Reg. No:- G - 8096
+                    </th>
+                    <th>
+                      <!-- Dr. Mahesh R Kakadiya --><br /><!-- M.D (PATHOLOGY), --><br /><!-- Reg.No:- G - 23663 -->
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
