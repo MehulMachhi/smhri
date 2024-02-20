@@ -27,10 +27,10 @@ from textmaster.views import (
     VisualTestViewSet
 )
 from employee.views import EmployeeMasterViewSet
-from company.views import CompanyMasterViewSet, ProfileViewSet
+from company.views import CompanyMasterViewSet, ProfileViewSet,RegisterViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-
+#RegisterViewSet
 router = DefaultRouter()
 router.register('reports/appoinment', AppoinmentViewSet)
 router.register('reports/chemical_examination', ChemicalExaminationViewSet)
@@ -56,6 +56,7 @@ router.register('visual_test', VisualTestViewSet, basename='visual_test')
 router.register('employee_master', EmployeeMasterViewSet)
 router.register('company_master', CompanyMasterViewSet)
 router.register('profile', ProfileViewSet)
+router.register('register', RegisterViewSet, basename='register')
 
 
 urlpatterns = [
