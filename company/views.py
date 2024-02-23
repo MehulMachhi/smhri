@@ -25,7 +25,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer,LoginSerializer
 
 class RegisterViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -55,3 +55,34 @@ class RegisterViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response({"message": "User deleted"}, status=status.HTTP_204_NO_CONTENT)
+    
+from rest_framework_simplejwt.views import TokenObtainPairView
+class LoginViewSet(viewsets.ViewSet):
+    serializer_class = LoginSerializer
+
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Assuming you have a model named User
+        user = User.objects.get(username=serializer.validated_data['username'])
+
+        # Check if the provided password is correct
+        if not user.check_password(serializer.validated_data['password']):
+            return Response({'error': 'Invalid password'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        # Assuming you are using the default User model
+        token_data = {
+            'username': user.username,
+            'password': serializer.validated_data['password'],
+        }
+
+        # Use TokenObtainPairView to generate tokens
+        token_view = TokenObtainPairView.as_view()
+        token_response = token_view(request=request._request)
+
+        # Get tokens from the response
+        access_token = token_response.data['access']
+        refresh_token = token_response.data['refresh']
+
+        return Response({'access_token': access_token, 'refresh_token': refresh_token})

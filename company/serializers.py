@@ -29,3 +29,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
     def create(self, validate_data):
         return User.objects.create_user(**validate_data)
+
+
+# serializers.py
+from rest_framework import serializers
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)

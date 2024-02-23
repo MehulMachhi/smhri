@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-sz(0hy^4jn&5mb)(**r(@7(klis@lz-7@ij4-w)8eqv7!n_atk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['127.0.0.1','localhost','172.25.16.1']
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # Example: Your frontend development server
+    'http://127.0.0.1:3000',  # Example: Another frontend development server
+]
 
 # Application definition
 
@@ -39,10 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
     'textmaster',
     'company',
     'employee',
     'reports',
+    # 'tenant_schemas'
    
 ]
 
@@ -54,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    # 'tenant_schemas.middleware.TenantMiddleware',
 ]
 # REST_FRAMEWORK = {
 #     # Use Django's standard `django.contrib.auth` permissions,
@@ -106,9 +113,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'smrhi.wsgi.application'
 
-
+# DATABASE_ROUTERS = (
+#     'django_tenants.routers.TenantSyncRouter',
+# )
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'tenant_schemas.postgresql_backend',
+#         'NAME': 'smhridata',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Ramesh244@',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     },
+# }
+# TENANT_MODEL = "customers.Client" # app.Model
+# TENANT_DOMAIN_MODEL = "customers.Domain"
+
 
 DATABASES = {
     'default': {
@@ -116,6 +138,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+
 APPEND_SLASH=False 
 
 # Password validation
